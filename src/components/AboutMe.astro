@@ -1,0 +1,25 @@
+---
+interface Props {
+    description: string;
+}
+
+const { description } = Astro.props;
+---
+
+<section class="about-me-section">
+    <h2>About me</h2>
+    <p>{description}</p>
+</section>
+
+<style>
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+</style>
