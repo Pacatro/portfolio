@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
 	name: string;
     image: string;
@@ -9,9 +11,17 @@ const { name, image, description } = Astro.props;
 ---
 
 <div class='profile'>
-    <div class='image-container'>
-        <img src={image} alt={name + '\'s profile image'} />
-      </div>
+    <Image
+        class='image-container' 
+        src={image} 
+        alt={name} 
+        width={200} 
+        height={200} 
+        format="webp" 
+        quality={80} 
+        decoding="async"
+        loading="lazy"
+    />
     <div class='profile-info'>
         <h1>Hi! I'm {name}</h1>
         <p>{description}</p>
@@ -25,8 +35,8 @@ const { name, image, description } = Astro.props;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding-top: 2rem;
-        margin-bottom: 3rem;
+        padding-top: 4rem;
+        /* margin-bottom: 1rem; */
 	}
 
     .image-container {

@@ -1,0 +1,47 @@
+---
+import ProjectCard from '../components/ProjectCard.astro';
+import type { Project } from '../models/project';
+
+interface Props {
+  title?: string;
+  projects: Project[];
+}
+
+const { title = "Most recent projects", projects } = Astro.props;
+---
+
+<section class="projects-section">
+  <h2>{title}</h2>
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</section>
+
+<style>
+    .projects-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+    }
+
+    .projects-grid {
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .projects-section {
+            padding: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
