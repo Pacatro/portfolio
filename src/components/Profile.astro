@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import SocialIcons from './SocialIcons.astro'; // Asegúrate de tener este componente disponible
 
 interface Props {
 	name: string;
@@ -25,6 +26,7 @@ const { name, image, description } = Astro.props;
     <div class='profile-info'>
         <h1>Hi! I'm {name}</h1>
         <p>{description}</p>
+        <SocialIcons />
     </div>
 </div>
 
@@ -35,11 +37,11 @@ const { name, image, description } = Astro.props;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding-top: 4rem;
-        /* margin-bottom: 1rem; */
+        padding-top: 2rem;
 	}
 
     .image-container {
+        margin-top: 1rem;
         width: 200px;
         height: 200px;
         border-radius: 50%;
@@ -58,16 +60,14 @@ const { name, image, description } = Astro.props;
 		font-size: 4rem;
 		font-weight: 700;
 		line-height: 1;
-		text-align: center;
         color: white;
-        margin-bottom: 1rem;
+        margin-bottom: 0.1rem;
 	}
 
 	p {
 		font-size: 1.5rem;
 		font-weight: 600;
 		line-height: 1;
-		text-align: center;
 		color: snow;
 	}
 </style>

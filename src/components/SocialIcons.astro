@@ -3,11 +3,10 @@ import GithubIcon from '../icons/github.astro';
 import LinkedinIcon from '../icons/linkedin.astro';
 import XIcon from '../icons/x.astro';
 import InstagramIcon from '../icons/instagram.astro';
+import Email from '../icons/email.astro';
 ---
 
-<section class="networks-section">
-    <h2>Social</h2>
-
+<div class="networks-section">
     <a href="https://github.com/Pacatro" target="_blank">
         <GithubIcon />
     </a>
@@ -23,13 +22,20 @@ import InstagramIcon from '../icons/instagram.astro';
     <a href="https://www.instagram.com/paco.algar/" target="_blank">
         <InstagramIcon />
     </a>
-</section>
 
+    <a href="mailto:paco.algar.15@gmail.com" target="_blank">
+        <Email />
+    </a>
+</div>
 
 <style>
+    a {
+        text-decoration: none;
+    }
+
     .networks-section {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
+        display: flex;
+        flex-direction: row;
+        gap: .8rem;
     }
 </style>
