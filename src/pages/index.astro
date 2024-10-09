@@ -4,6 +4,7 @@ import Profile from '../components/Profile.astro';
 import AboutMe from '../components/AboutMe.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import { Project } from '../models/project';
+import NetworksSection from '../components/NetworksSection.astro';
 
 const projects = [
     new Project('MiniNN', ' A minimalist deep learnig crate for rust', 'https://github.com/Pacatro/mininn'),
@@ -23,9 +24,7 @@ const projects = [
 	<main>
 		<AboutMe description="I'm a passionate about technology and computing, I have carried out multiple personal projects ranging from web development to artificial intelligence, always learning in a self-taught manner."/>
 		<ProjectSection projects={projects} />
-		<section class="contact-section">
-
-		</section>
+		<NetworksSection />
 	</main>
 </Layout>
 
