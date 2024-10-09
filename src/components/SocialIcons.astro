@@ -7,35 +7,46 @@ import Email from '../icons/email.astro';
 ---
 
 <div class="networks-section">
-    <a href="https://github.com/Pacatro" target="_blank">
+    <a href="https://github.com/Pacatro" target="_blank" class="icon-link">
         <GithubIcon />
     </a>
-
-    <a href="https://www.linkedin.com/in/paco-algar/" target="_blank">
+    <a href="https://www.linkedin.com/in/paco-algar/" target="_blank" class="icon-link">
         <LinkedinIcon />
     </a>
-
-    <a href="https://x.com/P4k02" target="_blank">
+    <a href="https://x.com/P4k02" target="_blank" class="icon-link">
         <XIcon />
     </a>
-
-    <a href="https://www.instagram.com/paco.algar/" target="_blank">
+    <a href="https://www.instagram.com/paco.algar/" target="_blank" class="icon-link">
         <InstagramIcon />
     </a>
-
-    <a href="mailto:paco.algar.15@gmail.com" target="_blank">
+    <a href="mailto:paco.algar.15@gmail.com" target="_blank" class="icon-link">
         <Email />
     </a>
 </div>
 
 <style>
-    a {
-        text-decoration: none;
-    }
-
     .networks-section {
         display: flex;
         flex-direction: row;
         gap: .8rem;
     }
-</style>
+  
+    .icon-link {
+        text-decoration: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+  
+    .icon-link:hover {
+        transform: translateY(-3px) scale(1.1);
+    }
+  
+    .icon-link :global(svg) {
+        width: 24px;
+        height: 24px;
+        transition: fill 0.3s ease;
+    }
+  
+    .icon-link:hover :global(svg) {
+        fill: #646cff; /* Color de acento, ajusta según tu paleta de colores */
+    }
+  </style>
