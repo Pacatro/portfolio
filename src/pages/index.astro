@@ -4,7 +4,6 @@ import Profile from '../components/Profile.astro';
 import AboutMe from '../components/AboutMe.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import { Project } from '../models/project';
-import NetworksSection from '../components/NetworksSection.astro';
 
 const projects = [
     new Project('MiniNN', ' A minimalist deep learnig crate for rust', 'https://github.com/Pacatro/mininn'),
@@ -18,7 +17,7 @@ const projects = [
 	<Profile
 	image='/public/profile.webp',
 	name='Paco',
-	description='Computer Science student'
+	description='A Computer Science student'
 	/>
 	
 	<main>
