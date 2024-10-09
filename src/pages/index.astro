@@ -4,13 +4,9 @@ import Profile from '../components/Profile.astro';
 import AboutMe from '../components/AboutMe.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import { Project } from '../models/project';
+import { Api } from '../api/api';
 
-const projects = [
-    new Project('MiniNN', ' A minimalist deep learnig crate for rust', 'https://github.com/Pacatro/mininn'),
-    new Project('GitHub', '/public/github.png', 'https://github.com/pacoalgar'),
-    new Project('LinkedIn', '/public/linkedin.png', 'https://www.linkedin.com/in/pacoalgar/'),
-    new Project('Twitter', '/public/twitter.png', 'https://twitter.com/pacoalgar'),
-];
+const projects: Project[] = await Api.getProjects();
 ---
 
 <Layout title="Paco Algar">
