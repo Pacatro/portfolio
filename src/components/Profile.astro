@@ -3,12 +3,13 @@ import { Image } from 'astro:assets';
 import SocialIcons from './SocialIcons.astro'; // Asegúrate de tener este componente disponible
 
 interface Props {
-	name: string;
+    greet: string;
+	name?: string;
     image: string;
     description: string;
 }
 
-const { name, image, description } = Astro.props;
+const { greet, name = 'Paco', image, description } = Astro.props;
 ---
 
 <div class='profile'>
@@ -24,7 +25,7 @@ const { name, image, description } = Astro.props;
         loading="lazy"
     />
     <div class='profile-info'>
-        <h1>Hi! I'm {name}</h1>
+        <h1>{greet} {name}</h1>
         <p>{description}</p>
         <SocialIcons />
     </div>

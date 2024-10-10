@@ -5,6 +5,10 @@ import AboutMe from '../components/AboutMe.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import { Project } from '../models/project';
 import { Api } from '../api/api';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const projects: Project[] = await Api.getProjects();
 ---
@@ -12,13 +16,17 @@ const projects: Project[] = await Api.getProjects();
 <Layout title="Paco Algar">
 	<Profile
 	image='/public/profile.webp',
+	greet={t('profile.greeting')}
 	name='Paco',
-	description='A Computer Science student'
+	description={t('profile.description')}
 	/>
 	
 	<main>
-		<AboutMe description="I'm a passionate about technology and computing, I have carried out multiple personal projects ranging from web development to artificial intelligence, always learning in a self-taught manner."/>
-		<ProjectSection projects={projects} />
+		<AboutMe
+		title={t('about.title')}
+		description={t('about.description')}
+		/>
+		<ProjectSection title={t('projects.title')} projects={projects} />
 	</main>
 </Layout>
 
