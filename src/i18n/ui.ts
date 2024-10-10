@@ -15,7 +15,7 @@ export const ui = {
     },
     en: {
         'profile.greeting': 'Hi! I\'m',
-        'profile.description': 'A Computer Science student',
+        'profile.description': 'Computer Science student',
         'about.title': 'About me',
         'about.description': 'I\'m a passionate about technology and computing, I have carried out multiple personal projects ranging from web development to artificial intelligence, always learning in a self-taught manner.',
         'projects.title': 'Most recent projects'

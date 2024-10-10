@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import SocialIcons from './SocialIcons.astro'; // Asegúrate de tener este componente disponible
+import SocialIcons from './SocialIcons.astro';
 
 interface Props {
     greet: string;
@@ -38,7 +38,7 @@ const { greet, name = 'Paco', image, description } = Astro.props;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding-top: 2rem;
+        padding-top: 3rem;
 	}
 
     .image-container {
