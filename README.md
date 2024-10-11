@@ -1,10 +1,22 @@
-# Personal portfolio
+# Personal Portfolio
 
 This is a simple web page of my personal portfolio made it with Astro.
 
-## TODOs 🏁
+## Getting Started
 
-- [x] Add i18n
-- [ ] Add nav bar
-- [ ] Add dark/light mode
-- [ ] Add more sections
+To view my portfolio locally, follow these steps:
+
+### Clone the repository
+
+```bash
+git clone git@github.com:Pacatro/portfolio.git
+cd portfolio
+```
+
+### Install dependencies
+
+```bash
+pnpm install && pnpm dev
+```
+
+Created by [**Paco Algar**](https://github.com/Pacatro).
