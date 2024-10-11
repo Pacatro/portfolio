@@ -28,7 +28,7 @@ export class Api {
         try {
             const projectsJSON: any[] = await result.json();
             return projectsJSON
-                .filter((project: any) => project.description)
+                .filter((project: any) => project.description && project.stars !== 0)
                 .slice(0, 5)
                 .map((project: any) => new Project(
                     project.name, 
