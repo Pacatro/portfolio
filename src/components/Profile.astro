@@ -12,7 +12,7 @@ interface Props {
 const { greet, name = 'Paco', image, description } = Astro.props;
 ---
 
-<div class='profile'>
+<section class='profile'>
     <Image
         class='image-container' 
         src={image} 
@@ -29,15 +29,13 @@ const { greet, name = 'Paco', image, description } = Astro.props;
         <p>{description}</p>
         <SocialIcons />
     </div>
-</div>
+</section>
 
 <style>
     .profile {
 		width: 100%;
 		display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: center;
         padding-top: 3rem;
 	}
 
@@ -49,6 +47,7 @@ const { greet, name = 'Paco', image, description } = Astro.props;
         overflow: hidden;
         border: 2px solid snow;
         margin-right: 2rem;
+        margin-left: 1rem;
     }
     
     img {
@@ -58,7 +57,7 @@ const { greet, name = 'Paco', image, description } = Astro.props;
     }
 
     h1 {
-		font-size: 4rem;
+		font-size: 3rem;
 		font-weight: 700;
 		line-height: 1;
         color: white;
@@ -66,7 +65,7 @@ const { greet, name = 'Paco', image, description } = Astro.props;
 	}
 
 	p {
-		font-size: 1.5rem;
+		font-size: 1rem;
 		font-weight: 600;
 		line-height: 1;
 		color: snow;
