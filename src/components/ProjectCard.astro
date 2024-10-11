@@ -1,20 +1,33 @@
 ---
 import { Project } from '../models/project';
+
 interface Props {
-  project: Project;
+	project: Project;
 }
+
 const { project } = Astro.props;
 ---
+
 <div class="background-div">
 	<li class="link-card">
-	<a href={project.link} target="_blank">
-		<h3>
-			{project.name}
-		</h3>
-		<p>
-			{project.description}
-		</p>
-	</a>
+		<a href={project.link} target="_blank">
+			<div class="project-header">
+				<h3>{project.name}</h3>
+				<div class="stats">
+					<span>
+						<h3 class="p-stats">
+							⭐ {project.stars}
+						</h3>
+					</span> 
+					<span>
+						<h3 class="p-stats">
+							{project.language}
+						</h3>	
+					</span> 
+				</div>
+			</div>
+			<p>{project.description}</p>
+		</a>
 	</li>
 </div>
 
@@ -26,7 +39,7 @@ const { project } = Astro.props;
 		border-radius: 7px;
 		margin: 1rem;
 		border: 2px solid white;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 	}
 	.link-card > a {
 		width: 100%;
@@ -38,21 +51,43 @@ const { project } = Astro.props;
 		opacity: 0.9;
 		transition: opacity 0.3s ease;
 	}
+
+	.project-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.stats {
+		display: flex;
+		gap: 1rem;
+		font-size: 1rem;
+	}
+
 	h3 {
 		margin: 0;
 		font-weight: bold;
 		font-size: 1.5rem;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
+
+	.p-stats {
+		font-size: 1rem;
+		font-weight: bold;
+		color: snow;
+	}
+
 	p {
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 		font-size: 1rem;
   	}
+
 	.link-card:is(:hover, :focus-within) {
 		background-position: 0;
 		transform: translateY(-5px);
 		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		border-color: snow;
 	}
 	.link-card:hover > a {
 		opacity: 1;

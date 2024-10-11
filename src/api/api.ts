@@ -30,7 +30,14 @@ export class Api {
             return projectsJSON
                 .filter((project: any) => project.description)
                 .slice(0, 5)
-                .map((project: any) => new Project(project.name, project.description, project.html_url, new Date(project.updated_at)));
+                .map((project: any) => new Project(
+                    project.name, 
+                    project.description, 
+                    project.html_url, 
+                    new Date(project.updated_at),
+                    project.stargazers_count,
+                    project.language,
+                ));
         } catch (error) {
             throw new Error(`Error parsing project data: ${(error as Error).message}`);
         }

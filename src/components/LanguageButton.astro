@@ -17,7 +17,7 @@ const t = useTranslations(lang);
     function changeLanguage() {
         const currentLang = button.dataset.currentLang;
         const newLang = currentLang === 'es' ? 'en' : 'es';
-        const newPath = newLang === 'es' ? '/' : '/en/';
+        const newPath = newLang === 'en' ? '/' : '/es/';
         const currentPath = window.location.pathname.split('/').slice(2).join('/');
         const newUrl = `${newPath}${currentPath}${window.location.search}${window.location.hash}`;
         window.location.href = newUrl;
