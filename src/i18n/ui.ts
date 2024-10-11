@@ -7,7 +7,7 @@ export const defaultLang = 'es';
 
 export const ui = {
     es: {
-        'profile.greeting': 'Hey, soy',
+        'profile.greeting': 'Hola! Soy',
         'profile.description': 'Estudiante de Ingeniería Informática',
         'about.title': 'Sobre mí',
         'about.description': 'Apasionado por la tecnología y la computación, he llevado a cabo múltiples proyectos personales que abarcan desde la programación web hasta la inteligencia artificial, siempre aprendiendo de forma autodidacta.',

@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 <script>
     const button = document.querySelector('.language-button') as HTMLButtonElement;
 
-    function changeLanguage(): void {
+    function changeLanguage() {
         const currentLang = button.dataset.currentLang;
         const newLang = currentLang === 'es' ? 'en' : 'es';
         const newPath = newLang === 'es' ? '/' : '/en/';
