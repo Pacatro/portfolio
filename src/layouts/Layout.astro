@@ -4,14 +4,12 @@ import '@fontsource/ubuntu';
 interface Props {
 	title: string;
 }
-
-const lang = getLangFromUrl(Astro.url);
-
 const { title } = Astro.props;
+const { currentLocale } = Astro;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={currentLocale}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />

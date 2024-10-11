@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Profile from '../components/Profile.astro';
-import AboutMe from '../components/AboutMe.astro';
-import ProjectSection from '../components/ProjectSection.astro';
-import { Project } from '../models/project';
-import { Api } from '../api/api';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import LanguageButton from '../components/LanguageButton.astro';
+import Layout from '../../layouts/Layout.astro';
+import Profile from '../../components/Profile.astro';
+import AboutMe from '../../components/AboutMe.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import { Project } from '../../models/project';
+import { Api } from '../../api/api';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import LanguageButton from '../../components/LanguageButton.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -28,7 +28,9 @@ const projects: Project[] = await Api.getProjects();
 		/>
 		<ProjectSection title={t('projects.title')} projects={projects} />
 	</main>
-	<LanguageButton />
+	<footer>
+		<LanguageButton />
+	</footer>
 </Layout>
 
 <style>
