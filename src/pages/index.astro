@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Nav from "../components/Nav.astro";
+import Header from "../components/Header.astro";
 import TextSection from "../components/TextSection.astro";
 import ProjectSection from "../components/ProjectSection.astro";
 import ContactSection from "../components/ContactSection.astro";
@@ -9,28 +9,40 @@ import content from "../../content.json";
 import { Project } from "../api/project";
 import { Api } from "../api/api";
 
-const projects: Project[] = await Api.getProjects();
+let projects: Project[] = [];
+
+try {
+  projects = await Api.getProjects();
+} catch (error) {
+  projects = [];
+}
+
+const formatUsername = content.username.toLowerCase().replace(/\s+/g, "-");
 ---
 
 <Layout>
   <main class="flex flex-col items-center justify-center p-6">
     <div class="w-full max-w-4xl">
-      <Nav contents={content.contents} />
+      <Header username={content.username} contents={content.contents} />
       <TextSection
-        path={`${content.username.toLocaleLowerCase()}/about`}
-        command="cat about.txt"
+        username={formatUsername}
+        path="about-me"
+        command="cat about-me.txt"
         description={content.bio}
+        id="about-me"
       />
       <ProjectSection
-        path={`${content.username.toLocaleLowerCase()}/projects`}
+        path="projects"
         command="ls"
         projects={projects}
+        id="projects"
       />
       <ContactSection
-        path=`${content.username.toLocaleLowerCase()}/contacts`
-        command="ls"
+        path="contacts"
+        command="cat contacts.txt"
         contacts={content.contacts}
         email={content.email}
+        id="contact"
       />
     </div>
   </main>

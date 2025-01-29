@@ -1,10 +1,8 @@
 ---
-import content from "../../content.json";
-
-const { path = content.username.toLowerCase(), command } = Astro.props;
+const { path, command } = Astro.props;
 ---
 
 <div class="">
-  <p class="text-xl">~/{path}</p>
-  <p class="text-xl">> {command}</p>
+  <p class="text-lg sm:text-xl text-[#C8A8FC] lowercase">~/{path}</p>
+  <p class="text-lg sm:text-xl text-green-300 lowercase">> {command}</p>
 </div>

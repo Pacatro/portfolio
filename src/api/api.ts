@@ -1,13 +1,13 @@
 import { Project } from "./project";
 
-const GITHUB_API =
+const GITHUB_API: string =
   "https://api.github.com/users/Pacatro/repos?sort=recent&type=public";
+
+const TOKEN: string = import.meta.env.GITHUB_TOKEN;
 
 export class Api {
   static async getProjects(): Promise<Project[]> {
-    const token = import.meta.env.GITHUB_TOKEN;
-
-    if (!token) {
+    if (!TOKEN || TOKEN === "YOUR TOKEN") {
       throw new Error("GitHub token is missing");
     }
 
@@ -17,7 +17,7 @@ export class Api {
         method: "GET",
         headers: {
           Accept: "application/vnd.github.v3+json",
-          Authorization: `token ${token}`,
+          Authorization: `token ${TOKEN}`,
         },
       });
 
@@ -47,7 +47,6 @@ export class Api {
               project.name,
               project.description,
               project.html_url,
-              new Date(project.updated_at),
               project.stargazers_count,
               project.language
             )

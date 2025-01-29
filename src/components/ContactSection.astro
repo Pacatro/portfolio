@@ -1,7 +1,7 @@
 ---
 import Prompt from "./Prompt.astro";
 
-const { path, command, contacts, email = "" } = Astro.props;
+const { path, command, contacts, email = "", id } = Astro.props;
 
 // const copyToClipboard = (text: HTML) => {
 //   navigator.clipboard
@@ -38,24 +38,26 @@ const { path, command, contacts, email = "" } = Astro.props;
   }
 </script>
 
-<footer class="mt-20">
-  <Prompt path={path} command={command.toLowerCase()} />
+<footer class="mt-20 mb-20" id={id}>
+  <Prompt path={path} command={command} />
   <div class="mt-4 flex flex-col gap-2">
-    <div class="flex flex-row gap-4">
-      <p class="text-xl">- Email:</p>
-      <p class="text-xl hover:cursor-pointer hover:underline" id="email">
-        {email}
-      </p>
-    </div>
+    <p class="text-base sm:text-lg">
+      <span class="text-green-300">-</span>
+      <span class="text-cyan-300">Email: </span><span
+        class="text-base sm:text-lg hover:cursor-pointer hover:text-[#C8A8FC] transition duration-300"
+        id="email">{email}</span
+      >
+    </p>
     {
       contacts.map((contact: { name: string; url: string }) => (
-        <p class="text-xl">
-          - {contact.name}:{" "}
+        <p class="text-base sm:text-lg">
+          <span class="text-green-300">-</span>
+          <span class="text-cyan-300">{contact.name}:</span>
           <a
             href={contact.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:underline"
+            class="hover:text-[#C8A8FC] transition duration-300"
           >
             {contact.url}
           </a>

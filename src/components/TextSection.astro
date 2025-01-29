@@ -1,12 +1,12 @@
 ---
 import Prompt from "./Prompt.astro";
 
-const { path = "", command, description } = Astro.props;
+const { path = "", command, description, id } = Astro.props;
 ---
 
-<section class="mt-20">
-  <Prompt path={path} command={command.toLowerCase()} />
-  <p class="mt-4 text-xl">
+<section class="mt-20" id={id}>
+  <Prompt path={path} command={command} />
+  <p class="text-base sm:text-lg mt-4">
     {description}
   </p>
 </section>

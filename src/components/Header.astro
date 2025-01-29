@@ -1,0 +1,33 @@
+---
+interface Props {
+  username: string;
+  contents: string[];
+}
+
+const { username, contents } = Astro.props;
+---
+
+<header
+  class="flex flex-col sm:flex-row items-center sm:justify-between py-3 gap-4"
+>
+  {/* Nombre con tamaño adaptable */}
+  <p class="text-lg sm:text-xl font-bold text-green-400">
+    {username}
+  </p>
+
+  <nav class="flex items-center gap-6">
+    {
+      contents.map((content) => {
+        let formatContent = content.toLocaleLowerCase().replace(/\s+/g, "-");
+
+        return (
+          <a href={"#" + formatContent}>
+            <p class="text-lg sm:text-xl font-bold text-cyan-400 hover:text-[#C8A8FC] transition duration-300">
+              {content}
+            </p>
+          </a>
+        );
+      })
+    }
+  </nav>
+</header>

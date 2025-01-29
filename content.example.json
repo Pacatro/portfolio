@@ -1,0 +1,17 @@
+{
+    "username": "Your Name or Username",
+    "bio": "Your Bio",
+    "email": "Your Email",
+    "contacts": [
+        {
+            "name": "Social media name",
+            "url": "social media url",
+            "icon": "path/to/icon.svg"
+        }
+    ],
+    "contents": [
+        "About me",
+        "Projects",
+        "Contact"
+    ]
+}
