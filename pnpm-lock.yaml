@@ -14,9 +14,6 @@ importers:
       astro:
         specifier: ^5.1.10
         version: 5.1.10(jiti@1.21.7)(rollup@4.32.1)(typescript@5.7.3)(yaml@2.7.0)
-      tailwindcss:
-        specifier: ^3.4.17
-        version: 3.4.17
 
 packages:
 
