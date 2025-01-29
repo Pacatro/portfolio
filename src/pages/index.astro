@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import TextSection from "../components/TextSection.astro";
+import ProjectSection from "../components/ProjectSection.astro";
+import ContactSection from "../components/ContactSection.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import content from "../../content.json";
+import { Project } from "../api/project";
+import { Api } from "../api/api";
+
+const projects: Project[] = await Api.getProjects();
 ---
 
 <Layout>
-	<Welcome />
+  <main class="flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-4xl">
+      <Nav contents={content.contents} />
+      <TextSection
+        path={`${content.username.toLocaleLowerCase()}/about`}
+        command="cat about.txt"
+        description={content.bio}
+      />
+      <ProjectSection
+        path={`${content.username.toLocaleLowerCase()}/projects`}
+        command="ls"
+        projects={projects}
+      />
+      <ContactSection
+        path=`${content.username.toLocaleLowerCase()}/contacts`
+        command="ls"
+        contacts={content.contacts}
+        email={content.email}
+      />
+    </div>
+  </main>
 </Layout>

@@ -1,0 +1,10 @@
+---
+import content from "../../content.json";
+
+const { path = content.username.toLowerCase(), command } = Astro.props;
+---
+
+<div class="">
+  <p class="text-xl">~/{path}</p>
+  <p class="text-xl">> {command}</p>
+</div>

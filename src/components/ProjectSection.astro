@@ -1,0 +1,20 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import type { Project } from "../api/project";
+import Prompt from "./Prompt.astro";
+
+interface Props {
+  path?: string;
+  command?: string;
+  projects: Project[];
+}
+
+const { path = "", command = "ls", projects } = Astro.props;
+---
+
+<section class="mt-20">
+  <Prompt path={path} command={command.toLowerCase()} />
+  <div>
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>

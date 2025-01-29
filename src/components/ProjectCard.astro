@@ -1,0 +1,29 @@
+---
+import { Project } from "../api/project";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="w-full">
+  <li class="list-none border-2 border-white rounded-md p-1 my-4">
+    <a
+      href={project.link}
+      target="_blank"
+      class="block w-full text-snow p-4 rounded-md hover:opacity-100 opacity-90 transition-opacity duration-300"
+    >
+      <div class="flex justify-between items-center">
+        <p class="text-lg font-bold">{project.name} | {project.language}</p>
+        <div class="flex gap-4 text-base font-semibold">
+          <span class="flex items-center text-white">
+            ⭐ {project.stars}
+          </span>
+        </div>
+      </div>
+      <p class="mt-2 text-sm text-gray-300">{project.description}</p>
+    </a>
+  </li>
+</div>
