@@ -10,31 +10,25 @@ This is my personal portfolio built with [Astro](https://astro.build/).
     git clone https://github.com/Pacatro/portfolio.git
     ```
 
-2. Rename the `content.example.json` file to `content.json`
-
-    ```bash
-    mv content.example.json content.json
-    ```
-
-3. Add your github token to the `.env.example` file and rename it to `.env`
+2. Add your github token to the `.env.example` file and rename it to `.env`
 
     ```bash
     mv env.example .env
     ```
 
-4. Install dependencies
+3. Install dependencies
 
     ```bash
     npm install
     ```
 
-5. Start the development server
+4. Start the development server
 
     ```bash
     npm run dev
     ```
 
-6. Open the project in your browser at `http://localhost:3000`
+5. Open the project in your browser at `http://localhost:3000`
 
 ## 🛠️ Customize
 

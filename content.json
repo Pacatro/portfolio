@@ -1,0 +1,29 @@
+{
+    "name": "Paco Algar Muñoz",
+    "githubProfile": "Pacatro",
+    "bio": "Hi, I'm Paco! I'm passionate about technology and computing. I've worked on multiple personal projects across various branches of computer science, including web development, systems programming, video games, and artificial intelligence. Always learning in a self-taught manner.",
+    "email": "paco.algar.15@gmail.com",
+    "contacts": [
+        {
+            "name": "Github",
+            "url": "https://github.com/Pacatro",
+            "icon": "./src/assets/github.svg"
+        },
+        {
+            "name": "Linkedin",
+            "url": "https://www.linkedin.com/in/paco-algar/",
+            "icon": "./src/assets/linkedin.svg"
+        },
+        {
+            "name": "X",
+            "url": "https://x.com/P4k02",
+            "icon": "./src/assets/x.svg"
+        }
+    
+    ],
+    "contents": [
+        "About",
+        "Projects",
+        "Contact"
+    ]
+}
