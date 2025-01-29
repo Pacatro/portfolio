@@ -1,8 +1,8 @@
-# Personal Portfolio
+# :man_technologist: Personal Portfolio
 
 This is my personal portfolio built with [Astro](https://astro.build/).
 
-## Build
+## 🚀 Getting Started
 
 1. Clone the repository
 
@@ -36,7 +36,7 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 
 6. Open the project in your browser at `http://localhost:3000`
 
-## Customize
+## 🛠️ Customize
 
 You can customize the portfolio by editing the `content.json` file.
 
