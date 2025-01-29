@@ -16,16 +16,13 @@ try {
 } catch (error) {
   projects = [];
 }
-
-const formatUsername = content.username.toLowerCase().replace(/\s+/g, "-");
 ---
 
 <Layout>
   <main class="flex flex-col items-center justify-center p-6">
     <div class="w-full max-w-4xl">
-      <Header username={content.username} contents={content.contents} />
+      <Header name={content.name} contents={content.contents} />
       <TextSection
-        username={formatUsername}
         path="about-me"
         command="cat about-me.txt"
         description={content.bio}

@@ -42,7 +42,8 @@ You can customize the portfolio by editing the `content.json` file.
 
 ```json
 {
-    "username": "Your Name or Username",
+    "name": "Your Name or Username",
+    "githubProfile": "Your GitHub Profile",
     "bio": "Your Bio",
     "email": "Your Email",
     "contacts": [

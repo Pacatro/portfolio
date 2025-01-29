@@ -1,10 +1,10 @@
 ---
 interface Props {
-  username: string;
+  name: string;
   contents: string[];
 }
 
-const { username, contents } = Astro.props;
+const { name, contents } = Astro.props;
 ---
 
 <header
@@ -12,7 +12,7 @@ const { username, contents } = Astro.props;
 >
   {/* Nombre con tamaño adaptable */}
   <p class="text-lg sm:text-xl font-bold text-green-400">
-    {username}
+    {name}
   </p>
 
   <nav class="flex items-center gap-6">

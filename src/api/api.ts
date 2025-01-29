@@ -1,15 +1,13 @@
 import { Project } from "./project";
+import content from "../../content.json";
 
-const GITHUB_API: string =
-  "https://api.github.com/users/Pacatro/repos?sort=recent&type=public";
-
+const GITHUB_PROFILE: string = content.githubProfile;
 const TOKEN: string = import.meta.env.GITHUB_TOKEN;
+const GITHUB_API: string = `https://api.github.com/users/${GITHUB_PROFILE}/repos?sort=recent&type=public`;
 
 export class Api {
   static async getProjects(): Promise<Project[]> {
-    if (!TOKEN || TOKEN === "YOUR TOKEN") {
-      throw new Error("GitHub token is missing");
-    }
+    if (!TOKEN) throw new Error("GitHub token is missing");
 
     let result: Response;
     try {

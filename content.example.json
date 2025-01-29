@@ -1,5 +1,6 @@
 {
-    "username": "Your Name or Username",
+    "name": "Your Name or Username",
+    "githubProfile": "Your GitHub Profile",
     "bio": "Your Bio",
     "email": "Your Email",
     "contacts": [
