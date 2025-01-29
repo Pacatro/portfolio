@@ -61,12 +61,6 @@ You can customize the portfolio by editing the `content.json` file.
 }
 ```
 
-Once you've made the changes, don't forget to rename the `content.example.json` file to `content.json`.
-
-```bash
-mv content.example.json content.json
-```
-
 ## 🔑 License
 
 [MIT](LICENSE) - Created by [**Paco Algar**](https://github.com/Pacatro).
