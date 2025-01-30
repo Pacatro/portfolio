@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import TextSection from "../components/TextSection.astro";
 import ProjectSection from "../components/ProjectSection.astro";
 import ContactSection from "../components/ContactSection.astro";
+import CmdDialog from "../components/CmdDialog.astro";
 
 import content from "../../content.json";
 import { Project } from "../api/project";
@@ -43,4 +44,13 @@ try {
       />
     </div>
   </main>
+  <CmdDialog />
 </Layout>
+
+<script>
+  const dialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+
+  window.addEventListener("keypress", (event) => {
+    if (event.key === ":") dialog.showModal();
+  });
+</script>
