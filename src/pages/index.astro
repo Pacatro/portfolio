@@ -50,7 +50,7 @@ try {
 <script>
   const dialog = document.getElementById("cmdDialog") as HTMLDialogElement;
 
-  window.addEventListener("keypress", (event) => {
+  window.addEventListener("keydown", (event) => {
     if (event.key === ":") dialog.showModal();
   });
 </script>

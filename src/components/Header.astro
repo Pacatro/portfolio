@@ -10,12 +10,11 @@ const { name, contents } = Astro.props;
 <header
   class="flex flex-col sm:flex-row items-center sm:justify-between py-3 gap-4"
 >
-  {/* Nombre con tamaño adaptable */}
   <p class="text-lg sm:text-xl font-bold text-green-300">
     {name}
   </p>
 
-  <nav class="flex items-center gap-6">
+  <nav class="flex items-center gap-8">
     {
       contents.map((content) => {
         let formatContent = content.toLocaleLowerCase().replace(/\s+/g, "-");

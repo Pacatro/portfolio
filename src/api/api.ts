@@ -38,7 +38,7 @@ export class Api {
             project.name !== "portfolio" &&
             !project.fork
         )
-        .slice(0, 5)
+        .slice(0, 7)
         .map(
           (project: any) =>
             new Project(
