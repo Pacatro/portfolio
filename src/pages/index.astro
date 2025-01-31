@@ -23,7 +23,7 @@ try {
 <Layout>
   <main class="flex flex-col items-center justify-center p-6">
     <div class="w-full max-w-4xl">
-      <Header name={content.name} contents={content.contents} />
+      <Header name={content.name} sections={content.sections} />
       <TextSection
         path="about-me"
         command="cat about-me.txt"
@@ -46,7 +46,7 @@ try {
     </div>
   </main>
   <CmdDialog />
-  <HelpDialog />
+  <HelpDialog commands={content.commands} />
 </Layout>
 
 <script>
