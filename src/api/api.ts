@@ -33,12 +33,9 @@ export class Api {
       return projectsJSON
         .filter(
           (project: any) =>
-            project.description &&
-            project.stars !== 0 &&
-            project.name !== "portfolio" &&
-            !project.fork
+            project.description && project.stars !== 0 && !project.fork
         )
-        .slice(0, 7)
+        .slice(0, 8)
         .map(
           (project: any) =>
             new Project(
