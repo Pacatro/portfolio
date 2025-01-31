@@ -1,29 +1,28 @@
 ---
 interface Props {
   name: string;
-  contents: string[];
+  sections: string[];
 }
 
-const { name, contents } = Astro.props;
+const { name, sections } = Astro.props;
 ---
 
 <header
-  class="flex flex-col sm:flex-row items-center sm:justify-between py-3 gap-4"
+  class="flex flex-col sm:flex-row items-center sm:justify-between py-1 gap-4"
 >
-  {/* Nombre con tamaño adaptable */}
   <p class="text-lg sm:text-xl font-bold text-green-300">
     {name}
   </p>
 
   <nav class="flex items-center gap-8">
     {
-      contents.map((content) => {
-        let formatContent = content.toLocaleLowerCase().replace(/\s+/g, "-");
+      sections.map((section) => {
+        let formatContent = section.toLocaleLowerCase().replace(" ", "-");
 
         return (
           <a href={"#" + formatContent}>
-            <p class="text-lg sm:text-xl font-bold text-cyan-400 hover:text-[#C8A8FC] transition duration-500">
-              {content}
+            <p class="text-lg sm:text-xl font-semibold text-cyan-300 hover:text-[#C8A8FC] transition duration-500">
+              {section}
             </p>
           </a>
         );

@@ -4,10 +4,12 @@ import Header from "../components/Header.astro";
 import TextSection from "../components/TextSection.astro";
 import ProjectSection from "../components/ProjectSection.astro";
 import ContactSection from "../components/ContactSection.astro";
+import CmdDialog from "../components/CmdDialog.astro";
 
 import content from "../../content.json";
 import { Project } from "../api/project";
 import { Api } from "../api/api";
+import HelpDialog from "../components/HelpDialog.astro";
 
 let projects: Project[] = [];
 
@@ -21,7 +23,7 @@ try {
 <Layout>
   <main class="flex flex-col items-center justify-center p-6">
     <div class="w-full max-w-4xl">
-      <Header name={content.name} contents={content.contents} />
+      <Header name={content.name} sections={content.sections} />
       <TextSection
         path="about-me"
         command="cat about-me.txt"
@@ -35,12 +37,26 @@ try {
         id="projects"
       />
       <ContactSection
-        path="contact"
-        command="cat contacts.txt"
-        contacts={content.contacts}
+        path="social"
+        command="cat socials.txt"
+        socials={content.socials}
         email={content.email}
-        id="contact"
+        id="social"
       />
     </div>
   </main>
+  <CmdDialog />
+  <HelpDialog commands={content.commands} />
 </Layout>
+
+<script>
+  const dialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+  const helpDialog = document.getElementById("helpDialog") as HTMLDialogElement;
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === ":") {
+      if (helpDialog.open) helpDialog.close();
+      dialog.showModal();
+    }
+  });
+</script>

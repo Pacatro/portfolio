@@ -1,4 +1,4 @@
-# :man_technologist: Personal Portfolio
+# Personal Portfolio
 
 This is my personal portfolio built with [Astro](https://astro.build/).
 
@@ -51,7 +51,54 @@ You can customize the portfolio by editing the `content.json` file.
         "About me",
         "Projects",
         "Contact"
+    ],
+    "commands": [
+        {
+            "name": ":help",
+            "args": "",
+            "description": "Show a help dialog with the available commands"
+        },
+        {
+            "name": ":goto",
+            "args": "<section>",
+            "description": "Go to a section of the portfolio"
+        },
+        {
+            "name": ":visit",
+            "args": "<project>",
+            "description": "Visit a project"
+        }
     ]
+}
+```
+
+### Add new commands
+
+To add a new command, you need to add it to the `commands` array in the `content.json` file.
+
+Then you have to implement the functionality in the `src/cmd/commands.ts` creating a new class that implements the `Command` interface.
+
+```typescript
+export class CustomCommand implements Command {
+  execute(arg: string): void {
+    console.log("Custom command executed with arg:", arg);
+  }
+}
+```
+
+And finally, you need to add the new command to the `Cmd` class in the `src/cmd/cmd.ts` file.
+
+```typescript
+private commands: Record<string, Command>;
+
+constructor(
+    private cmdDialog: HTMLDialogElement,
+    private helpDialog: HTMLDialogElement
+) {
+    this.commands = {
+        ":help": new HelpCommand(this.helpDialog),
+        ":custom": new CustomCommand(),
+    };
 }
 ```
 

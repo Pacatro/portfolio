@@ -1,68 +1,73 @@
 ---
 import Prompt from "./Prompt.astro";
 
-const { path, command, contacts, email = "", id } = Astro.props;
-
-// const copyToClipboard = (text: HTML) => {
-//   navigator.clipboard
-//     .writeText(text)
-//     .then(() => {
-//       alert("Texto copiado al portapapeles!");
-//     })
-//     .catch((err) => {
-//       console.error("Error al copiar el texto: ", err);
-//     });
-// };
+const { path, command, socials, email = "", id } = Astro.props;
 ---
-
-<script>
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard
-      .writeText(text)
-      // TODO: DO SOMETHING WHEN THE TEXT IS COPIED
-      // .then(() => {
-      //   alert("Texto copiado al portapapeles!");
-      // })
-      .catch((err) => {
-        console.error("Error al copiar el texto: ", err);
-      });
-  };
-
-  const emailElement = document.getElementById("email");
-
-  if (emailElement) {
-    const email = emailElement.innerText;
-    emailElement.addEventListener("click", () => {
-      copyToClipboard(email);
-    });
-  }
-</script>
 
 <footer class="mt-20 mb-20" id={id}>
   <Prompt path={path} command={command} />
   <div class="mt-4 flex flex-col gap-2">
-    <p class="text-base sm:text-lg">
-      <span class="text-green-300">-</span>
-      <span class="text-cyan-300">Email: </span><span
-        class="text-base sm:text-lg hover:cursor-pointer hover:text-[#C8A8FC] transition duration-300"
-        id="email">{email}</span
-      >
-    </p>
     {
-      contacts.map((contact: { name: string; url: string }) => (
+      email && (
+        <div class="flex items-center gap-2 text-base sm:text-lg">
+          <p class="text-green-300 font-mononoki">-</p>
+          <p class="text-cyan-300 font-mononoki">Email:</p>
+          <span
+            class="font-mononoki text-gray-50 sm:text-lg transition duration-300"
+            id="email"
+          >
+            {email}
+          </span>
+          <button
+            class="flex items-center justify-center p-1 rounded text-gray-50 hover:text-[#C8A8FC] hover:bg-gray-700 transition duration-300"
+            aria-label="Copy email"
+            id="copy-button"
+          >
+            <img src="/copy.svg" alt="Copy" class="h-6 w-6" id="copy-icon" />
+          </button>
+        </div>
+      )
+    }
+    {
+      socials.map((social: { name: string; url: string }) => (
         <p class="text-base sm:text-lg">
-          <span class="text-green-300">-</span>
-          <span class="text-cyan-300">{contact.name}:</span>
+          <span class="text-green-300 font-mononoki">-</span>
+          <span class="text-cyan-300 font-mononoki">{social.name}:</span>
           <a
-            href={contact.url}
+            href={social.url}
             target="_blank"
             rel="noopener noreferrer"
             class="hover:text-[#C8A8FC] transition duration-300"
           >
-            {contact.url}
+            {social.url}
           </a>
         </p>
       ))
     }
   </div>
 </footer>
+
+<script>
+  const copyToClipboard = (text: string) => {
+    return navigator.clipboard.writeText(text);
+  };
+
+  const emailElement = document.getElementById("email");
+
+  if (emailElement) {
+    const copyIcon = document.getElementById("copy-icon") as HTMLImageElement;
+    const copyButton = document.getElementById(
+      "copy-button"
+    ) as HTMLButtonElement;
+
+    const email = emailElement.innerText;
+    copyButton.addEventListener("click", () => {
+      copyToClipboard(email)
+        .then(() => {
+          copyIcon.src = "../../public/check.svg";
+          copyIcon.alt = "Copied";
+        })
+        .catch((err) => console.error("Error while copying text: ", err));
+    });
+  }
+</script>
