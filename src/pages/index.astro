@@ -11,7 +11,7 @@ import { Project } from "../api/project";
 import { Api } from "../api/api";
 import HelpDialog from "../components/HelpDialog.astro";
 
-let projects: Project[] = [];
+export let projects: Project[] = [];
 
 try {
   projects = await Api.getProjects();
