@@ -1,5 +1,3 @@
-import { projects } from "../pages/index.astro";
-
 export interface Command {
   /**
    * Executes the command
@@ -61,13 +59,9 @@ export class VisitCommand implements Command {
   execute(project: string): void {
     if (project.includes(":")) return;
 
-    for (const p of projects) {
-      if (p.name === project) {
-        // TODO: Add support for other APIs like GitLab, Bitbucket, etc
-        const url = `https://github.com/${this.profile}/${project}`;
+    // TODO: Add support for other APIs like GitLab, Bitbucket, etc
+    const url = `https://github.com/${this.profile}/${project}`;
 
-        window.open(url, "_blank");
-      }
-    }
+    window.open(url, "_blank");
   }
 }
