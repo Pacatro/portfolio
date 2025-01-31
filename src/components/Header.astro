@@ -1,10 +1,10 @@
 ---
 interface Props {
   name: string;
-  contents: string[];
+  sections: string[];
 }
 
-const { name, contents } = Astro.props;
+const { name, sections } = Astro.props;
 ---
 
 <header
@@ -16,13 +16,13 @@ const { name, contents } = Astro.props;
 
   <nav class="flex items-center gap-8">
     {
-      contents.map((content) => {
-        let formatContent = content.toLocaleLowerCase().replace(" ", "-");
+      sections.map((section) => {
+        let formatContent = section.toLocaleLowerCase().replace(" ", "-");
 
         return (
           <a href={"#" + formatContent}>
             <p class="text-lg sm:text-xl font-semibold text-cyan-300 hover:text-[#C8A8FC] transition duration-500">
-              {content}
+              {section}
             </p>
           </a>
         );

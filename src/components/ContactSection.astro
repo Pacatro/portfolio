@@ -2,29 +2,28 @@
 import Prompt from "./Prompt.astro";
 
 const { path, command, contacts, email = "", id } = Astro.props;
-
-// const copyToClipboard = (text: HTML) => {
-//   navigator.clipboard
-//     .writeText(text)
-//     .then(() => {
-//       alert("Texto copiado al portapapeles!");
-//     })
-//     .catch((err) => {
-//       console.error("Error al copiar el texto: ", err);
-//     });
-// };
 ---
 
 <footer class="mt-20 mb-20" id={id}>
   <Prompt path={path} command={command} />
   <div class="mt-4 flex flex-col gap-2">
-    <p class="text-base sm:text-lg">
+    <div class="flex items-center gap-2 text-base sm:text-lg">
       <span class="text-green-300">-</span>
-      <span class="text-cyan-300">Email: </span><span
-        class="text-base sm:text-lg hover:cursor-pointer hover:text-[#C8A8FC] transition duration-300"
-        id="email">{email}</span
+      <span class="text-cyan-300">Email: </span>
+      <spam
+        class="text-base text-gray-50 font-mononoki sm:text-lg transition duration-300"
+        id="email"
       >
-    </p>
+        {email}
+      </spam>
+      <button
+        class="flex items-center justify-center p-1 rounded text-gray-50 hover:text-[#C8A8FC] hover:bg-gray-700 transition duration-300"
+        aria-label="Copy email"
+        id="copy-button"
+      >
+        <img src="/copy.svg" alt="Copy" class="h-4 w-4" id="copy-icon" />
+      </button>
+    </div>
     {
       contacts.map((contact: { name: string; url: string }) => (
         <p class="text-base sm:text-lg">
@@ -46,22 +45,22 @@ const { path, command, contacts, email = "", id } = Astro.props;
 
 <script>
   const copyToClipboard = (text: string) => {
-    navigator.clipboard
-      .writeText(text)
-      // .then(() => {
-      //   alert("Texto copiado al portapapeles!");
-      // })
-      .catch((err) => {
-        console.error("Error al copiar el texto: ", err);
-      });
+    return navigator.clipboard.writeText(text);
   };
 
-  const emailElement = document.getElementById("email");
+  const copyButton = document.getElementById(
+    "copy-button"
+  ) as HTMLButtonElement;
+  const emailElement = document.getElementById("email") as HTMLSpanElement;
+  const copyIcon = document.getElementById("copy-icon") as HTMLImageElement;
 
-  if (emailElement) {
-    const email = emailElement.innerText;
-    emailElement.addEventListener("click", () => {
-      copyToClipboard(email);
-    });
-  }
+  const email = emailElement.innerText;
+  copyButton.addEventListener("click", () => {
+    copyToClipboard(email)
+      .then(() => {
+        copyIcon.src = "../../public/check.svg";
+        copyIcon.alt = "Copied";
+      })
+      .catch((err) => console.error("Error while copying text: ", err));
+  });
 </script>
