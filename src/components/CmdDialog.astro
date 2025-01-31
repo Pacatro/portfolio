@@ -1,36 +1,33 @@
 <dialog
   id="cmdDialog"
-  class="bg-[#1e1e2e] border border-green-400 rounded-lg p-4 w-96"
+  class="bg-[#1e1e2e] border border-cyan-400 rounded-lg p-4 w-96"
 >
   <div class="flex items-center space-x-2">
     <p class="text-lg sm:text-xl font-bold text-green-300 lowercase">></p>
     <input
       type="text"
       class="bg-transparent border-none outline-none text-pink-300 text-lg w-full font-mono placeholder-gray-500"
-      placeholder=":command"
+      placeholder="type :help"
     />
   </div>
 </dialog>
 
-<!-- <script>
-  import { commands } from "../../content.json";
+<script>
+  import { Cmd } from "../cmd/cmd";
+
   const dialog = document.getElementById("cmdDialog") as HTMLDialogElement;
   const inputElement = dialog.querySelector("input") as HTMLInputElement;
 
   dialog.addEventListener("keypress", (event) => {
-    if (
-      event.key === "Enter" &&
-      inputElement.value &&
-      inputElement.value !== ":"
-    ) {
-      const command = inputElement.value;
-      if (commands.includes(command)) {
-        console.log(command);
-      }
-      dialog.close();
-    } else if (event.key === "Escape") {
-			in
+    if (event.key === "Enter" && inputElement.value) {
+      const cmd = new Cmd(dialog);
+      cmd.execute(inputElement.value);
+      inputElement.value = "";
       dialog.close();
     }
   });
-</script> -->
+
+  dialog.addEventListener("close", () => {
+    inputElement.value = "";
+  });
+</script>

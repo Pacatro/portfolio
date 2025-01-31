@@ -9,6 +9,7 @@ import CmdDialog from "../components/CmdDialog.astro";
 import content from "../../content.json";
 import { Project } from "../api/project";
 import { Api } from "../api/api";
+import HelpDialog from "../components/HelpDialog.astro";
 
 let projects: Project[] = [];
 
@@ -45,12 +46,17 @@ try {
     </div>
   </main>
   <CmdDialog />
+  <HelpDialog />
 </Layout>
 
 <script>
   const dialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+  const helpDialog = document.getElementById("helpDialog") as HTMLDialogElement;
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === ":") dialog.showModal();
+    if (event.key === ":") {
+      if (helpDialog.open) helpDialog.close();
+      dialog.showModal();
+    }
   });
 </script>

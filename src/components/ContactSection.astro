@@ -15,29 +15,6 @@ const { path, command, contacts, email = "", id } = Astro.props;
 // };
 ---
 
-<script>
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard
-      .writeText(text)
-      // TODO: DO SOMETHING WHEN THE TEXT IS COPIED
-      // .then(() => {
-      //   alert("Texto copiado al portapapeles!");
-      // })
-      .catch((err) => {
-        console.error("Error al copiar el texto: ", err);
-      });
-  };
-
-  const emailElement = document.getElementById("email");
-
-  if (emailElement) {
-    const email = emailElement.innerText;
-    emailElement.addEventListener("click", () => {
-      copyToClipboard(email);
-    });
-  }
-</script>
-
 <footer class="mt-20 mb-20" id={id}>
   <Prompt path={path} command={command} />
   <div class="mt-4 flex flex-col gap-2">
@@ -66,3 +43,25 @@ const { path, command, contacts, email = "", id } = Astro.props;
     }
   </div>
 </footer>
+
+<script>
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard
+      .writeText(text)
+      // .then(() => {
+      //   alert("Texto copiado al portapapeles!");
+      // })
+      .catch((err) => {
+        console.error("Error al copiar el texto: ", err);
+      });
+  };
+
+  const emailElement = document.getElementById("email");
+
+  if (emailElement) {
+    const email = emailElement.innerText;
+    emailElement.addEventListener("click", () => {
+      copyToClipboard(email);
+    });
+  }
+</script>
