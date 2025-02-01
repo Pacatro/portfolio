@@ -44,10 +44,20 @@ export class GotoCommand implements Command {
 }
 
 /**
- * Exit the application
+ * Quit the website
  */
 export class QuitCommand implements Command {
   execute() {
     window.close();
+  }
+}
+
+/**
+ * Close cmd dialog
+ */
+export class ExitCommand implements Command {
+  execute() {
+    const cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+    cmdDialog.close();
   }
 }

@@ -35,7 +35,12 @@
         {
             "name": ":q",
             "args": "",
-            "description": "Exit"
+            "description": "Quit"
+        },
+        {
+            "name": ":e",
+            "args": "",
+            "description": "Exit cmd"
         },
         {
             "name": ":goto",

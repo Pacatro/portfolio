@@ -1,4 +1,5 @@
 import {
+  ExitCommand,
   GotoCommand,
   HelpCommand,
   QuitCommand,
@@ -14,6 +15,7 @@ export class Cmd {
     this.commands = {
       ":h": new HelpCommand(),
       ":q": new QuitCommand(),
+      ":e": new ExitCommand(),
       ":goto": new GotoCommand(content.sections),
     };
   }
