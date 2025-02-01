@@ -1,7 +1,7 @@
 import {
   GotoCommand,
   HelpCommand,
-  ExitCommand,
+  QuitCommand,
   type Command,
 } from "./commands";
 
@@ -10,15 +10,11 @@ import content from "../../content.json";
 export class Cmd {
   private commands: Record<string, Command>;
 
-  constructor(
-    private cmdDialog: HTMLDialogElement,
-    private helpDialog: HTMLDialogElement
-  ) {
+  constructor() {
     this.commands = {
-      ":help": new HelpCommand(this.helpDialog),
-      ":h": new HelpCommand(this.helpDialog),
+      ":h": new HelpCommand(),
+      ":q": new QuitCommand(),
       ":goto": new GotoCommand(content.sections),
-      ":q": new ExitCommand(),
     };
   }
 

@@ -10,14 +10,11 @@ export interface Command {
  * Show a help dialog with the available commands
  */
 export class HelpCommand implements Command {
-  helpDialog: HTMLDialogElement;
-
-  constructor(helpDialog: HTMLDialogElement) {
-    this.helpDialog = helpDialog;
-  }
-
   execute() {
-    this.helpDialog.showModal();
+    const helpDialog = document.getElementById(
+      "helpDialog"
+    ) as HTMLDialogElement;
+    helpDialog.showModal();
   }
 }
 
@@ -49,7 +46,7 @@ export class GotoCommand implements Command {
 /**
  * Exit the application
  */
-export class ExitCommand implements Command {
+export class QuitCommand implements Command {
   execute() {
     window.close();
   }
