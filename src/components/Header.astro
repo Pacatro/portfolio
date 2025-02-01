@@ -14,7 +14,7 @@ const { name, sections } = Astro.props;
     {name}
   </p>
 
-  <nav class="flex items-center gap-8">
+  <nav class="flex items-center gap-6">
     {
       sections.map((section) => {
         let formatContent = section.toLocaleLowerCase().replace(" ", "-");
