@@ -25,7 +25,7 @@ export class Api {
         );
       }
     } catch (error) {
-      throw new Error(`Network error: ${(error as Error).message}`);
+      return [];
     }
 
     try {
@@ -47,9 +47,7 @@ export class Api {
             )
         );
     } catch (error) {
-      throw new Error(
-        `Error parsing project data: ${(error as Error).message}`
-      );
+      return [];
     }
   }
 }

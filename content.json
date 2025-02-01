@@ -28,7 +28,7 @@
     ],
     "commands": [
         {
-            "name": ":help",
+            "name": ":help (:h)",
             "args": "",
             "description": "Show a help dialog with the available commands"
         },
@@ -38,9 +38,9 @@
             "description": "Go to a section of the portfolio"
         },
         {
-            "name": ":visit",
-            "args": "<project>",
-            "description": "Visit a project"
+            "name": ":q",
+            "args": "",
+            "description": "Exit"
         }
     ]
 }

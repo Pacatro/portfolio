@@ -1,7 +1,7 @@
 import {
   GotoCommand,
   HelpCommand,
-  VisitCommand,
+  ExitCommand,
   type Command,
 } from "./commands";
 
@@ -16,8 +16,9 @@ export class Cmd {
   ) {
     this.commands = {
       ":help": new HelpCommand(this.helpDialog),
+      ":h": new HelpCommand(this.helpDialog),
       ":goto": new GotoCommand(content.sections),
-      ":visit": new VisitCommand(content.githubProfile),
+      ":q": new ExitCommand(),
     };
   }
 

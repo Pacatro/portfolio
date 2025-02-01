@@ -47,21 +47,10 @@ export class GotoCommand implements Command {
 }
 
 /**
- * Visit a project
+ * Exit the application
  */
-export class VisitCommand implements Command {
-  private profile: string;
-
-  constructor(profile: string) {
-    this.profile = profile;
-  }
-
-  execute(project: string): void {
-    if (project.includes(":")) return;
-
-    // TODO: Add support for other APIs like GitLab, Bitbucket, etc
-    const url = `https://github.com/${this.profile}/${project}`;
-
-    window.open(url, "_blank");
+export class ExitCommand implements Command {
+  execute() {
+    window.close();
   }
 }
