@@ -10,8 +10,14 @@ const { name, sections } = Astro.props;
 <header
   class="flex flex-col sm:flex-row items-center sm:justify-between py-1 gap-4"
 >
-  <p class="text-lg sm:text-xl font-bold text-green-300">
+  <p class="flex flex-row gap-4 text-lg sm:text-xl font-bold text-green-300">
     {name}
+    <button
+      class="rounded text-gray-50 hover:bg-gray-700 transition duration-300"
+      id="cmd-button"
+    >
+      <img src="/terminal.svg" alt="terminal-logo" class="w-6 h-6" />
+    </button>
   </p>
 
   <nav class="flex items-center gap-6">

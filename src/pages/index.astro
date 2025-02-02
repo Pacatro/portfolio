@@ -46,19 +46,25 @@ export const projects: Project[] = await Api.getProjects();
 <script>
   const cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
   const helpDialog = document.getElementById("helpDialog") as HTMLDialogElement;
+  const cmdButton = document.getElementById("cmd-button") as HTMLButtonElement;
 
-  function openCmdDialog() {
+  export function openCmdDialog() {
     if (helpDialog.open) helpDialog.close();
     cmdDialog.showModal();
   }
 
-  window.addEventListener("keydown", (event) => {
-    if (event.key === ":") openCmdDialog();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === ":") openCmdDialog();
   });
 
-  window.addEventListener("click", () => {
+  cmdButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (!cmdDialog.open) openCmdDialog();
+  });
+
+  document.addEventListener("click", (event) => {
     if (helpDialog.open) helpDialog.close();
-    cmdDialog.close();
+    if (cmdDialog.open) cmdDialog.close();
   });
 
   let pressTimer: number;
