@@ -4,6 +4,8 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 
 ## 🚀 Getting Started
 
+> [!NOTE] This project uses [pnpm](https://pnpm.io/) as the package manager, if you use other you may need to make use the corresponding commands.
+
 1. Clone the repository
 
     ```bash
@@ -19,16 +21,35 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 3. Install dependencies
 
     ```bash
-    npm install
+    pnpm install
     ```
 
 4. Start the development server
 
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
-5. Open the project in your browser at `http://localhost:3000`
+5. Open the project in your browser at `http://localhost:4321`
+
+## 🖥️ CMD Mode
+
+This project has a command mode that allows you to execute some predefined commands.
+
+You have three ways to open the command mode:
+
+- Press the `:` key
+- Click the terminal button in the header, next to the name
+- Keep pressing the screen for a second if your are in mobile
+
+### Available commands
+
+| Command | Description |
+| --- | --- |
+| `:h` | Show a help dialog with the available commands |
+| `:q` | Quit the website |
+| `:e` | Close the command mode |
+| `:goto <section>` | Go to a section of the portfolio |
 
 ## 🛠️ Customize
 
@@ -54,19 +75,24 @@ You can customize the portfolio by editing the `content.json` file.
     ],
     "commands": [
         {
-            "name": ":help",
+            "name": ":h",
             "args": "",
-            "description": "Show a help dialog with the available commands"
+            "description": "Show the available commands"
+        },
+        {
+            "name": ":q",
+            "args": "",
+            "description": "Quit"
+        },
+        {
+            "name": ":e",
+            "args": "",
+            "description": "Exit cmd"
         },
         {
             "name": ":goto",
-            "args": "<section>",
+            "args": "section",
             "description": "Go to a section of the portfolio"
-        },
-        {
-            "name": ":visit",
-            "args": "<project>",
-            "description": "Visit a project"
         }
     ]
 }
