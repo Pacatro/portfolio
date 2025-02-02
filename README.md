@@ -4,7 +4,8 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 
 ## 🚀 Getting Started
 
-> [!NOTE] This project uses [pnpm](https://pnpm.io/) as the package manager, if you use other you may need to make use the corresponding commands.
+> [!NOTE]
+> This project uses [pnpm](https://pnpm.io/) as the package manager, if you use other you may need to make use the corresponding commands.
 
 1. Clone the repository
 
