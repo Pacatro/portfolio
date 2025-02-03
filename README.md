@@ -61,15 +61,15 @@ You can customize the portfolio by editing the `content.json` file.
     "name": "Your Name or Username",
     "githubProfile": "Your GitHub Profile",
     "bio": "Your Bio",
-    "email": "Your Email",
-    "contacts": [
+    "email": "Your Email (optional)",
+    "socials": [
         {
             "name": "Social media name",
             "url": "social media url",
             "icon": "path/to/icon.svg" // OPTIONAL
         }
     ],
-    "contents": [
+    "sections": [
         "About me",
         "Projects",
         "Contact"
@@ -103,12 +103,30 @@ You can customize the portfolio by editing the `content.json` file.
 
 To add a new command, you need to add it to the `commands` array in the `content.json` file.
 
+```json
+{
+    
+    "commands": [
+        {
+            "name": ":h",
+            "args": "",
+            "description": "Show the available commands"
+        },
+        {
+            "name": ":custom",
+            "args": "arg",
+            "description": "Custom command"
+        }
+    ]
+}
+```
+
 Then you have to implement the functionality in the `src/cmd/commands.ts` creating a new class that implements the `Command` interface.
 
 ```typescript
 export class CustomCommand implements Command {
   execute(arg: string): void {
-    console.log("Custom command executed with arg:", arg);
+    console.log("Custom command");
   }
 }
 ```
@@ -118,14 +136,11 @@ And finally, you need to add the new command to the `Cmd` class in the `src/cmd/
 ```typescript
 private commands: Record<string, Command>;
 
-constructor(
-    private cmdDialog: HTMLDialogElement,
-    private helpDialog: HTMLDialogElement
-) {
-    this.commands = {
-        ":help": new HelpCommand(this.helpDialog),
-        ":custom": new CustomCommand(),
-    };
+constructor() {
+  this.commands = {
+    ":h": new HelpCommand(),
+    ":custom": new CustomCommand(),
+  };
 }
 ```
 

@@ -7,17 +7,17 @@
         {
             "name": "Github",
             "url": "https://github.com/Pacatro",
-            "icon": "./src/assets/github.svg"
+            "icon": ""
         },
         {
             "name": "Linkedin",
             "url": "https://www.linkedin.com/in/paco-algar/",
-            "icon": "./src/assets/linkedin.svg"
+            "icon": ""
         },
         {
             "name": "X",
             "url": "https://x.com/P4k02",
-            "icon": "./src/assets/x.svg"
+            "icon": ""
         }
     
     ],
