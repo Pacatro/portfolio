@@ -9,9 +9,8 @@ export class Api {
   static async getProjects(): Promise<Project[]> {
     if (!TOKEN) throw new Error("GitHub token is missing");
 
-    let result: Response;
     try {
-      result = await fetch(GITHUB_API, {
+      let result = await fetch(GITHUB_API, {
         method: "GET",
         headers: {
           Accept: "application/vnd.github.v3+json",
@@ -24,11 +23,7 @@ export class Api {
           `Failed to fetch projects: ${result.status} ${result.statusText}`
         );
       }
-    } catch (error) {
-      return [];
-    }
 
-    try {
       const projectsJSON = await result.json();
       return projectsJSON
         .filter(
