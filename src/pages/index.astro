@@ -62,7 +62,7 @@ export const projects: Project[] = await Api.getProjects();
     if (!cmdDialog.open) openCmdDialog();
   });
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", () => {
     if (helpDialog.open) helpDialog.close();
     if (cmdDialog.open) cmdDialog.close();
   });
