@@ -5,7 +5,8 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 ## 🚀 Getting Started
 
 > [!NOTE]
-> This project uses [pnpm](https://pnpm.io/) as the package manager, if you use other you may need to make use the corresponding commands.
+> This project uses [pnpm](https://pnpm.io/) as the package manager,
+if you use other you may need to make use the corresponding commands.
 
 1. Clone the repository
 
@@ -41,7 +42,6 @@ You have three ways to open the command mode:
 
 - Press the `:` key
 - Click the terminal button in the header, next to the name
-- Keep pressing the screen for a second if your are in mobile
 
 ### Available commands
 
@@ -101,7 +101,8 @@ You can customize the portfolio by editing the `content.json` file.
 
 ### Add new commands
 
-To add a new command, you need to add it to the `commands` array in the `content.json` file.
+To add a new command, you need to add it to the `commands` array
+in the `content.json` file.
 
 ```json
 {
@@ -121,7 +122,8 @@ To add a new command, you need to add it to the `commands` array in the `content
 }
 ```
 
-Then you have to implement the functionality in the `src/cmd/commands.ts` creating a new class that implements the `Command` interface.
+Then you have to implement the functionality in the `src/cmd/commands.ts` creating
+a new class that implements the `Command` interface.
 
 ```typescript
 export class CustomCommand implements Command {
@@ -131,7 +133,8 @@ export class CustomCommand implements Command {
 }
 ```
 
-And finally, you need to add the new command to the `Cmd` class in the `src/cmd/cmd.ts` file.
+And finally, you need to add the new command to the `Cmd` class in the
+`src/cmd/cmd.ts` file.
 
 ```typescript
 private commands: Record<string, Command>;

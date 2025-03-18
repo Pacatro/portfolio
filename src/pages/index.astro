@@ -66,20 +66,4 @@ export const projects: Project[] = await Api.getProjects();
     if (helpDialog.open) helpDialog.close();
     if (cmdDialog.open) cmdDialog.close();
   });
-
-  let pressTimer: number;
-
-  const startPress = () => {
-    pressTimer = setTimeout(() => {
-      openCmdDialog();
-    }, 1000);
-  };
-
-  const cancelPress = () => {
-    // Cancel the timer if the user moves their finger
-    clearTimeout(pressTimer);
-  };
-
-  window.addEventListener("touchstart", () => startPress());
-  window.addEventListener("touchend", () => cancelPress());
 </script>
