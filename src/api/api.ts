@@ -28,7 +28,10 @@ export class Api {
       return projectsJSON
         .filter(
           (project: any) =>
-            project.description && project.stars !== 0 && !project.fork
+            project.description &&
+            project.stars !== 0 &&
+            !project.fork &&
+            project.name !== "dotfiles"
         )
         .slice(0, 8)
         .map(

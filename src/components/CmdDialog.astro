@@ -16,17 +16,17 @@
 <script>
   import { Cmd } from "../cmd/cmd";
 
-  const cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
-  const inputElement = cmdDialog.querySelector("input") as HTMLInputElement;
+  const $cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+  const $inputElement = $cmdDialog.querySelector("input") as HTMLInputElement;
 
-  cmdDialog.addEventListener("keypress", (event) => {
-    if (event.key === "Enter" && inputElement.value) {
+  $cmdDialog.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" && $inputElement.value) {
       const cmd = new Cmd();
-      cmd.execute(inputElement.value);
-      inputElement.value = "";
-      cmdDialog.close();
+      cmd.execute($inputElement.value);
+      $inputElement.value = "";
+      $cmdDialog.close();
     }
   });
 
-  cmdDialog.addEventListener("close", () => (inputElement.value = ""));
+  $cmdDialog.addEventListener("close", () => ($inputElement.value = ""));
 </script>

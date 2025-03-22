@@ -55,15 +55,15 @@ const { path, command, socials, email = "", id } = Astro.props;
     return navigator.clipboard.writeText(text);
   };
 
-  const emailElement = document.getElementById("email");
+  const $emailElement = document.getElementById("email");
 
-  if (emailElement) {
+  if ($emailElement) {
     const copyIcon = document.getElementById("copy-icon") as HTMLImageElement;
     const copyButton = document.getElementById(
       "copy-button"
     ) as HTMLButtonElement;
 
-    const email = emailElement.innerText;
+    const email = $emailElement.innerText;
     copyButton.addEventListener("click", () => {
       copyToClipboard(email)
         .then(() => {

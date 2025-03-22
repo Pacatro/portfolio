@@ -44,26 +44,28 @@ export const projects: Project[] = await Api.getProjects();
 </Layout>
 
 <script>
-  const cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
-  const helpDialog = document.getElementById("helpDialog") as HTMLDialogElement;
-  const cmdButton = document.getElementById("cmd-button") as HTMLButtonElement;
+  const $cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
+  const $helpDialog = document.getElementById(
+    "helpDialog"
+  ) as HTMLDialogElement;
+  const $cmdButton = document.getElementById("cmd-button") as HTMLButtonElement;
 
   export function openCmdDialog() {
-    if (helpDialog.open) helpDialog.close();
-    cmdDialog.showModal();
+    if ($helpDialog.open) $helpDialog.close();
+    $cmdDialog.showModal();
   }
 
   document.addEventListener("keydown", (e) => {
     if (e.key === ":") openCmdDialog();
   });
 
-  cmdButton.addEventListener("click", (event) => {
+  $cmdButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    if (!cmdDialog.open) openCmdDialog();
+    if (!$cmdDialog.open) openCmdDialog();
   });
 
   document.addEventListener("click", () => {
-    if (helpDialog.open) helpDialog.close();
-    if (cmdDialog.open) cmdDialog.close();
+    if ($helpDialog.open) $helpDialog.close();
+    if ($cmdDialog.open) $cmdDialog.close();
   });
 </script>
