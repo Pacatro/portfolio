@@ -17,6 +17,10 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 2. Add your github token to the `.env.example` file and rename it to `.env`
 
    ```bash
+   GITHUB_TOKEN="<YOUR_GITHUB_TOKEN>"
+   ```
+
+   ```bash
    mv env.example .env
    ```
 
@@ -32,7 +36,7 @@ This is my personal portfolio built with [Astro](https://astro.build/).
    pnpm dev
    ```
 
-5. Open the project in your browser at `http://localhost:4321`
+5. Open the project in your browser at [`http://localhost:4321`](http://localhost:4321)
 
 ## 🖥️ CMD Mode
 
