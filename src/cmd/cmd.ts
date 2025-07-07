@@ -1,4 +1,5 @@
 import {
+  DownloadResumeCommand,
   ExitCommand,
   GotoCommand,
   HelpCommand,
@@ -16,6 +17,7 @@ export class Cmd {
       ":h": new HelpCommand(),
       ":q": new QuitCommand(),
       ":e": new ExitCommand(),
+      ":r": new DownloadResumeCommand(),
       ":goto": new GotoCommand(content.sections),
     };
   }
