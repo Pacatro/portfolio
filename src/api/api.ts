@@ -4,6 +4,7 @@ import content from "../../content.json";
 const GITHUB_PROFILE: string = content.githubProfile;
 const TOKEN: string = import.meta.env.GITHUB_TOKEN;
 const GITHUB_API: string = `https://api.github.com/users/${GITHUB_PROFILE}/repos?sort=recent&type=public`;
+const MAX_PROJECTS: number = 5;
 
 export class Api {
   static async getProjects(): Promise<Project[]> {
@@ -33,7 +34,7 @@ export class Api {
             !project.fork &&
             project.name !== "dotfiles"
         )
-        .slice(0, 8)
+        .slice(0, MAX_PROJECTS)
         .map(
           (project: any) =>
             new Project(
