@@ -1,7 +1,7 @@
 {
     "name": "Paco Algar Muñoz",
     "githubProfile": "Pacatro",
-    "bio": "Hi, I'm Paco! I'm a passionate about technology and computer science, I'm known for my curiosity and self-taught mindset. I enjoy taking on new challenges and continuously expanding my skill set. I have developed personal projects outside academic and professional settings in a variety of areas, including artificial intelligence (AI), web development, systems programming, and game development.",
+    "bio": "Hi, I'm Paco! I'm a passionate, self-taught technologist with a strong curiosity for computer science. I thrive on tackling new challenges and continuously expanding my expertise. My personal projects span diverse areas, including artificial intelligence (AI), web development, systems programming, and game development, showcasing my versatile skill set and drive for innovation.",
     "socials": [
         {
             "name": "Email",
@@ -10,17 +10,17 @@
         },
         {
             "name": "Linkedin",
-            "url": "https://linkedin.com/in/paco-algar/",
+            "url": "linkedin.com/in/paco-algar/",
             "icon": "/socials/linkedin.svg"
         },
         {
             "name": "Github",
-            "url": "https://github.com/Pacatro",
+            "url": "github.com/Pacatro",
             "icon": "/socials/github.svg"
         }
     ],
     "sections": [
-        "About me",
+        "About",
         "Projects",
         "Social"
     ],

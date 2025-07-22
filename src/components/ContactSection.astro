@@ -2,35 +2,13 @@
 import Prompt from "./Prompt.astro";
 import SocialCard from "./SocialCard.astro";
 
-const { path, command, socials, email = "", id } = Astro.props;
+const { path, command, socials, id } = Astro.props;
 ---
 
 <footer class="mt-20 mb-20" id={id}>
   <Prompt path={path} command={command} />
   <div class="mt-4 flex flex-col gap-2">
-    {
-      // If email is not empty, show the email section
-      email && (
-        <div class="flex items-center gap-2 text-base sm:text-lg">
-          <p class="text-green-300 font-mononoki">-</p>
-          <p class="text-cyan-300 font-mononoki">Email:</p>
-          <span
-            class="font-mononoki text-gray-50 sm:text-lg transition duration-300"
-            id="email"
-          >
-            {email}
-          </span>
-          <button
-            class="flex items-center justify-center p-1 rounded text-gray-50 hover:text-[#C8A8FC] hover:bg-gray-700 transition duration-300"
-            aria-label="Copy email"
-            id="copy-button"
-          >
-            <img src="/copy.svg" alt="Copy" class="h-6 w-6" id="copy-icon" />
-          </button>
-        </div>
-      )
-    }
-    <div class="flex flex-row items-center gap-10">
+    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-10">
       {
         socials.map((social: { name: string; url: string; icon: string }) => (
           <SocialCard name={social.name} url={social.url} icon={social.icon} />

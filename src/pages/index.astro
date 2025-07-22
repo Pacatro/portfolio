@@ -15,7 +15,7 @@ export const projects: Project[] = await Api.getProjects();
 ---
 
 <Layout>
-  <main class="flex flex-col items-center justify-center p-6">
+  <main class="flex flex-col items-center justify-center p-0 sm:p-10">
     <div class="w-full max-w-4xl">
       <Header name={content.name} sections={content.sections} />
       <TextSection
@@ -34,7 +34,6 @@ export const projects: Project[] = await Api.getProjects();
         path="social"
         command="cat socials.txt"
         socials={content.socials}
-        email={content.email}
         id="social"
       />
     </div>

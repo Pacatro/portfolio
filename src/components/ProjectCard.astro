@@ -16,7 +16,7 @@ const { project } = Astro.props;
       class="block w-full text-snow p-4 rounded-md hover:opacity-100 opacity-90 transition-opacity duration-300"
     >
       <div class="flex justify-between items-center">
-        <p class="text-base sm:text-lg font-bold text-cyan-300">
+        <p class="text-sm sm:text-base font-bold text-cyan-300">
           {project.name}
           |
           {project.language}
@@ -24,13 +24,15 @@ const { project } = Astro.props;
         <div
           class="flex items-center text-white gap-4 text-base sm:text-lg font-semibold"
         >
-          <p>
+          <p class="text-sm sm:text-base">
             <span class="text-yellow-300 font-semibold text-xl">*</span>
             {project.stars}
           </p>
         </div>
       </div>
-      <p class="mt-2 text-sm sm:text-lg text-gray-300">{project.description}</p>
+      <p class="mt-2 text-sm sm:text-base text-gray-300">
+        {project.description}
+      </p>
     </a>
   </li>
 </div>

@@ -1,30 +1,31 @@
 ---
 const { url, icon, name } = Astro.props;
-
-const link = name.toLowerCase() === "email" ? `mailto:${url}` : url;
+const link =
+  name.toLowerCase() === "email" ? `mailto:${url}` : `https://${url}`;
 ---
 
-<!-- Tarjeta de enlace con icono y nombre centrados -->
+<!-- Tarjeta de enlace responsive -->
 <div
-  class="relative border-2 border-green-300 rounded-xl p-6 my-4 shadow-lg w-72 min-h-auto flex flex-col justify-between"
+  class="relative border-2 border-green-300 rounded-xl p-4 sm:p-6 my-4 shadow-lg w-full max-w-full sm:w-72 flex flex-col justify-between"
 >
   <a
     href={link}
     aria-label={name}
     target="_blank"
     rel="noopener noreferrer"
-    class="group flex flex-col items-center justify-center text-center gap-4 h-full"
+    class="group flex flex-col items-center justify-center text-center gap-3 sm:gap-4 h-full"
   >
     <div
-      class="flex items-center justify-center p-3 rounded-full border-2 border-cyan-300"
+      class="flex items-center justify-center p-2 sm:p-3 rounded-full border-2 border-cyan-300"
     >
-      <img src={icon} alt={name} class="w-12 h-12" />
+      <img src={icon} alt={name} class="w-10 h-10 sm:w-12 sm:h-12" />
     </div>
 
-    <span class="text-xl font-bold text-cyan-300">{name}</span>
-    <span
-      class="text-sm italic text-gray-600 dark:text-gray-400 group-hover:text-blue-500 underline-offset-2 hover:underline transition-colors duration-300 break-all"
-      >{url}</span
+    <p class="text-lg sm:text-xl font-bold text-[#C8A8FC]">{name}</p>
+    <p
+      class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 group-hover:text-blue-500 underline-offset-2 hover:underline transition-colors duration-300 break-all"
     >
+      {url}
+    </p>
   </a>
 </div>
