@@ -6,7 +6,7 @@ const link = name.toLowerCase() === "email" ? `mailto:${url}` : url;
 
 <!-- Tarjeta de enlace con icono y nombre centrados -->
 <div
-  class="relative border-4 border-green-300 rounded-xl p-6 my-4 shadow-lg w-72 min-h-auto flex flex-col justify-between"
+  class="relative border-2 border-green-300 rounded-xl p-6 my-4 shadow-lg w-72 min-h-auto flex flex-col justify-between"
 >
   <a
     href={link}
@@ -16,7 +16,7 @@ const link = name.toLowerCase() === "email" ? `mailto:${url}` : url;
     class="group flex flex-col items-center justify-center text-center gap-4 h-full"
   >
     <div
-      class="flex items-center justify-center p-3 rounded-full border-4 border-cyan-300"
+      class="flex items-center justify-center p-3 rounded-full border-2 border-cyan-300"
     >
       <img src={icon} alt={name} class="w-12 h-12" />
     </div>
