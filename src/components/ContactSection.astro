@@ -1,5 +1,6 @@
 ---
 import Prompt from "./Prompt.astro";
+import SocialCard from "./SocialCard.astro";
 
 const { path, command, socials, email = "", id } = Astro.props;
 ---
@@ -29,24 +30,13 @@ const { path, command, socials, email = "", id } = Astro.props;
         </div>
       )
     }
-    {
-      socials.map((social: { name: string; url: string }) => (
-        <p class="text-base sm:text-lg">
-          <span class="text-green-300 font-mononoki">-</span>
-          <span class="text-cyan-300 font-mononoki font-semibold">
-            {social.name}:
-          </span>
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-[#C8A8FC] transition duration-300"
-          >
-            {social.url}
-          </a>
-        </p>
-      ))
-    }
+    <div class="flex flex-row items-center gap-10">
+      {
+        socials.map((social: { name: string; url: string; icon: string }) => (
+          <SocialCard name={social.name} url={social.url} icon={social.icon} />
+        ))
+      }
+    </div>
   </div>
 </footer>
 

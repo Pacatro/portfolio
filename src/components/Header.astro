@@ -13,10 +13,14 @@ const { name, sections } = Astro.props;
   <p class="flex flex-row gap-4 text-lg sm:text-xl font-bold text-green-300">
     {name}
     <button
-      class="rounded text-gray-50 hover:bg-gray-700 transition duration-300"
+      class="rounded border-4 border-green-300 text-gray-50 transition duration-300 animate-border-cycle"
       id="cmd-button"
     >
-      <img src="/terminal.svg" alt="terminal-logo" class="w-6 h-6" />
+      <img
+        src="/terminal.svg"
+        alt="Terminal icon representing a command line interface in a modern digital environment"
+        class="w-6 h-6"
+      />
     </button>
   </p>
 
