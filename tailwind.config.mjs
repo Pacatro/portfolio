@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         mononoki: ['"Mononoki Nerd Font"', "monospace"],
+        mononokiBoldItalic: ['"Mononoki Nerd Font Bold Italic"', "monospace"],
       },
       keyframes: {
         "border-cycle": {
