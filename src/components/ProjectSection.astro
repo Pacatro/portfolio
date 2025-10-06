@@ -1,21 +1,17 @@
 ---
-import ProjectCard from "../components/ProjectCard.astro";
-import type { Project } from "../api/project";
 import Prompt from "./Prompt.astro";
+import Projects from "./preact/Projects.tsx"
 
 interface Props {
   path?: string;
   command?: string;
-  projects: Project[];
   id?: string;
 }
 
-const { path = "", command = "ls", projects, id } = Astro.props;
+const { path = "", command = "ls", id } = Astro.props;
 ---
 
 <section class="mt-20" id={id}>
   <Prompt path={path} command={command} />
-  <div>
-    {projects.map((project) => <ProjectCard project={project} />)}
-  </div>
+  <Projects client:load />
 </section>

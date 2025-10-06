@@ -7,11 +7,7 @@ import ContactSection from "../components/ContactSection.astro";
 import CmdDialog from "../components/CmdDialog.astro";
 
 import content from "../../content.json";
-import { Project } from "../api/project";
-import { Api } from "../api/api";
 import HelpDialog from "../components/HelpDialog.astro";
-
-export const projects: Project[] = await Api.getProjects();
 ---
 
 <Layout>
@@ -27,7 +23,6 @@ export const projects: Project[] = await Api.getProjects();
       <ProjectSection
         path="projects"
         command="ls"
-        projects={projects}
         id="projects"
       />
       <ContactSection
