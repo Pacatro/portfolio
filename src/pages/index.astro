@@ -8,6 +8,8 @@ import CmdDialog from "../components/CmdDialog.astro";
 
 import content from "../../content.json";
 import HelpDialog from "../components/HelpDialog.astro";
+
+export const prerender = false;
 ---
 
 <Layout>
@@ -20,11 +22,7 @@ import HelpDialog from "../components/HelpDialog.astro";
         description={content.bio}
         id="about-me"
       />
-      <ProjectSection
-        path="projects"
-        command="ls"
-        id="projects"
-      />
+      <ProjectSection path="projects" command="ls" id="projects" />
       <ContactSection
         path="social"
         command="cat socials.txt"
