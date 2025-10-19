@@ -67,10 +67,10 @@ export class ExitCommand implements Command {
  */
 export class DownloadResumeCommand implements Command {
   execute() {
-    const url = "/docs/CV_Paco_en.pdf";
+    const url = "/docs/resume_Paco.pdf";
     const a = document.createElement("a");
     a.href = url;
-    a.download = "CV_Paco_en.pdf";
+    a.download = "resume_Paco.pdf";
     a.style.display = "none";
     document.body.appendChild(a);
     a.click();
