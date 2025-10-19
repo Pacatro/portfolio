@@ -16,7 +16,7 @@ function Projects() {
       const projects = await response.json();
       setProjects(projects);
     } catch (err) {
-      setError("Error al cargar los proyectos");
+      setError("Can't fetch projects");
     } finally {
       setLoading(false);
     }

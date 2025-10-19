@@ -3,7 +3,7 @@ interface RepoCardProps {
   name: string;
   language?: string;
   stars: number;
-  description: string;
+  description: string | null;
 }
 
 export default function RepoCard({
