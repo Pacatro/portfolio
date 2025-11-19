@@ -14,7 +14,7 @@ export default function RepoCard({
   description,
 }: RepoCardProps) {
   return (
-    <div class="w-full">
+    <ul class="w-full">
       <li class="list-none border-2 border-green-300 rounded-md p-1 my-5">
         <a
           href={link}
@@ -42,6 +42,6 @@ export default function RepoCard({
           <p class="mt-2 text-sm sm:text-base text-gray-300">{description}</p>
         </a>
       </li>
-    </div>
+    </ul>
   );
 }
