@@ -3,7 +3,8 @@ interface RepoCardProps {
   name: string;
   language?: string;
   stars: number;
-  description: string | null;
+  description?: string;
+  topics?: string[];
 }
 
 export default function RepoCard({
@@ -12,6 +13,7 @@ export default function RepoCard({
   language,
   stars,
   description,
+  topics,
 }: RepoCardProps) {
   return (
     <ul class="w-full">
@@ -40,6 +42,15 @@ export default function RepoCard({
             </div>
           </div>
           <p class="mt-2 text-sm sm:text-base text-gray-300">{description}</p>
+          {topics && topics.length > 0 && (
+            <div class="mt-3 flex flex-wrap gap-2">
+              {topics.map((topic) => (
+                <p class="px-2 py-1 text-xs border-2 border-green-300 text-gray-400 rounded-md font-semibold">
+                  {topic}
+                </p>
+              ))}
+            </div>
+          )}
         </a>
       </li>
     </ul>

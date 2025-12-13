@@ -1,9 +1,9 @@
 import { useState, useEffect } from "preact/hooks";
 import RepoCard from "../preact/RepoCard";
-import type { Project } from "../../pages/api/projects";
+import type { GitHubRepo } from "../../pages/api/projects";
 
 function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -97,14 +97,15 @@ function Projects() {
 
   return (
     <div>
-      {projects.map((project: Project) => (
+      {projects.map((repo: GitHubRepo) => (
         <RepoCard
-          key={project.name}
-          link={project.link}
-          name={project.name}
-          language={project.language}
-          stars={project.stars}
-          description={project.description}
+          key={repo.name}
+          link={repo.html_url}
+          name={repo.name}
+          language={repo.language}
+          stars={repo.stargazers_count}
+          description={repo.description}
+          topics={repo.topics}
         />
       ))}
     </div>
