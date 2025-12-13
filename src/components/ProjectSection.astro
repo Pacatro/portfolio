@@ -2,6 +2,8 @@
 import Prompt from "./Prompt.astro";
 import Projects from "./preact/Projects.tsx";
 
+// import content from "../../content.json";
+
 interface Props {
   path?: string;
   command?: string;
@@ -14,14 +16,15 @@ const { path = "", command = "ls", id } = Astro.props;
 <section class="mt-20" id={id}>
   <Prompt path={path} command={command} />
   <Projects client:load />
-  <div class="mt-8 text-center">
-    <a 
-      href="https://github.com/pacatro" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="text-cyan-300 hover:text-[#C8A8FC] transition-colors duration-300 font-mononokiBoldItalic text-lg"
-    >
-      more on my github →
-    </a>
-  </div>
+  <!-- TODO: I still thinking if include this or not -->
+  <!-- <div class="text-center"> -->
+  <!--   <a  -->
+  <!--     href=`https://github.com/${content.githubProfile}?tab=repositories`  -->
+  <!--     target="_blank"  -->
+  <!--     rel="noopener noreferrer" -->
+  <!--     class="text-cyan-300 hover:text-[#C8A8FC] transition-colors duration-300 font-mononokiBoldItalic text-lg" -->
+  <!--   > -->
+  <!--     More on my GitHub → -->
+  <!--   </a> -->
+  <!-- </div> -->
 </section>
