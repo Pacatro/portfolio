@@ -17,7 +17,7 @@ export default function RepoCard({
 }: RepoCardProps) {
   return (
     <ul class="w-full">
-      <li class="list-none border-2 border-green-300 rounded-md p-1 my-5">
+      <li class="list-none border-2 border-green-300 rounded-md p-1 my-5 group">
         <a
           href={link}
           target="_blank"
@@ -39,6 +39,13 @@ export default function RepoCard({
                 <span class="text-yellow-300 font-semibold text-xl">* </span>
                 {stars}
               </p>
+              <div
+                class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-300 group-hover:text-[#C8A8FC] group-hover:translate-x-1 opacity-0 group-hover:opacity-100 transition duration-300 flex-shrink-0"
+              >
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </div>
           </div>
           <p class="mt-2 text-sm sm:text-base text-gray-300">{description}</p>
