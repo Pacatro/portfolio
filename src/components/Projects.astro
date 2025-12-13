@@ -1,0 +1,126 @@
+---
+import RepoCard from "./RepoCard.astro";
+import { githubProfile } from "../../content.json";
+import { GITHUB_TOKEN } from "astro:env/server"
+
+const GITHUB_API = `https://api.github.com/users/${githubProfile}/repos?sort=created&type=public`;
+const MAX_PROJECTS = 8;
+const EXCLUDED_REPOS = new Set(["dotfiles", "portfolio"]);
+
+export interface GitHubRepo {
+  name: string;
+  description?: string;
+  html_url: string;
+  stargazers_count: number;
+  language?: string;
+  fork: boolean;
+  topics: string[];
+  created_at: string;
+}
+
+const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
+  if (!GITHUB_TOKEN) {
+    throw new Error("GitHub token is missing");
+  }
+
+  const response = await fetch(GITHUB_API, {
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+      Authorization: `token ${GITHUB_TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+};
+
+const getRepos = (repos: GitHubRepo[]): GitHubRepo[] => {
+  return repos.filter((repo) =>
+    repo.description &&
+    repo.stargazers_count > 0 &&
+    !repo.fork &&
+    !EXCLUDED_REPOS.has(repo.name)
+  )
+    .slice(0, MAX_PROJECTS)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+};
+
+let errorMsg = null;
+let projects: GitHubRepo[] = [];
+
+try {
+  const response = await fetchGitHubRepos();
+  projects = getRepos(response);
+} catch (error) {
+  errorMsg = `Can't fetch projects: ${error}`;
+}
+---
+
+{errorMsg && (
+  <div class="flex items-center justify-center py-12">
+    <div class="bg-red-950/30 border border-red-800/50 rounded-lg p-6 max-w-md">
+      <div class="flex items-start">
+        <svg
+          class="h-6 w-6 text-red-400 mr-3 flex-shrink-0"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width={2}
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <div>
+          <h3 class="text-red-300 font-semibold mb-1">
+            Error loading projects
+          </h3>
+          <p class="text-red-400/80 text-sm">{errorMsg}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{!errorMsg && projects.length === 0 && (
+  <div class="flex items-center justify-center py-12">
+    <div class="text-center max-w-md">
+      <svg
+        class="mx-auto h-12 w-12 text-gray-600 mb-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width={2}
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        />
+      </svg>
+      <h3 class="text-lg font-semibold text-gray-300 mb-2">
+        No projects yet :(
+      </h3>
+    </div>
+  </div>
+)}
+
+{!errorMsg && projects.length > 0 && (
+  <div>
+    {projects.map((repo: GitHubRepo) => (
+      <RepoCard
+        link={repo.html_url}
+        name={repo.name}
+        language={repo.language}
+        stars={repo.stargazers_count}
+        description={repo.description}
+        topics={repo.topics}
+      />
+    ))}
+  </div>
+)}

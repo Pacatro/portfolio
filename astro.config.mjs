@@ -1,14 +1,18 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import tailwind from '@astrojs/tailwind';
-
-import preact from '@astrojs/preact';
 
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), preact()],
-  adapter: vercel()
+  output: "server",
+  integrations: [tailwind()],
+  adapter: vercel(),
+  env: {
+    schema: {
+      GITHUB_TOKEN: envField.string({ context: 'server', access: 'secret' })
+    }
+  }
 });

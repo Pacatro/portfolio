@@ -1,6 +1,6 @@
 ---
 import Prompt from "./Prompt.astro";
-import Projects from "./preact/Projects.tsx";
+import Projects from "./Projects.astro";
 
 // import content from "../../content.json";
 
@@ -11,11 +11,37 @@ interface Props {
 }
 
 const { path = "", command = "ls", id } = Astro.props;
+
+export const prerender = true;
 ---
 
 <section class="mt-20" id={id}>
   <Prompt path={path} command={command} />
-  <Projects client:load />
+  <Projects server:defer>
+    <ul slot="fallback" class="w-full">
+      {Array.from({ length: 3 }).map(() => (
+        <li class="list-none border-2 border-green-300/30 rounded-md p-1 my-5">
+          <div class="p-4 w-full animate-pulse">
+            <div class="flex justify-between items-center mb-3">
+              <div class="h-5 bg-cyan-300/20 rounded w-1/3"></div>
+            </div>
+
+            <div class="space-y-2 mb-4">
+              <div class="h-4 bg-gray-600/30 rounded w-3/4"></div>
+              <div class="h-4 bg-gray-600/30 rounded w-1/2"></div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <div class="h-7 w-16 border-2 border-green-300/20 rounded-md"></div>
+              <div class="h-7 w-20 border-2 border-green-300/20 rounded-md"></div>
+              <div class="h-7 w-14 border-2 border-green-300/20 rounded-md"></div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </Projects>
+
   <!-- TODO: I still thinking if include this or not -->
   <!-- <div class="text-center"> -->
   <!--   <a  -->
