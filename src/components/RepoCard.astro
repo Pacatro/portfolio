@@ -12,7 +12,7 @@ const { link, name, language, stars, description, topics } = Astro.props;
 ---
 
 <ul class="w-full">
-  <li class="list-none border-2 border-green-300 rounded-md p-1 my-5 group">
+  <li class="list-none border-2 border-[#8aadf4] rounded-md p-1 my-5 group hover:border-[#8bd5ca] transition duration-300">
     <a
       href={link}
       target="_blank"
@@ -20,7 +20,7 @@ const { link, name, language, stars, description, topics } = Astro.props;
       class="block w-full text-snow p-4 rounded-md hover:opacity-100 opacity-90 transition-opacity duration-300"
     >
       <div class="flex justify-between items-center">
-        <p class="text-sm sm:text-base font-bold text-cyan-300">
+        <p class="text-sm sm:text-lg font-bold text-[#c6a0f6]">
           {name}
           {language && (
             <>
@@ -30,12 +30,12 @@ const { link, name, language, stars, description, topics } = Astro.props;
           )}
         </p>
         <div class="flex items-center text-white gap-4 text-base sm:text-lg font-semibold">
-          <p class="text-sm sm:text-base">
-            <span class="text-yellow-300 font-semibold text-xl">* </span>
+          <p class="text-sm sm:text-lg">
+            <span class="text-yellow-300 font-semibold text-xl">*</span>
             {stars}
           </p>
           <div
-            class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-300 group-hover:text-[#C8A8FC] group-hover:translate-x-1 opacity-0 group-hover:opacity-100 transition duration-300 flex-shrink-0"
+            class="w-4 h-4 sm:w-5 sm:h-5 text-[#8aadf4] group-hover:text-[#8bd5ca] group-hover:translate-x-1 opacity-0 group-hover:opacity-100 transition duration-300 flex-shrink-0"
           >
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,7 +47,7 @@ const { link, name, language, stars, description, topics } = Astro.props;
       {topics && topics.length > 0 && (
         <div class="mt-3 flex flex-wrap gap-2">
           {topics.map((topic) => (
-            <p class="px-2 py-1 text-xs border-2 border-green-300 text-gray-400 rounded-md font-semibold">
+            <p class="px-2 py-1 text-xs border-2 border-[#f5a97f] text-gray-400 rounded-md font-semibold">
               {topic}
             </p>
           ))}

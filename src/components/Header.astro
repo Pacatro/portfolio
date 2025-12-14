@@ -11,11 +11,11 @@ const { name, sections } = Astro.props;
   class="flex flex-col sm:flex-row items-center sm:justify-between py-1 gap-4"
 >
   <p
-    class="flex flex-row gap-4 text-lg sm:text-xl font-mononokiBoldItalic text-green-300"
+    class="flex flex-row gap-4 text-lg sm:text-xl font-mononokiBoldItalic text-[#8bd5ca]"
   >
     {name}
     <button
-      class="rounded border-2 border-green-300 text-gray-50 transition duration-300 animate-border-cycle"
+      class="rounded border-2 border-[#8bd5ca] text-gray-50 transition duration-300 animate-border-cycle"
       id="cmd-button"
     >
       <img
@@ -33,7 +33,7 @@ const { name, sections } = Astro.props;
 
         return (
           <a href={"#" + formatContent}>
-            <p class="text-lg sm:text-xl font-semibold text-cyan-300 hover:text-[#C8A8FC] transition duration-500">
+            <p class="text-lg sm:text-xl font-semibold text-[#c6a0f6]">
               {section}
             </p>
           </a>

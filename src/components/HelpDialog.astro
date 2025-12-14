@@ -4,17 +4,17 @@ const { commands } = Astro.props;
 
 <dialog
   id="helpDialog"
-  class="bg-[#1e1e2e] border border-cyan-400 rounded-lg p-4 w-[80vw] max-w-3xl"
+  class="bg-[#222436] border-2 border-[#8aadf4] rounded-lg p-4 w-[80vw] max-w-3xl"
 >
   <div class="flex flex-col gap-4">
-    <p class="text-lg sm:text-xl font-bold text-green-300">
+    <p class="text-lg sm:text-xl font-bold text-[#a6da95]">
       Available commands: (ESC for close)
     </p>
-    <ul class="list-inside text-green-300 text-lg sm:text-xl list-none">
+    <ul class="list-inside text-[#a6da95] text-lg sm:text-xl list-none">
       {
         commands.map((command: any) => {
           return (
-            <li class="font-mononoki font-semibold text-pink-300 text-lg sm:text-xl">
+            <li class="font-mononoki font-semibold text-[#f5bde6] text-lg sm:text-xl">
               {command.name} {command.args ? `<${command.args}>` : ""}
               <span class="font-mononoki font-normal text-gray-50">
                 - {command.description}

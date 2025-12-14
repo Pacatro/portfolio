@@ -11,7 +11,7 @@ import content from "../../content.json";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content=`${content.name}'s portfolio` />
-    <title>Paco Algar</title>
+    <title>{content.title}</title>
     <Analytics />
   </head>
   <body>
@@ -39,7 +39,7 @@ import content from "../../content.json";
     padding: 20px;
     width: 100%;
     height: 100%;
-    background-color: #24273a;
+    background-color: #222436;
   }
 
   p {
