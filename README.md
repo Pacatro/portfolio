@@ -63,10 +63,10 @@ You can customize the portfolio by editing the `content.json` file.
 
 ```json
 {
-  "name": "Your Name or Username",
+  "title": "Your Name",
+  "name": "Your Full Name",
   "githubProfile": "Your GitHub Profile",
   "bio": "Your Bio",
-  "email": "Your Email (optional)",
   "socials": [
     {
       "name": "Social media name",
@@ -74,27 +74,12 @@ You can customize the portfolio by editing the `content.json` file.
       "icon": "path/to/icon.svg" // OPTIONAL
     }
   ],
-  "sections": ["About me", "Projects", "Contact"],
+  "sections": ["About", "Projects", "Social"],
   "commands": [
     {
       "name": ":h",
       "args": "",
       "description": "Show the available commands"
-    },
-    {
-      "name": ":q",
-      "args": "",
-      "description": "Quit"
-    },
-    {
-      "name": ":e",
-      "args": "",
-      "description": "Exit cmd"
-    },
-    {
-      "name": ":goto",
-      "args": "section",
-      "description": "Go to a section of the portfolio"
     }
   ]
 }
@@ -149,4 +134,4 @@ constructor() {
 
 ## 🔑 License
 
-[MIT](LICENSE) - Created by [**Paco Algar**](https://github.com/Pacatro).
+[MIT](LICENSE) - Created by [**Paco Algar Muñoz**](https://github.com/Pacatro).
