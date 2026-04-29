@@ -15,9 +15,6 @@ export interface Command {
  * Triggered by the :h command alias.
  */
 export class HelpCommand implements Command {
-  /**
-   * Opens the help dialog modal to display command information.
-   */
   execute() {
     const helpDialog = document.getElementById(
       "helpDialog",
@@ -33,18 +30,10 @@ export class HelpCommand implements Command {
 export class GotoCommand implements Command {
   private sections: string[];
 
-  /**
-   * Initializes the goto command with available portfolio sections.
-   * @param sections - Array of section names from the portfolio content
-   */
   constructor(sections: string[]) {
     this.sections = sections.map((c) => c.toLowerCase().replace(" ", "-"));
   }
 
-  /**
-   * Scrolls to the specified portfolio section.
-   * @param arg - The section name to navigate to
-   */
   execute(arg: string): void {
     if (arg.includes(":")) return;
 
@@ -65,9 +54,6 @@ export class GotoCommand implements Command {
  * Note: This may not work in all browsers due to security restrictions.
  */
 export class QuitCommand implements Command {
-  /**
-   * Attempts to close the current browser window.
-   */
   execute() {
     window.close();
   }
@@ -78,9 +64,6 @@ export class QuitCommand implements Command {
  * Returns focus to the main portfolio content.
  */
 export class ExitCommand implements Command {
-  /**
-   * Closes the terminal command dialog.
-   */
   execute() {
     const cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
     cmdDialog.close();
@@ -92,10 +75,6 @@ export class ExitCommand implements Command {
  * Creates a temporary download link and triggers the download automatically.
  */
 export class DownloadResumeCommand implements Command {
-  /**
-   * Initiates the resume PDF download.
-   * Creates a temporary anchor element, triggers the download, then removes it.
-   */
   execute() {
     const url = "/docs/resume_Paco.pdf";
     const a = document.createElement("a");
