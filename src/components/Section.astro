@@ -1,0 +1,86 @@
+---
+import Projects from "./Projects.astro";
+
+interface Social {
+  name: string;
+  url: string;
+  icon: string;
+}
+interface Props {
+  section: {
+    id: string;
+    path: string;
+    command: string;
+    type: string;
+    content?: string;
+    items?: Social[];
+  };
+}
+
+const { section } = Astro.props;
+const isFooter = section.type === "socials";
+const Tag = isFooter ? "footer" : "section";
+---
+
+<Tag class:list={["mt-20", { "mb-20": isFooter }]} id={section.id}>
+  <div>
+    <p class="text-lg sm:text-xl font-bold text-[#8bd5ca] lowercase">
+      ~/{section.path}
+    </p>
+    <p class="text-lg sm:text-xl font-bold text-[#f5bde6] lowercase">
+      <span class="text-[#a6da95]">❯</span>
+      {section.command}
+    </p>
+  </div>
+  {
+    section.type === "text" && (
+      <p class="text-sm sm:text-lg mt-4">{section.content}</p>
+    )
+  }
+  {
+    section.type === "projects" && (
+      <Projects server:defer>
+        <ul slot="fallback" class="w-full">
+          {Array.from({ length: 3 }).map(() => (
+            <li class="list-none border-2 border-gray-600/30 rounded-md p-5 my-5 animate-pulse">
+              <div class="h-5 bg-gray-600/30 rounded w-1/3 mb-3" />
+              <div class="h-4 bg-gray-600/30 rounded w-3/4 mb-2" />
+              <div class="h-4 bg-gray-600/30 rounded w-1/2" />
+            </li>
+          ))}
+        </ul>
+      </Projects>
+    )
+  }
+  {
+    section.type === "socials" && (
+      <div class="mt-4 flex flex-col md:flex-row items-center gap-2 md:gap-10">
+        {section.items?.map(({ name, url, icon }) => (
+          <div class="group border-2 border-[#8aadf4] rounded-lg p-3 sm:p-4 my-4 shadow-md w-full max-w-sm hover:border-[#8bd5ca] transition duration-300">
+            <a
+              href={
+                name.toLowerCase() === "email"
+                  ? `mailto:${url}`
+                  : `https://${url}`
+              }
+              aria-label={name}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex items-center gap-3 mb-2">
+                <img src={icon} alt="" class="w-5 h-5 sm:w-6 sm:h-6" />
+                <h3 class="font-mononokiBoldItalic font-bold text-[#c6a0f6] text-base sm:text-lg">
+                  {name}
+                </h3>
+                <span class="text-[#8aadf4] group-hover:text-[#8bd5ca] group-hover:translate-x-1 opacity-0 group-hover:opacity-100 transition ml-auto">
+                  ↗
+                </span>
+              </div>
+            </a>
+            <p class="text-gray-400 text-xs sm:text-sm truncate">{url}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</Tag>

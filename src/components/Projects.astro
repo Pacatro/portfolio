@@ -1,7 +1,6 @@
 ---
-import RepoCard from "./RepoCard.astro";
 import { githubProfile } from "../../content.json";
-import { GITHUB_TOKEN } from "astro:env/server"
+import { GITHUB_TOKEN } from "astro:env/server";
 
 const GITHUB_API = `https://api.github.com/users/${githubProfile}/repos?sort=created&type=public`;
 const MAX_PROJECTS = 8;
@@ -31,22 +30,24 @@ const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
   });
 
   if (!response.ok) {
-    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `GitHub API error: ${response.status} ${response.statusText}`,
+    );
   }
 
   return response.json();
 };
 
-const getRepos = (repos: GitHubRepo[]): GitHubRepo[] => {
-  return repos.filter((repo) =>
-    repo.description &&
-    repo.stargazers_count > 0 &&
-    !repo.fork &&
-    !EXCLUDED_REPOS.has(repo.name)
-  )
-    .slice(0, MAX_PROJECTS)
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-};
+const getRepos = (repos: GitHubRepo[]): GitHubRepo[] =>
+  repos
+    .filter(
+      (repo) =>
+        repo.description &&
+        repo.stargazers_count > 0 &&
+        !repo.fork &&
+        !EXCLUDED_REPOS.has(repo.name),
+    )
+    .slice(0, MAX_PROJECTS);
 
 let errorMsg = null;
 let projects: GitHubRepo[] = [];
@@ -59,12 +60,42 @@ try {
 }
 ---
 
-{errorMsg && (
-  <div class="flex items-center justify-center py-12">
-    <div class="bg-red-950/30 border border-red-800/50 rounded-lg p-6 max-w-md">
-      <div class="flex items-start">
+{
+  errorMsg && (
+    <div class="flex items-center justify-center py-12">
+      <div class="bg-red-950/30 border border-red-800/50 rounded-lg p-6 max-w-md">
+        <div class="flex items-start">
+          <svg
+            class="h-6 w-6 text-red-400 mr-3 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width={2}
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div>
+            <h3 class="text-red-300 font-semibold mb-1">
+              Error loading projects
+            </h3>
+            <p class="text-red-400/80 text-sm">{errorMsg}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  !errorMsg && projects.length === 0 && (
+    <div class="flex items-center justify-center py-12">
+      <div class="text-center max-w-md">
         <svg
-          class="h-6 w-6 text-red-400 mr-3 flex-shrink-0"
+          class="mx-auto h-12 w-12 text-gray-600 mb-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -73,54 +104,53 @@ try {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width={2}
-            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        <div>
-          <h3 class="text-red-300 font-semibold mb-1">
-            Error loading projects
-          </h3>
-          <p class="text-red-400/80 text-sm">{errorMsg}</p>
-        </div>
+        <h3 class="text-lg font-semibold text-gray-300 mb-2">
+          No projects yet :(
+        </h3>
       </div>
     </div>
-  </div>
-)}
+  )
+}
 
-{!errorMsg && projects.length === 0 && (
-  <div class="flex items-center justify-center py-12">
-    <div class="text-center max-w-md">
-      <svg
-        class="mx-auto h-12 w-12 text-gray-600 mb-4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width={2}
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        />
-      </svg>
-      <h3 class="text-lg font-semibold text-gray-300 mb-2">
-        No projects yet :(
-      </h3>
-    </div>
-  </div>
-)}
-
-{!errorMsg && projects.length > 0 && (
-  <div>
-    {projects.map((repo: GitHubRepo) => (
-      <RepoCard
-        link={repo.html_url}
-        name={repo.name}
-        language={repo.language}
-        stars={repo.stargazers_count}
-        description={repo.description}
-        topics={repo.topics}
-      />
-    ))}
-  </div>
-)}
+{
+  !errorMsg && projects.length > 0 && (
+    <ul class="w-full">
+      {projects.map((repo: GitHubRepo) => (
+        <li class="border-2 border-[#8aadf4] rounded-md p-1 my-5 group hover:border-[#8bd5ca] transition duration-300">
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block p-4 opacity-90 hover:opacity-100 transition-opacity"
+          >
+            <div class="flex justify-between items-center">
+              <p class="text-sm sm:text-lg font-bold text-[#c6a0f6]">
+                {repo.name}
+                {repo.language && ` | ${repo.language}`}
+              </p>
+              <p class="text-sm sm:text-lg font-semibold">
+                <span class="text-yellow-300 text-xl">*</span>
+                {repo.stargazers_count}
+              </p>
+            </div>
+            <p class="mt-2 text-sm sm:text-base text-gray-300">
+              {repo.description}
+            </p>
+            {repo.topics?.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-2">
+                {repo.topics.map((topic) => (
+                  <span class="px-2 py-1 text-xs border-2 border-[#f5a97f] text-gray-400 rounded-md font-semibold">
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

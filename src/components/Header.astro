@@ -1,7 +1,7 @@
 ---
 interface Props {
   name: string;
-  sections: string[];
+  sections: { id: string; label: string }[];
 }
 
 const { name, sections } = Astro.props;
@@ -28,17 +28,13 @@ const { name, sections } = Astro.props;
 
   <nav class="flex items-center gap-6">
     {
-      sections.map((section) => {
-        let formatContent = section.toLocaleLowerCase().replace(" ", "-");
-
-        return (
-          <a href={"#" + formatContent}>
+      sections.map(({ id, label }) => (
+          <a href={`#${id}`}>
             <p class="text-lg sm:text-xl font-semibold text-[#c6a0f6]">
-              {section}
+              {label}
             </p>
           </a>
-        );
-      })
+      ))
     }
   </nav>
 </header>
