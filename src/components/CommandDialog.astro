@@ -1,14 +1,17 @@
 ---
 import { commands } from "../commands";
+import type { SocialLink } from "../lib/portfolio";
 interface Props {
   sections: string[];
+  socialItems?: SocialLink[];
 }
-const { sections } = Astro.props;
+const { sections, socialItems = [] } = Astro.props;
 ---
 
 <dialog
   id="command-dialog"
   data-sections={JSON.stringify(sections)}
+  data-socials={JSON.stringify(socialItems)}
   aria-label="Command palette"
   class="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-xl border border-[#494d64] bg-[#1e2030] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.45)] focus-visible:!outline-none focus-visible:!outline-offset-0"
 >
@@ -17,6 +20,7 @@ const { sections } = Astro.props;
     type="text"
     spellcheck="false"
     autocomplete="off"
+    data-bwignore="true"
     aria-label="Command"
     aria-describedby="command-feedback"
     class="w-full border-none bg-transparent font-mononoki text-base text-[#c6a0f6] caret-[#8bd5ca] outline-none placeholder:text-[#6e738d] focus-visible:!outline-none focus-visible:!outline-offset-0"
@@ -66,6 +70,7 @@ const { sections } = Astro.props;
     "#command-feedback",
   ) as HTMLParagraphElement;
   const sections = JSON.parse(dialog.dataset.sections ?? "[]") as string[];
+  const socialItems = JSON.parse(dialog.dataset.socials ?? "[]") as SocialLink[];
 
   const close = () => dialog.close();
   const open = () => {
@@ -102,9 +107,11 @@ const { sections } = Astro.props;
       goToSection,
       help: showHelp,
       sections,
+      socialItems,
     });
     if (result) {
-      feedback.textContent = result.message;
+      if (result.html) feedback.innerHTML = result.message;
+      else feedback.textContent = result.message;
       feedback.hidden = false;
       input.select();
       return;

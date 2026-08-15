@@ -1,13 +1,21 @@
+interface SocialLinkInfo {
+  name: string;
+  url: string;
+  icon: string;
+}
+
 interface CommandContext {
   close: () => void;
   download: (path: string, filename: string) => void;
   help: () => void;
   goToSection: (sectionId: string) => void;
   sections: string[];
+  socialItems: SocialLinkInfo[];
 }
 
 interface CommandResult {
   message: string;
+  html?: boolean;
 }
 
 interface Command {
@@ -46,13 +54,35 @@ export const commands: readonly Command[] = [
           message: "Add a section name, for example :goto projects.",
         };
       }
-      const sectionId = sections.find((section) => section.toLowerCase() === id);
+      const sectionId = sections.find(
+        (section) => section.toLowerCase() === id,
+      );
       if (!sectionId) {
         return {
           message: `Unknown section “${argument}”. Try: ${sections.join(", ")}.`,
         };
       }
       goToSection(sectionId);
+    },
+  },
+  {
+    name: ":links",
+    description: "Display all social media links",
+    run: (_, { socialItems }) => {
+      if (socialItems.length === 0) {
+        return { message: "No social links configured." };
+      }
+      const html = socialItems
+        .map(({ name, url, icon }) => {
+          const isEmail = name.toLowerCase() === "email";
+          const href = isEmail ? `mailto:${url}` : `https://${url}`;
+          return `<a href="${href}" target="${isEmail ? "" : "_blank"}" rel="${isEmail ? "" : "noopener noreferrer"}" class="flex items-center gap-2 font-semibold text-[#8bd5ca] transition-colors hover:text-[#cad3f5]">${icon ? `<img src="${icon}" alt="" class="h-4 w-4 opacity-70" />` : ""}${url}</a>`;
+        })
+        .join("");
+      return {
+        message: `<div class="flex flex-wrap items-center gap-x-5 gap-y-2">${html}</div>`,
+        html: true,
+      };
     },
   },
 ];
