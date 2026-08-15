@@ -1,5 +1,6 @@
 import rawContent from "../../content.json";
 import type { CollectionEntry } from "astro:content";
+import { features } from "./features";
 
 export interface SocialLink {
   name: string;
@@ -28,5 +29,7 @@ interface PortfolioContent {
 }
 
 export const portfolio: PortfolioContent = rawContent;
-export const sections = portfolio.sections;
+export const sections = portfolio.sections.filter(
+  ({ type }) => type !== "blog" || features.blog,
+);
 export const sectionIds = sections.map(({ id }) => id);

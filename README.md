@@ -18,6 +18,7 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 
    ```bash
    GITHUB_TOKEN="<YOUR_GITHUB_TOKEN>"
+   FEATURE_BLOG=false
    ```
 
    ```bash
@@ -58,6 +59,19 @@ You have two ways to open the command mode:
 | `:goto <section>` | Go to a section of the portfolio               |
 
 ## 🛠️ Customize
+
+### Feature flags
+
+The blog is experimental and disabled by default. Enable its home section,
+navigation item, commands, and generated post routes with:
+
+```bash
+FEATURE_BLOG=true
+```
+
+Set the variable in `.env` for local development or in the deployment
+environment. Because blog pages are prerendered, changing the flag requires a
+new build/deployment.
 
 The portfolio content and navigation are generated from the `sections` array in
 `content.json`. A rendered section needs an `id` and a `type`. Its `id` is reused
