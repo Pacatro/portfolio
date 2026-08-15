@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/dates";
 
 interface Props {
   posts: CollectionEntry<"blog">[];
@@ -7,12 +8,6 @@ interface Props {
 
 const { posts } = Astro.props;
 const PAGE_SIZE = 5;
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(date);
 ---
 
 <div class="blog-list" data-blog-list data-page-size={PAGE_SIZE}>
@@ -97,22 +92,23 @@ const formatDate = (date: Date) =>
     let page = 0;
 
     const showPage = () => {
+      const firstPost = page * pageSize;
+      const lastPost = firstPost + pageSize;
       posts.forEach((post, index) => {
-        post.hidden = index < page * pageSize || index >= (page + 1) * pageSize;
+        post.hidden = index < firstPost || index >= lastPost;
       });
       if (previous) previous.disabled = page === 0;
       if (next) next.disabled = page === pages - 1;
       if (status) status.textContent = `${page + 1} / ${pages}`;
     };
 
-    previous?.addEventListener("click", () => {
-      page -= 1;
+    const changePage = (offset: number) => {
+      page += offset;
       showPage();
-    });
-    next?.addEventListener("click", () => {
-      page += 1;
-      showPage();
-    });
+    };
+
+    previous?.addEventListener("click", () => changePage(-1));
+    next?.addEventListener("click", () => changePage(1));
     showPage();
   });
 </script>

@@ -1,0 +1,23 @@
+---
+import type { SocialLink } from "../lib/portfolio";
+interface Props { links: SocialLink[]; }
+const { links } = Astro.props;
+---
+
+<nav class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-1 sm:mt-6" aria-label="Social profiles and contact">
+  {links.map(({ name, url, icon }) => {
+    const isEmail = name.toLowerCase() === "email";
+    return (
+      <a
+        href={isEmail ? `mailto:${url}` : `https://${url}`}
+        target={isEmail ? undefined : "_blank"}
+        rel={isEmail ? undefined : "noopener noreferrer"}
+        class="group flex min-h-11 items-center gap-2 border-b-2 border-transparent px-1 py-2 font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5]"
+      >
+        <img src={icon} alt="" class="h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100" />
+        <span>{name}</span>
+        <span class="text-[#6e738d]" aria-hidden="true">↗</span>
+      </a>
+    );
+  })}
+</nav>

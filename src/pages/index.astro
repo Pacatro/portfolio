@@ -1,15 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import content from "../../content.json";
 import Section from "../components/Section.astro";
 import CommandDialog from "../components/CommandDialog.astro";
 import { getCollection } from "astro:content";
+import {
+  portfolio,
+  sections,
+  sectionIds,
+} from "../lib/portfolio";
 
 export const prerender = true;
 
-const socialSection = content.sections.find((section) => section.type === "socials");
-const primarySections = content.sections.filter((section) => section.type !== "socials");
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
 );
@@ -18,13 +20,13 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 <Layout>
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
-      <Header name={content.name} sections={primarySections} />
+      <Header name={portfolio.name} {sections} />
       {
-        primarySections.map((section) => (
-          <Section section={section} socialItems={socialSection?.items} posts={posts} />
+        sections.map((section) => (
+          <Section section={section} socialItems={portfolio.socialLinks} posts={posts} />
         ))
       }
     </div>
   </main>
-  <CommandDialog sections={primarySections.map(({ id }) => id)} />
+  <CommandDialog sections={sectionIds} />
 </Layout>

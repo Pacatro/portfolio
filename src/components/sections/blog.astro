@@ -1,0 +1,13 @@
+---
+import Blog from "../Blog.astro";
+import SectionFrame from "../SectionFrame.astro";
+import type { SectionRendererProps } from "../../lib/portfolio";
+
+type Props = SectionRendererProps;
+
+const { section, posts = [] } = Astro.props;
+---
+
+<SectionFrame id={section.id}>
+  <Blog {posts} />
+</SectionFrame>

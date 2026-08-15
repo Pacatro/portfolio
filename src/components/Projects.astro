@@ -1,71 +1,13 @@
 ---
-import { githubProfile } from "../../content.json";
 import { GITHUB_TOKEN } from "astro:env/server";
+import { portfolio } from "../lib/portfolio";
+import { getGitHubProjects } from "../services/github";
 
-const GITHUB_API = `https://api.github.com/users/${githubProfile}/repos?sort=updated&type=public&per_page=100`;
-const MAX_PROJECTS = 8;
-const MIN_STARS = 0;
-
-export interface GitHubRepo {
-  name: string;
-  description?: string;
-  html_url: string;
-  stargazers_count: number;
-  language?: string;
-  fork: boolean;
-  topics: string[];
-  created_at: string;
-  updated_at: string;
-}
-
-const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 8000);
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-  };
-
-  if (GITHUB_TOKEN) headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
-
-  try {
-    const response = await fetch(GITHUB_API, {
-      headers,
-      signal: controller.signal,
-    });
-
-    if (!response.ok) throw new Error(`github:${response.status}`);
-
-    return response.json();
-  } finally {
-    clearTimeout(timeout);
-  }
-};
-
-const getRepos = (repos: GitHubRepo[]): GitHubRepo[] =>
-  repos
-    .filter((repo) => !repo.fork && repo.stargazers_count > MIN_STARS)
-    .sort(
-      (a, b) =>
-        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-    )
-    .slice(0, MAX_PROJECTS);
-
-let errorKind: "rate-limit" | "timeout" | "unavailable" | null = null;
-let projects: GitHubRepo[] = [];
-
-try {
-  const response = await fetchGitHubRepos();
-  projects = getRepos(response);
-} catch (error) {
-  if (error instanceof Error && error.name === "AbortError") {
-    errorKind = "timeout";
-  } else if (error instanceof Error && error.message === "github:403") {
-    errorKind = "rate-limit";
-  } else {
-    errorKind = "unavailable";
-  }
-}
+const { githubProfile } = portfolio;
+const { projects, error: errorKind } = await getGitHubProjects(
+  githubProfile,
+  GITHUB_TOKEN,
+);
 
 const githubUrl = `https://github.com/${githubProfile}?tab=repositories`;
 const errorCopy = {
@@ -165,7 +107,7 @@ const errorCopy = {
 {
   !errorKind && projects.length > 0 && (
     <ul class="grid w-full gap-4 md:grid-cols-2">
-      {projects.map((repo: GitHubRepo) => (
+      {projects.map((repo) => (
         <li class="group flex min-w-0 rounded-xl border border-[#363a4f] bg-[#1e2030] transition-colors hover:border-[#494d64] hover:bg-[#24273a]">
           <a
             href={repo.html_url}
@@ -187,7 +129,7 @@ const errorCopy = {
                   {repo.language}
                 </span>
               )}
-              {repo.topics?.slice(0, 3).map((topic) => (
+              {repo.topics.slice(0, 3).map((topic) => (
                 <span class="break-all">#{topic}</span>
               ))}
               <span

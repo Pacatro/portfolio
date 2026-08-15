@@ -2,6 +2,11 @@
   "title": "Paco Algar",
   "name": "Paco Algar Muñoz",
   "githubProfile": "Pacatro",
+  "socialLinks": [
+    { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
+    { "name": "Linkedin", "url": "linkedin.com/in/paco-algar/", "icon": "/socials/linkedin.svg" },
+    { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" }
+  ],
   "sections": [
     {
       "id": "Whoami",
@@ -15,15 +20,6 @@
     {
       "id": "Projects",
       "type": "projects"
-    },
-    {
-      "id": "social",
-      "type": "socials",
-      "items": [
-        { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
-        { "name": "Linkedin", "url": "linkedin.com/in/paco-algar/", "icon": "/socials/linkedin.svg" },
-        { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" }
-      ]
     }
   ]
 }

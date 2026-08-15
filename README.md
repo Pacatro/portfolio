@@ -60,15 +60,15 @@ You have two ways to open the command mode:
 ## 🛠️ Customize
 
 The portfolio content and navigation are generated from the `sections` array in
-`content.json`. A section only needs an `id` and a `type` (`text`, `blog`,
-`projects`, or `socials`). Its `id` is reused as the anchor, navigation label, and
-terminal-styled section title.
+`content.json`. A rendered section needs an `id` and a `type`. Its `id` is reused
+as the anchor, navigation label, and terminal-styled section title.
 
 ```json
 {
   "title": "Your Name",
   "name": "Your Full Name",
   "githubProfile": "Your GitHub Profile",
+  "socialLinks": [],
   "sections": [
     {
       "id": "about-me",
@@ -79,18 +79,45 @@ terminal-styled section title.
 }
 ```
 
+### Add a new section type
+
+Section renderers are discovered automatically from `src/components/sections`.
+The filename must match the `type` in `content.json`; no central conditional or
+registry needs to be updated.
+
+For example, add `{ "id": "Experience", "type": "experience" }` to the
+`sections` array, then create `src/components/sections/experience.astro`:
+
+```astro
+---
+import SectionFrame from "../SectionFrame.astro";
+import type { SectionRendererProps } from "../../lib/portfolio";
+
+type Props = SectionRendererProps;
+const { section } = Astro.props;
+---
+
+<SectionFrame id={section.id}>
+  <!-- Render this section's fields here. -->
+</SectionFrame>
+```
+
+`SectionFrame` provides the shared heading, spacing, and anchor. A renderer can
+omit it when it needs a completely custom layout.
+
 ### Add new commands
 
 Commands are defined in a single registry in `src/commands.ts`. Adding an entry
 automatically adds it to the command runner and the help dialog.
 
 ```typescript
-commands.push({
+// Add an entry to the `commands` array:
+{
   name: ":custom",
   args: "arg",
   description: "Custom command",
-  run: (argument) => console.log(argument),
-});
+  run: (argument) => console.log(argument)
+}
 ```
 
 ## 🔑 License

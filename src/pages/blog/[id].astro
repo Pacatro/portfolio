@@ -3,7 +3,8 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import CommandDialog from "../../components/CommandDialog.astro";
-import content from "../../../content.json";
+import { formatDate } from "../../lib/dates";
+import { portfolio, sections, sectionIds } from "../../lib/portfolio";
 
 export const prerender = true;
 
@@ -18,14 +19,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const primarySections = content.sections.filter(
-  (section) => section.type !== "socials",
-);
-const publishedAt = new Intl.DateTimeFormat("en", {
-  day: "2-digit",
-  month: "long",
-  year: "numeric",
-}).format(post.data.publishedAt);
+const publishedAt = formatDate(post.data.publishedAt, "long");
 ---
 
 <Layout
@@ -34,7 +28,7 @@ const publishedAt = new Intl.DateTimeFormat("en", {
 >
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
-      <Header name={content.name} sections={primarySections} />
+      <Header name={portfolio.name} {sections} />
 
       <article class="mt-14 sm:mt-20">
         <header class="border-b border-[#363a4f] pb-8 sm:pb-10">
@@ -81,7 +75,7 @@ const publishedAt = new Intl.DateTimeFormat("en", {
       </article>
     </div>
   </main>
-  <CommandDialog sections={primarySections.map(({ id }) => id)} />
+  <CommandDialog sections={sectionIds} />
 </Layout>
 
 <style>

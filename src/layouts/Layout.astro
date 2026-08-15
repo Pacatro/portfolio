@@ -1,6 +1,6 @@
 ---
 import Analytics from "@vercel/analytics/astro";
-import content from "../../content.json";
+import { portfolio } from "../lib/portfolio";
 
 interface Props {
   title?: string;
@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = content.title,
-  description = `${content.name}'s portfolio`,
+  title = portfolio.title,
+  description = `${portfolio.name}'s portfolio`,
 } = Astro.props;
 ---
 
