@@ -27,23 +27,23 @@ const Tag = isFooter ? "footer" : "section";
   id={section.id}
 >
   <div
-    class="mb-6 flex items-end justify-between gap-5 border-b border-[#39404d] pb-3 text-base leading-7"
+    class="mb-6 flex items-end justify-between gap-5 border-b border-[#363a4f] pb-3 text-base leading-7"
   >
     <div>
-      <p class="text-xs uppercase tracking-[0.12em] text-[#929aaa]">
+      <p class="text-xs uppercase tracking-[0.12em] text-[#939ab7]">
         ~/{section.path}
       </p>
       <p
-        class="mt-1 text-xl font-bold tracking-[-0.02em] text-[#f4f6f9] sm:text-2xl"
+        class="mt-1 text-xl font-bold tracking-[-0.02em] text-[#cad3f5] sm:text-2xl"
       >
-        <span class="mr-1 text-[#ef5b5b]" aria-hidden="true">›</span>
+        <span class="mr-1 text-[#8bd5ca]" aria-hidden="true">›</span>
         {section.command}
       </p>
     </div>
   </div>
   {
     section.type === "text" && (
-      <p class="max-w-[72ch] text-base leading-7 text-[#cbd1db] sm:text-lg sm:leading-8">
+      <p class="max-w-[72ch] text-base leading-7 text-[#b8c0e0] sm:text-lg sm:leading-8">
         {section.content}
       </p>
     )
@@ -65,7 +65,7 @@ const Tag = isFooter ? "footer" : "section";
   }
   {
     section.type === "socials" && (
-      <div class="grid gap-px overflow-hidden rounded-xl border border-[#39404d] bg-[#39404d] sm:grid-cols-3">
+      <div class="grid gap-px overflow-hidden rounded-xl border border-[#363a4f] bg-[#363a4f] sm:grid-cols-3">
         {section.items?.map(({ name, url, icon }) => (
           <a
             href={
@@ -76,16 +76,16 @@ const Tag = isFooter ? "footer" : "section";
             aria-label={name}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex min-w-0 items-center gap-3 bg-[#171c25] px-4 py-5 no-underline transition-colors hover:bg-[#1c222d]"
+            class="group flex min-w-0 items-center gap-3 bg-[#1e2030] px-4 py-5 no-underline transition-colors hover:bg-[#24273a]"
           >
             <img
               src={icon}
               alt=""
               class="h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100"
             />
-            <span class="font-semibold text-base text-[#f0f2f6]">{name}</span>
+            <span class="font-semibold text-base text-[#cad3f5]">{name}</span>
             <span
-              class="ml-auto text-[#727b8c] transition-colors group-hover:text-[#ef6a6a]"
+              class="ml-auto text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]"
               aria-hidden="true"
             >
               ↗

@@ -8,17 +8,17 @@ const { name, sections } = Astro.props;
 ---
 
 <header
-  class="flex items-center justify-between gap-6 border-b border-[#39404d] pb-4"
+  class="flex items-center justify-between gap-6 border-b border-[#363a4f] pb-4"
 >
   <div class="flex min-w-0 items-center gap-3">
     <a
       href="#about-me"
-      class="truncate text-lg font-bold tracking-[-0.02em] text-[#f4f6f9] no-underline sm:text-xl"
+      class="truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
     >
       {name}
     </a>
     <button
-      class="group grid h-9 w-9 shrink-0 place-items-center rounded-md border border-[#4a5261] bg-[#191e28] transition-colors duration-200 hover:border-[#ef5b5b] hover:bg-[#ef5b5b]/10"
+      class="group grid h-9 w-9 shrink-0 place-items-center rounded-md border border-[#494d64] bg-[#1e2030] transition-colors duration-200 hover:border-[#8bd5ca] hover:bg-[#8bd5ca]/10"
       id="cmd-button"
       type="button"
       aria-label="Open command palette"
@@ -37,7 +37,7 @@ const { name, sections } = Astro.props;
       sections.map(({ id, label }) => (
         <a
           href={`#${id}`}
-          class="border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-[#aeb5c2] no-underline transition-colors hover:border-[#ef5b5b] hover:text-[#f4f6f9]"
+          class="border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5]"
         >
           {label}
         </a>
