@@ -2,9 +2,9 @@
 import { githubProfile } from "../../content.json";
 import { GITHUB_TOKEN } from "astro:env/server";
 
-const GITHUB_API = `https://api.github.com/users/${githubProfile}/repos?sort=created&type=public`;
+const GITHUB_API = `https://api.github.com/users/${githubProfile}/repos?sort=updated&type=public&per_page=100`;
 const MAX_PROJECTS = 8;
-const EXCLUDED_REPOS = new Set(["dotfiles", "portfolio"]);
+const MIN_STARS = 0;
 
 export interface GitHubRepo {
   name: string;
@@ -15,61 +15,77 @@ export interface GitHubRepo {
   fork: boolean;
   topics: string[];
   created_at: string;
+  updated_at: string;
 }
 
 const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
-  if (!GITHUB_TOKEN) {
-    throw new Error("GitHub token is missing");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+  };
+
+  if (GITHUB_TOKEN) headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+
+  try {
+    const response = await fetch(GITHUB_API, {
+      headers,
+      signal: controller.signal,
+    });
+
+    if (!response.ok) throw new Error(`github:${response.status}`);
+
+    return response.json();
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const response = await fetch(GITHUB_API, {
-    headers: {
-      Accept: "application/vnd.github.v3+json",
-      Authorization: `token ${GITHUB_TOKEN}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `GitHub API error: ${response.status} ${response.statusText}`,
-    );
-  }
-
-  return response.json();
 };
 
 const getRepos = (repos: GitHubRepo[]): GitHubRepo[] =>
   repos
-    .filter(
-      (repo) =>
-        repo.description &&
-        repo.stargazers_count > 0 &&
-        !repo.fork &&
-        !EXCLUDED_REPOS.has(repo.name),
+    .filter((repo) => !repo.fork && repo.stargazers_count > MIN_STARS)
+    .sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
     )
     .slice(0, MAX_PROJECTS);
 
-let errorMsg = null;
+let errorKind: "rate-limit" | "timeout" | "unavailable" | null = null;
 let projects: GitHubRepo[] = [];
 
 try {
   const response = await fetchGitHubRepos();
   projects = getRepos(response);
 } catch (error) {
-  errorMsg = `Can't fetch projects: ${error}`;
+  if (error instanceof Error && error.name === "AbortError") {
+    errorKind = "timeout";
+  } else if (error instanceof Error && error.message === "github:403") {
+    errorKind = "rate-limit";
+  } else {
+    errorKind = "unavailable";
+  }
 }
+
+const githubUrl = `https://github.com/${githubProfile}?tab=repositories`;
+const errorCopy = {
+  "rate-limit": "GitHub is temporarily limiting requests.",
+  timeout: "GitHub took too long to respond.",
+  unavailable: "GitHub could not be reached right now.",
+};
 ---
 
 {
-  errorMsg && (
+  errorKind && (
     <div class="flex items-center justify-center py-12">
-      <div class="bg-red-950/30 border border-red-800/50 rounded-lg p-6 max-w-md">
+      <div class="max-w-md rounded-xl border border-[#494d64] bg-[#1e2030] p-6">
         <div class="flex items-start">
           <svg
-            class="h-6 w-6 text-red-400 mr-3 flex-shrink-0"
+            class="mr-3 h-6 w-6 shrink-0 text-[#eed49f]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -78,11 +94,30 @@ try {
               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <div>
-            <h3 class="text-red-300 font-semibold mb-1">
-              Error loading projects
+          <div class="min-w-0">
+            <h3 class="mb-1 font-semibold text-[#cad3f5]">
+              Projects are temporarily unavailable
             </h3>
-            <p class="text-red-400/80 text-sm">{errorMsg}</p>
+            <p class="text-sm leading-6 text-[#a5adcb]">
+              {errorCopy[errorKind]} You can still browse every project directly
+              on GitHub.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#8bd5ca] underline decoration-[#8bd5ca]/50 underline-offset-4 hover:decoration-[#8bd5ca]"
+              >
+                View projects on GitHub
+              </a>
+              <a
+                href="/#projects"
+                class="text-[#a5adcb] underline decoration-[#a5adcb]/40 underline-offset-4 hover:text-[#cad3f5]"
+              >
+                Try again
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -91,7 +126,7 @@ try {
 }
 
 {
-  !errorMsg && projects.length === 0 && (
+  !errorKind && projects.length === 0 && (
     <div class="flex items-center justify-center py-12">
       <div class="text-center max-w-md">
         <svg
@@ -107,41 +142,53 @@ try {
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        <h3 class="text-lg font-semibold text-gray-300 mb-2">
-          No projects yet :(
+        <h3 class="mb-2 text-lg font-semibold text-[#cad3f5]">
+          No public projects found
         </h3>
+        <p class="text-sm leading-6 text-[#a5adcb]">
+          The repository list is empty right now. Check the GitHub profile for
+          the latest work.
+        </p>
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-block text-sm font-semibold text-[#8bd5ca] underline decoration-[#8bd5ca]/50 underline-offset-4 hover:decoration-[#8bd5ca]"
+        >
+          Open GitHub profile
+        </a>
       </div>
     </div>
   )
 }
 
 {
-  !errorMsg && projects.length > 0 && (
-    <ul class="grid w-full gap-4 sm:grid-cols-2">
-      {projects.map((repo: GitHubRepo, index) => (
+  !errorKind && projects.length > 0 && (
+    <ul class="grid w-full gap-4 md:grid-cols-2">
+      {projects.map((repo: GitHubRepo) => (
         <li class="group flex min-w-0 rounded-xl border border-[#363a4f] bg-[#1e2030] transition-colors hover:border-[#494d64] hover:bg-[#24273a]">
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex w-full flex-col p-5 no-underline sm:p-6"
+            class="flex w-full min-w-0 flex-col p-5 no-underline active:bg-[#24273a] sm:p-6"
           >
             <div class="flex items-start justify-between gap-4">
-              <p class="text-lg font-bold leading-6 tracking-[-0.02em] text-[#c6a0f6] sm:text-xl">
+              <p class="break-words text-lg font-bold leading-6 tracking-[-0.02em] text-[#c6a0f6] sm:text-xl">
                 {repo.name}
               </p>
             </div>
             <p class="mt-3 flex-1 text-sm leading-6 text-[#a5adcb] sm:text-base sm:leading-7">
-              {repo.description}
+              {repo.description || "No description provided."}
             </p>
-            <div class="mt-5 flex flex-wrap items-center gap-2 border-t border-[#363a4f] pt-4 text-xs text-[#939ab7]">
+            <div class="mt-5 flex min-w-0 flex-wrap items-center gap-2 border-t border-[#363a4f] pt-4 text-xs text-[#939ab7]">
               {repo.language && (
                 <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
                   {repo.language}
                 </span>
               )}
               {repo.topics?.slice(0, 3).map((topic) => (
-                <span>#{topic}</span>
+                <span class="break-all">#{topic}</span>
               ))}
               <span
                 class="ml-auto tabular-nums text-[#eed49f]"

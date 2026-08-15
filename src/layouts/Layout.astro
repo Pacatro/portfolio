@@ -7,7 +7,10 @@ import content from "../../content.json";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content=`${content.name}'s portfolio` />
@@ -20,6 +23,12 @@ import content from "../../content.json";
 </html>
 
 <style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   @font-face {
     font-family: "Mononoki Nerd Font";
     src: url("/fonts/MononokiNerdFont-Regular.ttf") format("truetype");
@@ -57,6 +66,14 @@ import content from "../../content.json";
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+  }
+
+  .page-shell {
+    padding-block: max(1.75rem, env(safe-area-inset-top))
+      max(4rem, env(safe-area-inset-bottom));
+    padding-inline: max(1.5rem, env(safe-area-inset-left))
+      max(1.5rem, env(safe-area-inset-right));
   }
 
   ::selection {
@@ -72,6 +89,22 @@ import content from "../../content.json";
   dialog::backdrop {
     background: rgb(17 17 27 / 76%);
     backdrop-filter: blur(3px);
+  }
+
+  @media (min-width: 40rem) {
+    .page-shell {
+      padding-block-start: max(2rem, env(safe-area-inset-top));
+      padding-inline: max(1.75rem, env(safe-area-inset-left))
+        max(1.75rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .page-shell {
+      padding-block-start: max(2.5rem, env(safe-area-inset-top));
+      padding-inline: max(2.5rem, env(safe-area-inset-left))
+        max(2.5rem, env(safe-area-inset-right));
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

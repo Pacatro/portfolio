@@ -8,17 +8,17 @@ const { name, sections } = Astro.props;
 ---
 
 <header
-  class="flex items-center justify-between gap-6 border-b border-[#363a4f] pb-4"
+  class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-[#363a4f] pb-3 sm:flex-nowrap sm:pb-4"
 >
-  <div class="flex min-w-0 items-center gap-3">
+  <div class="flex min-w-0 w-full items-center justify-center gap-3 sm:w-auto sm:justify-start">
     <a
       href="#about-me"
-      class="truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
+      class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
     >
       {name}
     </a>
     <button
-      class="group grid h-9 w-9 shrink-0 place-items-center rounded-md border border-[#494d64] bg-[#1e2030] transition-colors duration-200 hover:border-[#8bd5ca] hover:bg-[#8bd5ca]/10"
+      class="group grid h-11 w-11 shrink-0 place-items-center sm:h-10 sm:w-10"
       id="cmd-button"
       type="button"
       aria-label="Open command palette"
@@ -32,12 +32,15 @@ const { name, sections } = Astro.props;
     </button>
   </div>
 
-  <nav class="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
+  <nav
+    class="grid w-full grid-cols-3 items-center gap-1 sm:flex sm:w-auto"
+    aria-label="Main navigation"
+  >
     {
       sections.map(({ id, label }) => (
         <a
           href={`#${id}`}
-          class="border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5]"
+          class="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2 text-center text-sm font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5] sm:px-3"
         >
           {label}
         </a>

@@ -23,7 +23,7 @@ const Tag = isFooter ? "footer" : "section";
 ---
 
 <Tag
-  class:list={["mt-16 scroll-mt-8 sm:mt-20", { "mb-16": isFooter }]}
+  class:list={["mt-14 scroll-mt-6 sm:mt-20 sm:scroll-mt-8", { "mb-16": isFooter }]}
   id={section.id}
 >
   <div
@@ -53,10 +53,10 @@ const Tag = isFooter ? "footer" : "section";
       <Projects server:defer>
         <ul slot="fallback" class="w-full">
           {Array.from({ length: 3 }).map(() => (
-            <li class="my-2 list-none border-b border-[#343746] px-1 py-5 animate-pulse">
-              <div class="h-5 bg-gray-600/30 rounded w-1/3 mb-3" />
-              <div class="h-4 bg-gray-600/30 rounded w-3/4 mb-2" />
-              <div class="h-4 bg-gray-600/30 rounded w-1/2" />
+            <li class="my-2 list-none animate-pulse border-b border-[#343746] px-1 py-5">
+              <div class="mb-3 h-5 w-1/3 rounded bg-[#494d64]/40" />
+              <div class="mb-2 h-4 w-3/4 rounded bg-[#494d64]/30" />
+              <div class="h-4 w-1/2 rounded bg-[#494d64]/30" />
             </li>
           ))}
         </ul>
@@ -76,7 +76,7 @@ const Tag = isFooter ? "footer" : "section";
             aria-label={name}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex min-w-0 items-center gap-3 bg-[#1e2030] px-4 py-5 no-underline transition-colors hover:bg-[#24273a]"
+            class="group flex min-h-14 min-w-0 items-center gap-3 bg-[#1e2030] px-4 py-4 no-underline transition-colors hover:bg-[#24273a] active:bg-[#24273a] sm:py-5"
           >
             <img
               src={icon}

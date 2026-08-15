@@ -9,7 +9,7 @@ export const prerender = true;
 ---
 
 <Layout>
-  <main class="min-h-screen px-4 py-5 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
+  <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
       <Header name={content.name} sections={content.sections} />
       {content.sections.map((section) => <Section section={section} />)}

@@ -30,6 +30,7 @@ pnpm-debug.log*
 .vercel
 
 # Impeccable skill
+.impeccable/
 .impeccable/config.local.json
 .impeccable/hook.cache.json
 .impeccable/hook.pending.json

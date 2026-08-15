@@ -10,7 +10,7 @@ const { sections } = Astro.props;
   id="command-dialog"
   data-sections={JSON.stringify(sections)}
   aria-label="Command palette"
-  class="w-[calc(100%-2rem)] max-w-md rounded-xl border border-[#494d64] bg-[#1e2030] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.45)]"
+  class="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-xl border border-[#494d64] bg-[#1e2030] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.45)] focus-visible:!outline-none focus-visible:!outline-offset-0"
 >
   <input
     id="command-input"
@@ -18,15 +18,24 @@ const { sections } = Astro.props;
     spellcheck="false"
     autocomplete="off"
     aria-label="Command"
-    class="w-full border-none bg-transparent font-mononoki text-base text-[#c6a0f6] caret-[#8bd5ca] outline-none placeholder:text-[#6e738d]"
+    aria-describedby="command-feedback"
+    class="w-full border-none bg-transparent font-mononoki text-base text-[#c6a0f6] caret-[#8bd5ca] outline-none placeholder:text-[#6e738d] focus-visible:!outline-none focus-visible:!outline-offset-0"
     placeholder="Type a command, e.g. :h"
   />
+  <p
+    id="command-feedback"
+    class="mt-3 text-sm leading-5 text-[#ed8796]"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+  </p>
 </dialog>
 
 <dialog
   id="help-dialog"
   aria-labelledby="help-title"
-  class="w-[calc(100%-2rem)] max-w-2xl rounded-xl border border-[#494d64] bg-[#1e2030] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.45)] sm:p-6"
+  class="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto overscroll-contain rounded-xl border border-[#494d64] bg-[#1e2030] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.45)] focus-visible:!outline-none focus-visible:!outline-offset-0 sm:p-6"
 >
   <p id="help-title" class="mb-4 text-sm font-semibold text-[#8bd5ca]">
     Available commands <span class="font-normal text-[#777c90]"
@@ -36,7 +45,7 @@ const { sections } = Astro.props;
   <ul class="list-none divide-y divide-[#363a4f] text-sm">
     {
       commands.map(({ name, args, description }) => (
-        <li class="grid gap-1 py-3 font-mononoki font-semibold text-[#c6a0f6] sm:grid-cols-[10rem_1fr]">
+        <li class="grid min-w-0 gap-1 py-3 font-mononoki font-semibold text-[#c6a0f6] sm:grid-cols-[10rem_minmax(0,1fr)]">
           {name} {args && `<${args}>`}
           <span class="font-normal text-[#a5adcb]">{description}</span>
         </li>
@@ -53,12 +62,16 @@ const { sections } = Astro.props;
   ) as HTMLDialogElement;
   const input = document.querySelector("#command-input") as HTMLInputElement;
   const button = document.querySelector("#cmd-button") as HTMLButtonElement;
+  const feedback = document.querySelector(
+    "#command-feedback",
+  ) as HTMLParagraphElement;
   const sections = JSON.parse(dialog.dataset.sections ?? "[]") as string[];
 
   const close = () => dialog.close();
   const open = () => {
     helpDialog.close();
     if (!dialog.open) dialog.showModal();
+    feedback.hidden = true;
     input.focus();
   };
   const showHelp = () => {
@@ -72,11 +85,20 @@ const { sections } = Astro.props;
   button.addEventListener("click", open);
   input.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" || !input.value.trim()) return;
-    runCommand(input.value, { close, help: showHelp, sections });
+    const result = runCommand(input.value, { close, help: showHelp, sections });
+    if (result?.message) {
+      feedback.textContent = result.message;
+      feedback.hidden = false;
+      input.select();
+      return;
+    }
     input.value = "";
     if (dialog.open) close();
   });
-  dialog.addEventListener("close", () => (input.value = ""));
+  dialog.addEventListener("close", () => {
+    input.value = "";
+    feedback.hidden = true;
+  });
   for (const modal of [dialog, helpDialog]) {
     modal.addEventListener("click", (event) => {
       if (event.target === modal) modal.close();
