@@ -7,7 +7,10 @@ import content from "../../content.json";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content=`${content.name}'s portfolio` />
@@ -20,6 +23,12 @@ import content from "../../content.json";
 </html>
 
 <style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   @font-face {
     font-family: "Mononoki Nerd Font";
     src: url("/fonts/MononokiNerdFont-Regular.ttf") format("truetype");
@@ -36,15 +45,79 @@ import content from "../../content.json";
   }
   html,
   body {
-    padding: 20px;
+    margin: 0;
+    padding: 0;
     width: 100%;
-    height: 100%;
-    background-color: #222436;
+    min-height: 100%;
+    background: #181926;
+    color: #cad3f5;
+    scroll-behavior: smooth;
   }
 
-  p {
+  html {
+    color-scheme: dark;
+    scrollbar-color: #494d64 #181926;
+    scrollbar-width: thin;
+  }
+
+  body {
     font-family: "Mononoki Nerd Font";
-    font-size: large;
-    color: white;
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+  }
+
+  .page-shell {
+    padding-block: max(1.75rem, env(safe-area-inset-top))
+      max(4rem, env(safe-area-inset-bottom));
+    padding-inline: max(1.5rem, env(safe-area-inset-left))
+      max(1.5rem, env(safe-area-inset-right));
+  }
+
+  ::selection {
+    background: #8bd5ca;
+    color: #181926;
+  }
+
+  :focus-visible {
+    outline: 2px solid #8bd5ca;
+    outline-offset: 4px;
+  }
+
+  dialog::backdrop {
+    background: rgb(17 17 27 / 76%);
+    backdrop-filter: blur(3px);
+  }
+
+  @media (min-width: 40rem) {
+    .page-shell {
+      padding-block-start: max(2rem, env(safe-area-inset-top));
+      padding-inline: max(1.75rem, env(safe-area-inset-left))
+        max(1.75rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .page-shell {
+      padding-block-start: max(2.5rem, env(safe-area-inset-top));
+      padding-inline: max(2.5rem, env(safe-area-inset-left))
+        max(2.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>

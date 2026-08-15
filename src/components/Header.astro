@@ -1,44 +1,50 @@
 ---
 interface Props {
   name: string;
-  sections: string[];
+  sections: { id: string; label: string }[];
 }
 
 const { name, sections } = Astro.props;
 ---
 
 <header
-  class="flex flex-col sm:flex-row items-center sm:justify-between py-1 gap-4"
+  class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-[#363a4f] pb-3 sm:flex-nowrap sm:pb-4"
 >
-  <p
-    class="flex flex-row gap-4 text-lg sm:text-xl font-mononokiBoldItalic text-[#8bd5ca]"
-  >
-    {name}
+  <div class="flex min-w-0 w-full items-center justify-center gap-3 sm:w-auto sm:justify-start">
+    <a
+      href="#about-me"
+      class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
+    >
+      {name}
+    </a>
     <button
-      class="rounded border-2 border-[#8bd5ca] text-gray-50 transition duration-300 animate-border-cycle"
+      class="group grid h-11 w-11 shrink-0 place-items-center sm:h-10 sm:w-10"
       id="cmd-button"
+      type="button"
+      aria-label="Open command palette"
+      title="Open command palette (:)"
     >
       <img
         src="/terminal.svg"
-        alt="Terminal icon representing a command line interface in a modern digital environment"
-        class="w-6 h-6"
+        alt=""
+        class="h-[1.125rem] w-[1.125rem] opacity-70 transition-opacity group-hover:opacity-100"
       />
     </button>
-  </p>
+  </div>
 
-  <nav class="flex items-center gap-6">
+  <nav
+    class="grid w-full grid-cols-3 items-center gap-1 sm:flex sm:w-auto"
+    aria-label="Main navigation"
+  >
     {
-      sections.map((section) => {
-        let formatContent = section.toLocaleLowerCase().replace(" ", "-");
-
-        return (
-          <a href={"#" + formatContent}>
-            <p class="text-lg sm:text-xl font-semibold text-[#c6a0f6]">
-              {section}
-            </p>
-          </a>
-        );
-      })
+      sections.map(({ id, label }) => (
+        <a
+          href={`#${id}`}
+          class="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2 text-center text-sm font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5] sm:px-3"
+        >
+          {label}
+        </a>
+      ))
     }
   </nav>
 </header>

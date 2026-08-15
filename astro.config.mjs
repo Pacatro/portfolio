@@ -12,7 +12,11 @@ export default defineConfig({
   adapter: vercel(),
   env: {
     schema: {
-      GITHUB_TOKEN: envField.string({ context: 'server', access: 'secret' })
+      GITHUB_TOKEN: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      })
     }
   }
 });

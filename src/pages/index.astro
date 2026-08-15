@@ -1,63 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import TextSection from "../components/TextSection.astro";
-import ProjectSection from "../components/ProjectSection.astro";
-import ContactSection from "../components/ContactSection.astro";
-import CmdDialog from "../components/CmdDialog.astro";
-
 import content from "../../content.json";
-import HelpDialog from "../components/HelpDialog.astro";
+import Section from "../components/Section.astro";
+import CommandDialog from "../components/CommandDialog.astro";
 
 export const prerender = true;
 ---
 
 <Layout>
-  <main class="flex flex-col items-center justify-center p-0 sm:p-10">
-    <div class="w-full max-w-4xl">
+  <main class="page-shell min-h-screen">
+    <div class="mx-auto w-full max-w-5xl">
       <Header name={content.name} sections={content.sections} />
-      <TextSection
-        path="about-me"
-        command="whoami"
-        description={content.bio}
-        id="about-me"
-      />
-      <ProjectSection path="projects" command="ls" id="projects" />
-      <ContactSection
-        path="social"
-        command="cat socials.txt"
-        socials={content.socials}
-        id="social"
-      />
+      {content.sections.map((section) => <Section section={section} />)}
     </div>
   </main>
-  <CmdDialog />
-  <HelpDialog commands={content.commands} />
+  <CommandDialog sections={content.sections.map(({ id }) => id)} />
 </Layout>
-
-<script>
-  const $cmdDialog = document.getElementById("cmdDialog") as HTMLDialogElement;
-  const $helpDialog = document.getElementById(
-    "helpDialog"
-  ) as HTMLDialogElement;
-  const $cmdButton = document.getElementById("cmd-button") as HTMLButtonElement;
-
-  export function openCmdDialog() {
-    if ($helpDialog.open) $helpDialog.close();
-    $cmdDialog.showModal();
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === ":") openCmdDialog();
-  });
-
-  $cmdButton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    if (!$cmdDialog.open) openCmdDialog();
-  });
-
-  document.addEventListener("click", () => {
-    if ($helpDialog.open) $helpDialog.close();
-    if ($cmdDialog.open) $cmdDialog.close();
-  });
-</script>
