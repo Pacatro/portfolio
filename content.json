@@ -9,7 +9,7 @@
       "path": "about-me",
       "command": "whoami",
       "type": "text",
-      "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher experienced in building end-to-end ML solutions with real-world industrial data. I work on predictive maintenance, time series forecasting, computer vision, and recommendation systems. I also develop personal projects in systems programming, inference engines, and full-stack development, and I'm passionate about continuous, self-driven learning and experimenting with new technologies."
+      "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher who enjoys turning real-world data into useful solutions. I work on everything from forecasting and computer vision to recommendation systems, and I'm always tinkering with side projects and learning something new."
     },
     {
       "id": "projects",
