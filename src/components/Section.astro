@@ -1,5 +1,7 @@
 ---
 import Projects from "./Projects.astro";
+import Blog from "./Blog.astro";
+import type { CollectionEntry } from "astro:content";
 
 interface Social {
   name: string;
@@ -16,9 +18,10 @@ interface Props {
     items?: Social[];
   };
   socialItems?: Social[];
+  posts?: CollectionEntry<"blog">[];
 }
 
-const { section, socialItems = [] } = Astro.props;
+const { section, socialItems = [], posts = [] } = Astro.props;
 ---
 
 <section
@@ -74,6 +77,7 @@ const { section, socialItems = [] } = Astro.props;
       </div>
     )
   }
+  {section.type === "blog" && <Blog posts={posts} />}
   {
     section.type === "projects" && (
       <Projects server:defer>

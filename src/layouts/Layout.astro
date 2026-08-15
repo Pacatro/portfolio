@@ -1,6 +1,16 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import content from "../../content.json";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = content.title,
+  description = `${content.name}'s portfolio`,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -13,8 +23,8 @@ import content from "../../content.json";
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content=`${content.name}'s portfolio` />
-    <title>{content.title}</title>
+    <meta name="description" content={description} />
+    <title>{title}</title>
     <Analytics />
   </head>
   <body>

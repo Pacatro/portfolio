@@ -4,11 +4,15 @@ import Header from "../components/Header.astro";
 import content from "../../content.json";
 import Section from "../components/Section.astro";
 import CommandDialog from "../components/CommandDialog.astro";
+import { getCollection } from "astro:content";
 
 export const prerender = true;
 
 const socialSection = content.sections.find((section) => section.type === "socials");
 const primarySections = content.sections.filter((section) => section.type !== "socials");
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
 ---
 
 <Layout>
@@ -17,7 +21,7 @@ const primarySections = content.sections.filter((section) => section.type !== "s
       <Header name={content.name} sections={primarySections} />
       {
         primarySections.map((section) => (
-          <Section section={section} socialItems={socialSection?.items} />
+          <Section section={section} socialItems={socialSection?.items} posts={posts} />
         ))
       }
     </div>
