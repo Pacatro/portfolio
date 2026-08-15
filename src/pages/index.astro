@@ -6,14 +6,21 @@ import Section from "../components/Section.astro";
 import CommandDialog from "../components/CommandDialog.astro";
 
 export const prerender = true;
+
+const socialSection = content.sections.find((section) => section.type === "socials");
+const primarySections = content.sections.filter((section) => section.type !== "socials");
 ---
 
 <Layout>
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
-      <Header name={content.name} sections={content.sections} />
-      {content.sections.map((section) => <Section section={section} />)}
+      <Header name={content.name} sections={primarySections} />
+      {
+        primarySections.map((section) => (
+          <Section section={section} socialItems={socialSection?.items} />
+        ))
+      }
     </div>
   </main>
-  <CommandDialog sections={content.sections.map(({ id }) => id)} />
+  <CommandDialog sections={primarySections.map(({ id }) => id)} />
 </Layout>

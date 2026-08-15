@@ -15,15 +15,14 @@ interface Props {
     content?: string;
     items?: Social[];
   };
+  socialItems?: Social[];
 }
 
-const { section } = Astro.props;
-const isFooter = section.type === "socials";
-const Tag = isFooter ? "footer" : "section";
+const { section, socialItems = [] } = Astro.props;
 ---
 
-<Tag
-  class:list={["mt-14 scroll-mt-6 sm:mt-20 sm:scroll-mt-8", { "mb-16": isFooter }]}
+<section
+  class="mt-14 scroll-mt-6 sm:mt-20 sm:scroll-mt-8"
   id={section.id}
 >
   <div
@@ -43,9 +42,36 @@ const Tag = isFooter ? "footer" : "section";
   </div>
   {
     section.type === "text" && (
-      <p class="max-w-[72ch] text-base leading-7 text-[#b8c0e0] sm:text-lg sm:leading-8">
-        {section.content}
-      </p>
+      <div>
+        <p class="max-w-[72ch] text-base leading-7 text-[#b8c0e0] sm:text-lg sm:leading-8">
+          {section.content}
+        </p>
+        <nav
+          class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-1 sm:mt-6"
+          aria-label="Social profiles and contact"
+        >
+          {socialItems.map(({ name, url, icon }) => {
+            const isEmail = name.toLowerCase() === "email";
+
+            return (
+              <a
+                href={isEmail ? `mailto:${url}` : `https://${url}`}
+                target={isEmail ? undefined : "_blank"}
+                rel={isEmail ? undefined : "noopener noreferrer"}
+                class="group flex min-h-11 items-center gap-2 border-b-2 border-transparent px-1 py-2 font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5]"
+              >
+                <img
+                  src={icon}
+                  alt=""
+                  class="h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100"
+                />
+                <span>{name}</span>
+                {!isEmail && <span class="text-[#6e738d]" aria-hidden="true">↗</span>}
+              </a>
+            );
+          })}
+        </nav>
+      </div>
     )
   }
   {
@@ -63,36 +89,4 @@ const Tag = isFooter ? "footer" : "section";
       </Projects>
     )
   }
-  {
-    section.type === "socials" && (
-      <div class="grid gap-px overflow-hidden rounded-xl border border-[#363a4f] bg-[#363a4f] sm:grid-cols-3">
-        {section.items?.map(({ name, url, icon }) => (
-          <a
-            href={
-              name.toLowerCase() === "email"
-                ? `mailto:${url}`
-                : `https://${url}`
-            }
-            aria-label={name}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex min-h-14 min-w-0 items-center gap-3 bg-[#1e2030] px-4 py-4 no-underline transition-colors hover:bg-[#24273a] active:bg-[#24273a] sm:py-5"
-          >
-            <img
-              src={icon}
-              alt=""
-              class="h-5 w-5 opacity-70 transition-opacity group-hover:opacity-100"
-            />
-            <span class="font-semibold text-base text-[#cad3f5]">{name}</span>
-            <span
-              class="ml-auto text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]"
-              aria-hidden="true"
-            >
-              ↗
-            </span>
-          </a>
-        ))}
-      </div>
-    )
-  }
-</Tag>
+</section>
