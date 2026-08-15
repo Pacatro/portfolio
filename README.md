@@ -60,8 +60,9 @@ You have two ways to open the command mode:
 ## 🛠️ Customize
 
 The portfolio content and navigation are generated from the `sections` array in
-`content.json`. A section only needs an `id`, navigation `label`, terminal `path`,
-displayed `command`, and a `type` (`text`, `projects`, or `socials`).
+`content.json`. A section only needs an `id` and a `type` (`text`, `blog`,
+`projects`, or `socials`). Its `id` is reused as the anchor, navigation label, and
+terminal-styled section title.
 
 ```json
 {
@@ -71,9 +72,6 @@ displayed `command`, and a `type` (`text`, `projects`, or `socials`).
   "sections": [
     {
       "id": "about-me",
-      "label": "About",
-      "path": "about-me",
-      "command": "whoami",
       "type": "text",
       "content": "Your bio"
     }

@@ -4,32 +4,20 @@
   "githubProfile": "Pacatro",
   "sections": [
     {
-      "id": "about-me",
-      "label": "About",
-      "path": "about-me",
-      "command": "whoami",
+      "id": "Whoami",
       "type": "text",
       "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher who enjoys turning real-world data into useful solutions. I work on everything from forecasting and computer vision to recommendation systems, and I'm always tinkering with side projects and learning something new."
     },
     {
-      "id": "blog",
-      "label": "Blog",
-      "path": "blog",
-      "command": "ls -t",
+      "id": "Blog",
       "type": "blog"
     },
     {
-      "id": "projects",
-      "label": "Projects",
-      "path": "projects",
-      "command": "ls",
+      "id": "Projects",
       "type": "projects"
     },
     {
       "id": "social",
-      "label": "Social",
-      "path": "social",
-      "command": "cat socials.txt",
       "type": "socials",
       "items": [
         { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },

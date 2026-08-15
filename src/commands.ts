@@ -50,13 +50,19 @@ export const commands: Command[] = [
           tone: "error",
         };
       }
-      if (!sections.includes(id)) {
+      const sectionId = sections.find((section) => section.toLowerCase() === id);
+      if (!sectionId) {
         return {
           message: `Unknown section “${argument}”. Try: ${sections.join(", ")}.`,
           tone: "error",
         };
       }
-      document.getElementById(id)?.scrollIntoView();
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView();
+      } else {
+        window.location.href = `/#${sectionId}`;
+      }
     },
   },
 ];
