@@ -9,31 +9,36 @@ const { sections } = Astro.props;
 <dialog
   id="command-dialog"
   data-sections={JSON.stringify(sections)}
-  class="bg-[#1e1e2e] border-2 border-[#8aadf4] rounded-lg p-4 w-96"
+  aria-label="Command palette"
+  class="w-[calc(100%-2rem)] max-w-md rounded-xl border border-[#4a5261] bg-[#171c25] p-4 shadow-[0_18px_55px_rgba(0,0,0,0.45)]"
 >
   <input
     id="command-input"
     type="text"
     spellcheck="false"
     autocomplete="off"
-    class="bg-transparent border-none outline-none text-[#f5bde6] text-lg w-full font-mononoki font-semibold placeholder-gray-500"
-    placeholder=":h"
+    aria-label="Command"
+    class="w-full border-none bg-transparent font-mononoki text-base text-[#f0f2f6] caret-[#ef5b5b] outline-none placeholder:text-[#737c8d]"
+    placeholder="Type a command, e.g. :h"
   />
 </dialog>
 
 <dialog
   id="help-dialog"
-  class="bg-[#222436] border-2 border-[#8aadf4] rounded-lg p-4 w-[80vw] max-w-3xl"
+  aria-labelledby="help-title"
+  class="w-[calc(100%-2rem)] max-w-2xl rounded-xl border border-[#4a5261] bg-[#171c25] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.45)] sm:p-6"
 >
-  <p class="text-lg sm:text-xl font-bold text-[#a6da95] mb-4">
-    Available commands: (ESC for close)
+  <p id="help-title" class="mb-4 text-sm font-semibold text-[#ef6a6a]">
+    Available commands <span class="font-normal text-[#777c90]"
+      >· Esc to close</span
+    >
   </p>
-  <ul class="text-[#a6da95] text-lg sm:text-xl list-none">
+  <ul class="list-none divide-y divide-[#39404d] text-sm">
     {
       commands.map(({ name, args, description }) => (
-        <li class="font-mononoki font-semibold text-[#f5bde6]">
+        <li class="grid gap-1 py-3 font-mononoki font-semibold text-[#f0f2f6] sm:grid-cols-[10rem_1fr]">
           {name} {args && `<${args}>`}
-          <span class="font-normal text-gray-50"> - {description}</span>
+          <span class="font-normal text-[#aeb3c5]">{description}</span>
         </li>
       ))
     }

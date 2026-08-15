@@ -8,32 +8,39 @@ const { name, sections } = Astro.props;
 ---
 
 <header
-  class="flex flex-col sm:flex-row items-center sm:justify-between py-1 gap-4"
+  class="flex items-center justify-between gap-6 border-b border-[#39404d] pb-4"
 >
-  <p
-    class="flex flex-row gap-4 text-lg sm:text-xl font-mononokiBoldItalic text-[#8bd5ca]"
-  >
-    {name}
+  <div class="flex min-w-0 items-center gap-3">
+    <a
+      href="#about-me"
+      class="truncate text-lg font-bold tracking-[-0.02em] text-[#f4f6f9] no-underline sm:text-xl"
+    >
+      {name}
+    </a>
     <button
-      class="rounded border-2 border-[#8bd5ca] text-gray-50 transition duration-300 animate-border-cycle"
+      class="group grid h-9 w-9 shrink-0 place-items-center rounded-md border border-[#4a5261] bg-[#191e28] transition-colors duration-200 hover:border-[#ef5b5b] hover:bg-[#ef5b5b]/10"
       id="cmd-button"
+      type="button"
+      aria-label="Open command palette"
+      title="Open command palette (:)"
     >
       <img
         src="/terminal.svg"
-        alt="Terminal icon representing a command line interface in a modern digital environment"
-        class="w-6 h-6"
+        alt=""
+        class="h-[1.125rem] w-[1.125rem] opacity-70 transition-opacity group-hover:opacity-100"
       />
     </button>
-  </p>
+  </div>
 
-  <nav class="flex items-center gap-6">
+  <nav class="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
     {
       sections.map(({ id, label }) => (
-          <a href={`#${id}`}>
-            <p class="text-lg sm:text-xl font-semibold text-[#c6a0f6]">
-              {label}
-            </p>
-          </a>
+        <a
+          href={`#${id}`}
+          class="border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-[#aeb5c2] no-underline transition-colors hover:border-[#ef5b5b] hover:text-[#f4f6f9]"
+        >
+          {label}
+        </a>
       ))
     }
   </nav>

@@ -9,7 +9,7 @@
       "path": "about-me",
       "command": "whoami",
       "type": "text",
-      "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher experienced in building end-to-end ML solutions with real-world industrial data. I work on predictive maintenance, time series forecasting, computer vision, and recommendation systems, using both traditional methods and deep learning (RNNs, CNNs, GNNs, Transformers). I also develop personal projects in systems programming, inference engines, and full-stack development, and I'm passionate about continuous, self-driven learning and experimenting with new technologies."
+      "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher experienced in building end-to-end ML solutions with real-world industrial data. I work on predictive maintenance, time series forecasting, computer vision, and recommendation systems. I also develop personal projects in systems programming, inference engines, and full-stack development, and I'm passionate about continuous, self-driven learning and experimenting with new technologies."
     },
     {
       "id": "projects",
@@ -25,9 +25,9 @@
       "command": "cat socials.txt",
       "type": "socials",
       "items": [
-        { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" },
+        { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
         { "name": "Linkedin", "url": "linkedin.com/in/paco-algar/", "icon": "/socials/linkedin.svg" },
-        { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" }
+        { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" }
       ]
     }
   ]

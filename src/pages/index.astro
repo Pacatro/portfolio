@@ -9,8 +9,8 @@ export const prerender = true;
 ---
 
 <Layout>
-  <main class="flex flex-col items-center justify-center p-0 sm:p-10">
-    <div class="w-full max-w-4xl">
+  <main class="min-h-screen px-4 py-5 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
+    <div class="mx-auto w-full max-w-5xl">
       <Header name={content.name} sections={content.sections} />
       {content.sections.map((section) => <Section section={section} />)}
     </div>
