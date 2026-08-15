@@ -78,6 +78,17 @@ const { sections } = Astro.props;
     close();
     helpDialog.showModal();
   };
+  const download = (path: string, filename: string) => {
+    const link = document.createElement("a");
+    link.href = path;
+    link.download = filename;
+    link.click();
+  };
+  const goToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) section.scrollIntoView();
+    else window.location.href = `/#${sectionId}`;
+  };
 
   document.addEventListener("keydown", (event) => {
     if (event.key === ":" && !dialog.open && !helpDialog.open) open();
@@ -85,8 +96,14 @@ const { sections } = Astro.props;
   button.addEventListener("click", open);
   input.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" || !input.value.trim()) return;
-    const result = runCommand(input.value, { close, help: showHelp, sections });
-    if (result?.message) {
+    const result = runCommand(input.value, {
+      close,
+      download,
+      goToSection,
+      help: showHelp,
+      sections,
+    });
+    if (result) {
       feedback.textContent = result.message;
       feedback.hidden = false;
       input.select();

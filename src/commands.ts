@@ -1,12 +1,13 @@
-export interface CommandContext {
+interface CommandContext {
   close: () => void;
+  download: (path: string, filename: string) => void;
   help: () => void;
+  goToSection: (sectionId: string) => void;
   sections: string[];
 }
 
-export interface CommandResult {
-  message?: string;
-  tone?: "neutral" | "error";
+interface CommandResult {
+  message: string;
 }
 
 interface Command {
@@ -16,7 +17,7 @@ interface Command {
   run: (argument: string, context: CommandContext) => CommandResult | void;
 }
 
-export const commands: Command[] = [
+export const commands: readonly Command[] = [
   {
     name: ":h",
     description: "Show the available commands",
@@ -31,32 +32,27 @@ export const commands: Command[] = [
   {
     name: ":r",
     description: "Download resume",
-    run: () => {
-      const link = document.createElement("a");
-      link.href = "/docs/resume_Paco.pdf";
-      link.download = "resume_Paco.pdf";
-      link.click();
-    },
+    run: (_, { download }) =>
+      download("/docs/resume_Paco.pdf", "resume_Paco.pdf"),
   },
   {
     name: ":goto",
     args: "section",
     description: "Go to a section of the portfolio",
-    run: (argument, { sections }) => {
+    run: (argument, { goToSection, sections }) => {
       const id = argument.toLowerCase().replaceAll(" ", "-");
       if (!argument) {
         return {
           message: "Add a section name, for example :goto projects.",
-          tone: "error",
         };
       }
-      if (!sections.includes(id)) {
+      const sectionId = sections.find((section) => section.toLowerCase() === id);
+      if (!sectionId) {
         return {
           message: `Unknown section “${argument}”. Try: ${sections.join(", ")}.`,
-          tone: "error",
         };
       }
-      document.getElementById(id)?.scrollIntoView();
+      goToSection(sectionId);
     },
   },
 ];
@@ -70,6 +66,5 @@ export function runCommand(
   if (command) return command.run(args.join(" "), context);
   return {
     message: `Unknown command “${name}”. Enter :h to see available commands.`,
-    tone: "error",
   };
 }

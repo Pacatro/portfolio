@@ -18,6 +18,7 @@ This is my personal portfolio built with [Astro](https://astro.build/).
 
    ```bash
    GITHUB_TOKEN="<YOUR_GITHUB_TOKEN>"
+   FEATURE_BLOG=false
    ```
 
    ```bash
@@ -59,21 +60,32 @@ You have two ways to open the command mode:
 
 ## 🛠️ Customize
 
+### Feature flags
+
+The blog is experimental and disabled by default. Enable its home section,
+navigation item, commands, and generated post routes with:
+
+```bash
+FEATURE_BLOG=true
+```
+
+Set the variable in `.env` for local development or in the deployment
+environment. Because blog pages are prerendered, changing the flag requires a
+new build/deployment.
+
 The portfolio content and navigation are generated from the `sections` array in
-`content.json`. A section only needs an `id`, navigation `label`, terminal `path`,
-displayed `command`, and a `type` (`text`, `projects`, or `socials`).
+`content.json`. A rendered section needs an `id` and a `type`. Its `id` is reused
+as the anchor, navigation label, and terminal-styled section title.
 
 ```json
 {
   "title": "Your Name",
   "name": "Your Full Name",
   "githubProfile": "Your GitHub Profile",
+  "socialLinks": [],
   "sections": [
     {
       "id": "about-me",
-      "label": "About",
-      "path": "about-me",
-      "command": "whoami",
       "type": "text",
       "content": "Your bio"
     }
@@ -81,18 +93,45 @@ displayed `command`, and a `type` (`text`, `projects`, or `socials`).
 }
 ```
 
+### Add a new section type
+
+Section renderers are discovered automatically from `src/components/sections`.
+The filename must match the `type` in `content.json`; no central conditional or
+registry needs to be updated.
+
+For example, add `{ "id": "Experience", "type": "experience" }` to the
+`sections` array, then create `src/components/sections/experience.astro`:
+
+```astro
+---
+import SectionFrame from "../SectionFrame.astro";
+import type { SectionRendererProps } from "../../lib/portfolio";
+
+type Props = SectionRendererProps;
+const { section } = Astro.props;
+---
+
+<SectionFrame id={section.id}>
+  <!-- Render this section's fields here. -->
+</SectionFrame>
+```
+
+`SectionFrame` provides the shared heading, spacing, and anchor. A renderer can
+omit it when it needs a completely custom layout.
+
 ### Add new commands
 
 Commands are defined in a single registry in `src/commands.ts`. Adding an entry
 automatically adds it to the command runner and the help dialog.
 
 ```typescript
-commands.push({
+// Add an entry to the `commands` array:
+{
   name: ":custom",
   args: "arg",
   description: "Custom command",
-  run: (argument) => console.log(argument),
-});
+  run: (argument) => console.log(argument)
+}
 ```
 
 ## 🔑 License

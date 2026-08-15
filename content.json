@@ -2,33 +2,24 @@
   "title": "Paco Algar",
   "name": "Paco Algar Muñoz",
   "githubProfile": "Pacatro",
+  "socialLinks": [
+    { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
+    { "name": "Linkedin", "url": "linkedin.com/in/paco-algar/", "icon": "/socials/linkedin.svg" },
+    { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" }
+  ],
   "sections": [
     {
-      "id": "about-me",
-      "label": "About",
-      "path": "about-me",
-      "command": "whoami",
+      "id": "Whoami",
       "type": "text",
       "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher who enjoys turning real-world data into useful solutions. I work on everything from forecasting and computer vision to recommendation systems, and I'm always tinkering with side projects and learning something new."
     },
     {
-      "id": "projects",
-      "label": "Projects",
-      "path": "projects",
-      "command": "ls",
-      "type": "projects"
+      "id": "Blog",
+      "type": "blog"
     },
     {
-      "id": "social",
-      "label": "Social",
-      "path": "social",
-      "command": "cat socials.txt",
-      "type": "socials",
-      "items": [
-        { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
-        { "name": "Linkedin", "url": "linkedin.com/in/paco-algar/", "icon": "/socials/linkedin.svg" },
-        { "name": "Email", "url": "paco.algar.15@gmail.com", "icon": "/socials/email.svg" }
-      ]
+      "id": "Projects",
+      "type": "projects"
     }
   ]
 }

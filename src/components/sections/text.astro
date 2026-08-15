@@ -1,0 +1,15 @@
+---
+import SectionFrame from "../SectionFrame.astro";
+import SocialLinks from "../SocialLinks.astro";
+import type { SectionRendererProps } from "../../lib/portfolio";
+
+type Props = SectionRendererProps;
+
+const { section, socialItems = [] } = Astro.props;
+const content = typeof section.content === "string" ? section.content : "";
+---
+
+<SectionFrame id={section.id}>
+  <p class="w-full text-base leading-7 text-[#b8c0e0] sm:text-lg sm:leading-8">{content}</p>
+  <SocialLinks links={socialItems} />
+</SectionFrame>

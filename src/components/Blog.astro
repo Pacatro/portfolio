@@ -1,0 +1,114 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/dates";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+const PAGE_SIZE = 5;
+---
+
+<div class="blog-list" data-blog-list data-page-size={PAGE_SIZE}>
+  <ul class="grid w-full gap-3" aria-live="polite">
+    {
+      posts.map((post, index) => (
+        <li
+          data-post
+          hidden={index >= PAGE_SIZE}
+          class="group min-w-0 rounded-lg border border-[#363a4f] bg-[#1e2030] transition-colors hover:border-[#494d64] hover:bg-[#24273a]"
+        >
+          <a
+            href={`/blog/${post.id}/`}
+            class="grid gap-2 p-4 no-underline active:bg-[#24273a] sm:grid-cols-[8.5rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-5 sm:p-5"
+          >
+            <time
+              datetime={post.data.publishedAt.toISOString()}
+              class="text-xs tabular-nums text-[#939ab7]"
+            >
+              {formatDate(post.data.publishedAt)}
+            </time>
+            <span class="min-w-0">
+              <span class="block text-base font-bold tracking-[-0.02em] text-[#c6a0f6] sm:text-lg">
+                {post.data.title}
+              </span>
+              <span class="mt-1 block text-sm leading-6 text-[#a5adcb]">
+                {post.data.description}
+              </span>
+              {post.data.tags.length > 0 && (
+                <span class="mt-3 flex flex-wrap gap-2 text-xs text-[#939ab7]">
+                  {post.data.tags.map((tag) => (
+                    <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
+                      #{tag}
+                    </span>
+                  ))}
+                </span>
+              )}
+            </span>
+            <span class="hidden text-[#6e738d] sm:block" aria-hidden="true">
+              →
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    posts.length > PAGE_SIZE && (
+      <nav
+        class="mt-4 flex items-center justify-between"
+        aria-label="Blog pages"
+      >
+        <button
+          type="button"
+          data-previous
+          class="min-h-11 px-1 text-sm font-semibold text-[#a5adcb] transition-colors hover:text-[#cad3f5] disabled:cursor-not-allowed disabled:text-[#494d64]"
+        >
+          ← Newer
+        </button>
+        <p class="text-xs tabular-nums text-[#939ab7]" data-page-status />
+        <button
+          type="button"
+          data-next
+          class="min-h-11 px-1 text-sm font-semibold text-[#8bd5ca] transition-colors hover:text-[#cad3f5] disabled:cursor-not-allowed disabled:text-[#494d64]"
+        >
+          Older →
+        </button>
+      </nav>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-blog-list]").forEach((list) => {
+    const posts = [...list.querySelectorAll<HTMLElement>("[data-post]")];
+    const previous = list.querySelector<HTMLButtonElement>("[data-previous]");
+    const next = list.querySelector<HTMLButtonElement>("[data-next]");
+    const status = list.querySelector<HTMLElement>("[data-page-status]");
+    const pageSize = Number(list.dataset.pageSize);
+    const pages = Math.ceil(posts.length / pageSize);
+    let page = 0;
+
+    const showPage = () => {
+      const firstPost = page * pageSize;
+      const lastPost = firstPost + pageSize;
+      posts.forEach((post, index) => {
+        post.hidden = index < firstPost || index >= lastPost;
+      });
+      if (previous) previous.disabled = page === 0;
+      if (next) next.disabled = page === pages - 1;
+      if (status) status.textContent = `${page + 1} / ${pages}`;
+    };
+
+    const changePage = (offset: number) => {
+      page += offset;
+      showPage();
+    };
+
+    previous?.addEventListener("click", () => changePage(-1));
+    next?.addEventListener("click", () => changePage(1));
+    showPage();
+  });
+</script>

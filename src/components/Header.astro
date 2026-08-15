@@ -1,7 +1,7 @@
 ---
 interface Props {
   name: string;
-  sections: { id: string; label: string }[];
+  sections: { id: string }[];
 }
 
 const { name, sections } = Astro.props;
@@ -10,9 +10,11 @@ const { name, sections } = Astro.props;
 <header
   class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-[#363a4f] pb-3 sm:flex-nowrap sm:pb-4"
 >
-  <div class="flex min-w-0 w-full items-center justify-center gap-3 sm:w-auto sm:justify-start">
+  <div
+    class="flex min-w-0 w-full items-center justify-center gap-3 sm:w-auto sm:justify-start"
+  >
     <a
-      href="#about-me"
+      href="/"
       class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
     >
       {name}
@@ -37,12 +39,12 @@ const { name, sections } = Astro.props;
     aria-label="Main navigation"
   >
     {
-      sections.map(({ id, label }) => (
+      sections.map(({ id }) => (
         <a
-          href={`#${id}`}
-          class="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2 text-center text-sm font-semibold text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5] sm:px-3"
+          href={`/#${id}`}
+          class="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2 text-center text-sm font-semibold capitalize text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5] sm:px-3"
         >
-          {label}
+          {id.replaceAll("-", " ")}
         </a>
       ))
     }
