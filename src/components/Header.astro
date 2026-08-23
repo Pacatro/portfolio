@@ -22,16 +22,19 @@ const { name, sections } = Astro.props;
   </div>
 
   <nav
-    class="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-1 lg:w-auto lg:justify-end"
+    class="flex w-full flex-wrap items-center justify-center gap-1 lg:w-auto lg:justify-end"
     aria-label="Main navigation"
   >
     {
       sections.map(({ id }) => (
         <a
           href={`/#${id}`}
-          class="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2 text-center text-sm font-semibold capitalize text-[#a5adcb] no-underline transition-colors hover:border-[#8aadf4] hover:text-[#cad3f5] active:border-[#8aadf4] active:text-[#cad3f5] sm:px-3"
+          class="group flex min-h-11 items-center justify-center gap-0.5 rounded-lg border border-transparent px-2.5 py-2 text-center text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-colors hover:border-[#363a4f] hover:bg-[#24273a] hover:text-[#cad3f5] active:border-[#494d64] active:bg-[#24273a] sm:px-3"
         >
-          {id.replaceAll("-", " ")}
+          <span class="text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]" aria-hidden="true">
+            ./
+          </span>
+          <span>{id.replaceAll("-", " ")}</span>
         </a>
       ))
     }
