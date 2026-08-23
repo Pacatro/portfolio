@@ -49,12 +49,14 @@
 **Header:** Fixed border-bottom, flex wrap with gap, responsive to `sm:flex-nowrap`
 **Project Grid:** CSS Grid, `grid w-full gap-4 md:grid-cols-2`
 **Navigation:** Grid of section links, `grid w-full grid-cols-3 items-center gap-1 sm:flex sm:w-auto`
+**Section Rhythm:** Generous vertical spacing with terminal-path headings
 
 ## Elevation
 
 **Card/Panel:** `border border-[#363a4f] bg-[#1e2030]` with `rounded-xl`
 **Hover States:** `transition-colors hover:border-[#494d64] hover:bg-[#24273a]`
 **Active States:** `active:border-[#8aadf4] active:text-[#cad3f5]`
+**Atmosphere:** Fixed, low-contrast radial color fields over a four-rem baseline grid
 
 ## Components
 
@@ -64,6 +66,7 @@
 **Language Tag:** Rounded background `rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]`
 **Topic Tags:** `break-all #{topic}`
 **Star Rating:** `tabular-nums text-[#eed49f]` with aria-label of star count
+**Project Index:** Two-digit repository order as a quiet scanning aid; it communicates listing position, not rank
 
 ## Do's and Don'ts
 

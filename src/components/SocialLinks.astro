@@ -1,5 +1,6 @@
 ---
 import type { SocialLink } from "../lib/portfolio";
+import { getSocialHref, isEmailLink } from "../lib/social-links";
 interface Props {
   links: SocialLink[];
 }
@@ -11,14 +12,15 @@ const { links } = Astro.props;
   aria-label="Social profiles and contact"
 >
   {
-    links.map(({ name, url, icon }) => {
-      const isEmail = name.toLowerCase() === "email";
+    links.map((link) => {
+      const { name, icon } = link;
+      const isEmail = isEmailLink(link);
       return (
         <a
-          href={isEmail ? `mailto:${url}` : `https://${url}`}
+          href={getSocialHref(link)}
           target={isEmail ? undefined : "_blank"}
           rel={isEmail ? undefined : "noopener noreferrer"}
-          class="group flex min-h-11 items-center gap-2 rounded-lg border border-transparent px-2.5 py-2 text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-colors hover:border-[#363a4f] hover:bg-[#24273a] hover:text-[#cad3f5] active:border-[#494d64] active:bg-[#24273a] sm:px-3"
+          class="group flex min-h-11 items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-all first:pl-0 hover:-translate-y-0.5 hover:text-[#cad3f5] active:translate-y-0 active:border-[#494d64] sm:px-3.5 sm:first:pl-0"
         >
           <span
             class="grid h-6 w-6 place-items-center rounded transition-colors"

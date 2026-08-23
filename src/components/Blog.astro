@@ -17,7 +17,7 @@ const PAGE_SIZE = 5;
         <li
           data-post
           hidden={index >= PAGE_SIZE}
-          class="group min-w-0 rounded-lg border border-[#363a4f] bg-[#1e2030] transition-colors hover:border-[#494d64] hover:bg-[#24273a]"
+          class="group min-w-0 rounded-xl border border-[#363a4f] bg-[#1e2030]/90 transition-all duration-300 hover:translate-x-1 hover:border-[#8bd5ca]/50 hover:bg-[#24273a]"
         >
           <a
             href={`/blog/${post.id}/`}
@@ -46,7 +46,7 @@ const PAGE_SIZE = 5;
                 </span>
               )}
             </span>
-            <span class="hidden text-[#6e738d] sm:block" aria-hidden="true">
+            <span class="hidden text-[#6e738d] transition-transform group-hover:translate-x-1 group-hover:text-[#8bd5ca] sm:block" aria-hidden="true">
               →
             </span>
           </a>

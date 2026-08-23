@@ -47,9 +47,23 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
+    {
+      publishedAt && (
+        <meta
+          property="article:published_time"
+          content={publishedAt.toISOString()}
+        />
+      )
+    }
     {tags.map((tag) => <meta property="article:tag" content={tag} />)}
-    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
     <title>{title}</title>
     <Analytics />
   </head>
@@ -105,11 +119,33 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
     overflow-wrap: break-word;
   }
 
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(
+      rgb(202 211 245 / 2.5%) 1px,
+      transparent 1px
+    );
+    background-size: 100% 4rem;
+    content: "";
+    pointer-events: none;
+  }
+
   .page-shell {
     padding-block: max(1.75rem, env(safe-area-inset-top))
       max(4rem, env(safe-area-inset-bottom));
     padding-inline: max(1.5rem, env(safe-area-inset-left))
       max(1.5rem, env(safe-area-inset-right));
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    font: inherit;
   }
 
   ::selection {

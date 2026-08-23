@@ -9,22 +9,21 @@ const { name, sections, homepage = false } = Astro.props;
 ---
 
 <header
-  class="flex flex-col items-center gap-4 border-b border-[#363a4f] pb-4 lg:flex-row lg:justify-between lg:gap-6"
+  class="relative flex flex-col items-center gap-4 border-b border-[#363a4f] pb-4 lg:flex-row lg:justify-between lg:gap-6"
 >
   <div
     class="flex min-w-0 w-full items-center justify-center gap-3 lg:w-auto lg:justify-start"
   >
-    {
-      homepage ? (
-        <h1 class="m-0 min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] sm:text-xl">
-          <a href="/" class="text-inherit no-underline">{name}</a>
-        </h1>
-      ) : (
-        <a href="/" class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl">
-          {name}
-        </a>
-      )
-    }
+    <h1
+      class="m-0 min-w-0 truncate text-lg font-bold tracking-[-0.04em] text-[#cad3f5] sm:text-xl"
+    >
+      <a
+        href="/"
+        class="group inline-flex items-center gap-2 text-inherit no-underline"
+      >
+        {name}
+      </a>
+    </h1>
   </div>
 
   <nav
@@ -35,9 +34,12 @@ const { name, sections, homepage = false } = Astro.props;
       sections.map(({ id }) => (
         <a
           href={`/#${id}`}
-          class="group flex min-h-11 items-center justify-center gap-0.5 rounded-lg border border-transparent px-2.5 py-2 text-center text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-colors hover:border-[#363a4f] hover:bg-[#24273a] hover:text-[#cad3f5] active:border-[#494d64] active:bg-[#24273a] sm:px-3"
+          class="group flex min-h-11 items-center justify-center gap-0.5 rounded-lg border border-transparent px-2.5 py-2 text-center text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-all hover:-translate-y-px hover:border-[#363a4f] hover:bg-[#24273a] hover:text-[#cad3f5] active:translate-y-0 active:border-[#494d64] active:bg-[#24273a] sm:px-3"
         >
-          <span class="text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]" aria-hidden="true">
+          <span
+            class="text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]"
+            aria-hidden="true"
+          >
             ./
           </span>
           <span>{id.replaceAll("-", " ")}</span>
@@ -45,7 +47,7 @@ const { name, sections, homepage = false } = Astro.props;
       ))
     }
     <button
-      class="group grid h-11 w-11 shrink-0 place-items-center"
+      class="group grid h-11 w-11 shrink-0 place-items-center rounded-lg transition-all hover:-translate-y-px active:translate-y-0"
       id="cmd-button"
       type="button"
       aria-label="Open command palette"

@@ -10,6 +10,7 @@ import {
   sectionIds,
 } from "../lib/portfolio";
 import { features } from "../lib/features";
+import { getSocialHref, isEmailLink } from "../lib/social-links";
 
 export const prerender = true;
 
@@ -19,8 +20,8 @@ const posts = features.blog
     )
   : [];
 const sameAs = portfolio.socialLinks
-  .filter(({ name }) => name.toLowerCase() !== "email")
-  .map(({ url }) => `https://${url}`);
+  .filter((link) => !isEmailLink(link))
+  .map(getSocialHref);
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -48,7 +49,7 @@ const structuredData = {
         ))
       }
       <footer
-        class="mt-16 border-t border-[#363a4f] pt-6 text-center text-xs tracking-[0.01em] text-[#939ab7] sm:mt-20 sm:pt-7"
+        class="mt-20 border-t border-[#363a4f] pt-7 text-center text-xs tracking-[0.01em] text-[#939ab7] sm:mt-28 sm:pt-8"
       >
         <p class="m-0 inline-flex items-baseline gap-x-1.5">
           <span>Made with</span>
