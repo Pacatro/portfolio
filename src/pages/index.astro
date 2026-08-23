@@ -18,12 +18,30 @@ const posts = features.blog
       (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
     )
   : [];
+const sameAs = portfolio.socialLinks
+  .filter(({ name }) => name.toLowerCase() !== "email")
+  .map(({ url }) => `https://${url}`);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolio.name,
+  url: Astro.site?.href,
+  jobTitle: "Machine Learning Engineer and AI Researcher",
+  sameAs,
+  knowsAbout: [
+    "Machine learning",
+    "Artificial intelligence",
+    "Computer vision",
+    "Recommender systems",
+    "Forecasting",
+  ],
+};
 ---
 
-<Layout>
+<Layout structuredData={structuredData}>
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
-      <Header name={portfolio.name} {sections} />
+      <Header name={portfolio.name} {sections} homepage />
       {
         sections.map((section) => (
           <Section section={section} socialItems={portfolio.socialLinks} posts={posts} />

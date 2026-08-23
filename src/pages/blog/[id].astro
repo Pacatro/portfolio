@@ -23,11 +23,31 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const publishedAt = formatDate(post.data.publishedAt, "long");
+const canonicalPath = `/blog/${post.id}/`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  author: {
+    "@type": "Person",
+    name: portfolio.name,
+    url: Astro.site?.href,
+  },
+  mainEntityOfPage: Astro.site && new URL(canonicalPath, Astro.site).href,
+  keywords: post.data.tags.join(", "),
+};
 ---
 
 <Layout
   title={`${post.data.title} — Paco Algar`}
   description={post.data.description}
+  {canonicalPath}
+  type="article"
+  publishedAt={post.data.publishedAt}
+  tags={post.data.tags}
+  structuredData={structuredData}
 >
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
@@ -36,14 +56,12 @@ const publishedAt = formatDate(post.data.publishedAt, "long");
       <article class="mt-14 sm:mt-20">
         <header class="mb-8 pb-3 sm:mb-10">
           <h1
-            class="text-xl font-bold leading-7 tracking-[-0.02em] text-[#c6a0f6] sm:text-2xl"
+            class="text-xl font-bold leading-7 tracking-[-0.02em] text-[#c6a0f6] sm:text-3xl"
           >
             <span class="mr-1 text-[#8bd5ca]" aria-hidden="true">›</span>
             {post.data.title}
           </h1>
-          <div
-            class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3 text-xs"
-          >
+          <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3 text-xs">
             <time
               datetime={post.data.publishedAt.toISOString()}
               class="tabular-nums text-[#939ab7]"

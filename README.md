@@ -19,6 +19,7 @@ This is my personal portfolio built with [Astro](https://astro.build/).
    ```bash
    GITHUB_TOKEN="<YOUR_GITHUB_TOKEN>"
    FEATURE_BLOG=false
+   PUBLIC_SITE_URL="https://your-domain.example"
    ```
 
    ```bash
@@ -72,6 +73,10 @@ FEATURE_BLOG=true
 Set the variable in `.env` for local development or in the deployment
 environment. Because blog pages are prerendered, changing the flag requires a
 new build/deployment.
+
+Set `PUBLIC_SITE_URL` to the production origin, without a path. Astro uses it
+for canonical URLs, Open Graph URLs, structured data, `robots.txt`, and the XML
+sitemap.
 
 The portfolio content and navigation are generated from the `sections` array in
 `content.json`. A rendered section needs an `id` and a `type`. Its `id` is reused

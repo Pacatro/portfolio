@@ -2,9 +2,10 @@
 interface Props {
   name: string;
   sections: { id: string }[];
+  homepage?: boolean;
 }
 
-const { name, sections } = Astro.props;
+const { name, sections, homepage = false } = Astro.props;
 ---
 
 <header
@@ -13,12 +14,17 @@ const { name, sections } = Astro.props;
   <div
     class="flex min-w-0 w-full items-center justify-center gap-3 lg:w-auto lg:justify-start"
   >
-    <a
-      href="/"
-      class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl"
-    >
-      {name}
-    </a>
+    {
+      homepage ? (
+        <h1 class="m-0 min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] sm:text-xl">
+          <a href="/" class="text-inherit no-underline">{name}</a>
+        </h1>
+      ) : (
+        <a href="/" class="min-w-0 truncate text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] no-underline sm:text-xl">
+          {name}
+        </a>
+      )
+    }
   </div>
 
   <nav
