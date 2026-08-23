@@ -1,6 +1,7 @@
 {
   "title": "Paco Algar",
   "name": "Paco Algar Muñoz",
+  "shortName": "Paco Algar",
   "githubProfile": "Pacatro",
   "socialLinks": [
     { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },

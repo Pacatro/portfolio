@@ -23,6 +23,7 @@ export interface SectionRendererProps {
 interface PortfolioContent {
   title: string;
   name: string;
+  shortName: string;
   githubProfile: string;
   socialLinks: SocialLink[];
   sections: PortfolioSection[];

@@ -29,6 +29,20 @@ const posts = features.blog
           <Section section={section} socialItems={portfolio.socialLinks} posts={posts} />
         ))
       }
+      <footer
+        class="mt-16 border-t border-[#363a4f] pt-6 text-center text-xs tracking-[0.01em] text-[#939ab7] sm:mt-20 sm:pt-7"
+      >
+        <p class="m-0 inline-flex items-baseline gap-x-1.5">
+          <span>Made with</span>
+          <span
+            class="inline-block translate-y-px text-[#c6a0f6]"
+            aria-hidden="true">❤</span
+          >
+          <span class="sr-only">love</span>
+          <span>by</span>
+          <span class="font-semibold text-[#a5adcb]">{portfolio.shortName}</span>
+        </p>
+      </footer>
     </div>
   </main>
   <CommandDialog sections={sectionIds} socialItems={portfolio.socialLinks} />

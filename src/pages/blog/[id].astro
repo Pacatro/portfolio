@@ -34,37 +34,37 @@ const publishedAt = formatDate(post.data.publishedAt, "long");
       <Header name={portfolio.name} {sections} />
 
       <article class="mt-14 sm:mt-20">
-        <header class="border-b border-[#363a4f] pb-8 sm:pb-10">
-          <div class="w-full">
-            <h1
-              class="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] text-[#c6a0f6] sm:text-5xl"
+        <header class="mb-8 pb-3 sm:mb-10">
+          <h1
+            class="text-xl font-bold leading-7 tracking-[-0.02em] text-[#c6a0f6] sm:text-2xl"
+          >
+            <span class="mr-1 text-[#8bd5ca]" aria-hidden="true">›</span>
+            {post.data.title}
+          </h1>
+          <div
+            class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3 text-xs"
+          >
+            <time
+              datetime={post.data.publishedAt.toISOString()}
+              class="tabular-nums text-[#939ab7]"
             >
-              <span class="mr-1 text-[#8bd5ca]" aria-hidden="true">›</span>
-              {post.data.title}
-            </h1>
-            <div
-              class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-xs"
-            >
-              <time
-                datetime={post.data.publishedAt.toISOString()}
-                class="tabular-nums text-[#939ab7]"
-              >
-                {publishedAt}
-              </time>
+              {publishedAt}
+            </time>
 
-              <div class="flex flex-wrap gap-2">
-                {
-                  post.data.tags.map((tag) => (
+            {
+              post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map((tag) => (
                     <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
                       #{tag}
                     </span>
-                  ))
-                }
-              </div>
-            </div>
+                  ))}
+                </div>
+              )
+            }
           </div>
         </header>
-        <div class="prose mt-9 w-full sm:mt-12">
+        <div class="prose w-full">
           <Content />
         </div>
         <footer class="mt-12 w-full border-t border-[#363a4f] pt-6 sm:mt-16">
@@ -84,7 +84,7 @@ const publishedAt = formatDate(post.data.publishedAt, "long");
 <style>
   .prose :global(h2) {
     margin: 3rem 0 1rem;
-    color: #cad3f5;
+    color: #c6a0f6;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.35;
@@ -92,15 +92,15 @@ const publishedAt = formatDate(post.data.publishedAt, "long");
   }
   .prose :global(h3) {
     margin: 2.25rem 0 0.75rem;
-    color: #cad3f5;
+    color: #c6a0f6;
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.45;
   }
   .prose :global(p),
   .prose :global(li) {
-    color: #b8c0e0;
-    line-height: 1.9;
+    color: #a5adcb;
+    line-height: 1.75;
   }
   .prose :global(p),
   .prose :global(ul),
