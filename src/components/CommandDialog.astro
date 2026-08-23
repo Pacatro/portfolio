@@ -15,12 +15,7 @@ const { sections, socialItems = [] } = Astro.props;
   aria-label="Command palette"
   class="max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-2xl border border-[#494d64] bg-[#1e2030]/95 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl focus-visible:!outline-none focus-visible:!outline-offset-0"
 >
-  <p
-    class="mb-3 text-[0.625rem] font-bold uppercase tracking-[0.18em] text-[#6e738d]"
-  >
-    command palette
-  </p>
-  <div class="flex items-center gap-2 border-b border-[#363a4f] pb-3">
+  <div class="flex items-center gap-2">
     <span class="text-[#8bd5ca]" aria-hidden="true">›</span><input
       id="command-input"
       type="text"
