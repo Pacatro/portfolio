@@ -16,23 +16,23 @@ const { section } = Astro.props;
       aria-label="Loading projects"
       class="grid w-full gap-4 md:grid-cols-2"
     >
-      {Array.from({ length: 4 }).map(() => (
-        <li
-          class="min-w-0 animate-pulse rounded-xl border border-[#363a4f] bg-[#1e2030] p-5 sm:p-6"
-        >
-          <div class="h-6 w-2/3 rounded bg-[#494d64]/50 sm:h-7" />
-          <div class="mt-4 space-y-2">
-            <div class="h-4 w-full rounded bg-[#494d64]/30" />
-            <div class="h-4 w-11/12 rounded bg-[#494d64]/30" />
-            <div class="h-4 w-3/5 rounded bg-[#494d64]/30" />
-          </div>
-          <div class="mt-5 flex items-center gap-2 border-t border-[#363a4f] pt-4">
-            <div class="h-6 w-16 rounded bg-[#363a4f]/70" />
-            <div class="h-4 w-20 rounded bg-[#494d64]/30" />
-            <div class="ml-auto h-4 w-10 rounded bg-[#eed49f]/25" />
-          </div>
-        </li>
-      ))}
+      {
+        Array.from({ length: 4 }).map(() => (
+          <li class="min-w-0 animate-pulse rounded-xl border border-[#363a4f] bg-[#1e2030] p-5 sm:p-6">
+            <div class="h-6 w-2/3 rounded bg-[#494d64]/50 sm:h-7" />
+            <div class="mt-4 space-y-2">
+              <div class="h-4 w-full rounded bg-[#494d64]/30" />
+              <div class="h-4 w-11/12 rounded bg-[#494d64]/30" />
+              <div class="h-4 w-3/5 rounded bg-[#494d64]/30" />
+            </div>
+            <div class="mt-5 flex items-center gap-2 border-t border-[#363a4f] pt-4">
+              <div class="h-6 w-16 rounded bg-[#363a4f]/70" />
+              <div class="h-4 w-20 rounded bg-[#494d64]/30" />
+              <div class="ml-auto h-4 w-10 rounded bg-[#eed49f]/25" />
+            </div>
+          </li>
+        ))
+      }
     </ul>
   </Projects>
 </SectionFrame>

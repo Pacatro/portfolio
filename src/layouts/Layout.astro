@@ -5,12 +5,23 @@ import { portfolio } from "../lib/portfolio";
 interface Props {
   title?: string;
   description?: string;
+  canonicalPath?: string;
+  type?: "website" | "article";
+  publishedAt?: Date;
+  tags?: string[];
+  structuredData?: Record<string, unknown>;
 }
 
 const {
-  title = portfolio.title,
-  description = `${portfolio.name}'s portfolio`,
+  title = `${portfolio.name} — Machine Learning Engineer & AI Researcher`,
+  description = `${portfolio.name} is a Machine Learning Engineer and AI Researcher building practical systems in forecasting, computer vision, and recommendations.`,
+  canonicalPath = Astro.url.pathname,
+  type = "website",
+  publishedAt,
+  tags = [],
+  structuredData,
 } = Astro.props;
+const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
@@ -22,8 +33,37 @@ const {
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="author" content={portfolio.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={portfolio.shortName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {
+      publishedAt && (
+        <meta
+          property="article:published_time"
+          content={publishedAt.toISOString()}
+        />
+      )
+    }
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
     <title>{title}</title>
     <Analytics />
   </head>
@@ -79,11 +119,33 @@ const {
     overflow-wrap: break-word;
   }
 
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(
+      rgb(202 211 245 / 2.5%) 1px,
+      transparent 1px
+    );
+    background-size: 100% 4rem;
+    content: "";
+    pointer-events: none;
+  }
+
   .page-shell {
     padding-block: max(1.75rem, env(safe-area-inset-top))
       max(4rem, env(safe-area-inset-bottom));
     padding-inline: max(1.5rem, env(safe-area-inset-left))
       max(1.5rem, env(safe-area-inset-right));
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    font: inherit;
   }
 
   ::selection {

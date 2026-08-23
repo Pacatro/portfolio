@@ -1,8 +1,5 @@
-interface SocialLinkInfo {
-  name: string;
-  url: string;
-  icon: string;
-}
+import type { SocialLink } from "./lib/portfolio";
+import { getSocialHref, isEmailLink } from "./lib/social-links";
 
 interface CommandContext {
   close: () => void;
@@ -10,7 +7,7 @@ interface CommandContext {
   help: () => void;
   goToSection: (sectionId: string) => void;
   sections: string[];
-  socialItems: SocialLinkInfo[];
+  socialItems: SocialLink[];
 }
 
 interface CommandResult {
@@ -73,9 +70,10 @@ export const commands: readonly Command[] = [
         return { message: "No social links configured." };
       }
       const html = socialItems
-        .map(({ name, url, icon }) => {
-          const isEmail = name.toLowerCase() === "email";
-          const href = isEmail ? `mailto:${url}` : `https://${url}`;
+        .map((link) => {
+          const { url, icon } = link;
+          const isEmail = isEmailLink(link);
+          const href = getSocialHref(link);
           return `<a href="${href}" target="${isEmail ? "" : "_blank"}" rel="${isEmail ? "" : "noopener noreferrer"}" class="flex items-center gap-2 font-semibold text-[#8bd5ca] transition-colors hover:text-[#cad3f5]">${icon ? `<img src="${icon}" alt="" class="h-4 w-4 opacity-70" />` : ""}${url}</a>`;
         })
         .join("");

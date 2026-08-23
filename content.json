@@ -1,7 +1,7 @@
 {
   "title": "Paco Algar",
   "name": "Paco Algar Muñoz",
-  "shortName": "Paco Algar",
+  "shortName": "Paco",
   "githubProfile": "Pacatro",
   "socialLinks": [
     { "name": "Github", "url": "github.com/Pacatro", "icon": "/socials/github.svg" },
@@ -12,7 +12,7 @@
     {
       "id": "Whoami",
       "type": "text",
-      "content": "Hi, I'm Paco! I'm a Machine Learning Engineer and AI Researcher who enjoys turning real-world data into useful solutions. I work on everything from forecasting and computer vision to recommendation systems, and I'm always tinkering with side projects and learning something new."
+      "content": "I'm a Machine Learning Engineer and AI Researcher who enjoys turning real-world data into useful solutions. I work on everything from forecasting and computer vision to recommendation systems, and I'm always tinkering with side projects and learning something new."
     },
     {
       "id": "Projects",

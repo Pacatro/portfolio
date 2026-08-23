@@ -1,22 +1,25 @@
 ---
+import BlogSection from "./sections/blog.astro";
+import ProjectsSection from "./sections/projects.astro";
 import TextSection from "./sections/text.astro";
 import type { SectionRendererProps } from "../lib/portfolio";
 
 type Props = SectionRendererProps;
 
 const props = Astro.props;
-const rendererModules = import.meta.glob("./sections/*.astro", { eager: true });
-const rendererPath = `./sections/${props.section.type}.astro`;
-const rendererModule = rendererModules[rendererPath];
+const renderers = {
+  blog: BlogSection,
+  projects: ProjectsSection,
+  text: TextSection,
+} as const;
+const Renderer = renderers[props.section.type as keyof typeof renderers];
 
-if (!rendererModule) {
+if (!Renderer) {
   throw new Error(
     `No renderer found for section type “${props.section.type}”. ` +
       `Create src/components/sections/${props.section.type}.astro.`,
   );
 }
-
-const Renderer = (rendererModule as { default: typeof TextSection }).default;
 ---
 
 <Renderer {...props} />

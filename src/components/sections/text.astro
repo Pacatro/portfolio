@@ -1,7 +1,7 @@
 ---
 import SectionFrame from "../SectionFrame.astro";
 import SocialLinks from "../SocialLinks.astro";
-import type { SectionRendererProps } from "../../lib/portfolio";
+import { portfolio, type SectionRendererProps } from "../../lib/portfolio";
 
 type Props = SectionRendererProps;
 
@@ -10,6 +10,17 @@ const content = typeof section.content === "string" ? section.content : "";
 ---
 
 <SectionFrame id={section.id}>
-  <p class="w-full text-base leading-7 text-[#b8c0e0] sm:text-lg sm:leading-8">{content}</p>
+  <div class="max-w-4xl">
+    <p
+      class="text-lg sm:text-xl font-bold leading-[1.35] tracking-[-0.045em] text-[#cad3f5]"
+    >
+      Hi, I'm <span class="text-[#c6a0f6]">{portfolio.shortName}</span>!
+    </p>
+    <p
+      class="mt-6 max-w-3xl text-base leading-7 text-[#a5adcb] sm:text-lg sm:leading-8"
+    >
+      {content}
+    </p>
+  </div>
   <SocialLinks links={socialItems} />
 </SectionFrame>

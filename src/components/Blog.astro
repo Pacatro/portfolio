@@ -17,7 +17,7 @@ const PAGE_SIZE = 5;
         <li
           data-post
           hidden={index >= PAGE_SIZE}
-          class="group min-w-0 rounded-lg border border-[#363a4f] bg-[#1e2030] transition-colors hover:border-[#494d64] hover:bg-[#24273a]"
+          class="group relative min-w-0 overflow-hidden rounded-xl border border-[#363a4f] bg-[#1e2030]/90 shadow-[0_1px_0_rgb(255_255_255_/_0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a0f6]/50 hover:bg-[#24273a] hover:shadow-[0_16px_40px_rgb(0_0_0_/_0.2)]"
         >
           <a
             href={`/blog/${post.id}/`}
@@ -30,7 +30,7 @@ const PAGE_SIZE = 5;
               {formatDate(post.data.publishedAt)}
             </time>
             <span class="min-w-0">
-              <span class="block text-base font-bold tracking-[-0.02em] text-[#c6a0f6] sm:text-lg">
+              <span class="block text-base font-bold tracking-[-0.02em] text-[#c6a0f6] transition-colors group-hover:text-[#d8b9fa] sm:text-lg">
                 {post.data.title}
               </span>
               <span class="mt-1 block text-sm leading-6 text-[#a5adcb]">
@@ -46,9 +46,13 @@ const PAGE_SIZE = 5;
                 </span>
               )}
             </span>
-            <span class="hidden text-[#6e738d] sm:block" aria-hidden="true">
+            <span class="hidden text-[#6e738d] transition-colors group-hover:text-[#c6a0f6] sm:block" aria-hidden="true">
               →
             </span>
+            <span
+              class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#c6a0f6] transition-transform duration-300 group-hover:scale-x-100"
+              aria-hidden="true"
+            />
           </a>
         </li>
       ))

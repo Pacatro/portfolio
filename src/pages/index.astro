@@ -10,6 +10,7 @@ import {
   sectionIds,
 } from "../lib/portfolio";
 import { features } from "../lib/features";
+import { getSocialHref, isEmailLink } from "../lib/social-links";
 
 export const prerender = true;
 
@@ -18,19 +19,37 @@ const posts = features.blog
       (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
     )
   : [];
+const sameAs = portfolio.socialLinks
+  .filter((link) => !isEmailLink(link))
+  .map(getSocialHref);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolio.name,
+  url: Astro.site?.href,
+  jobTitle: "Machine Learning Engineer and AI Researcher",
+  sameAs,
+  knowsAbout: [
+    "Machine learning",
+    "Artificial intelligence",
+    "Computer vision",
+    "Recommender systems",
+    "Forecasting",
+  ],
+};
 ---
 
-<Layout>
+<Layout structuredData={structuredData}>
   <main class="page-shell min-h-screen">
     <div class="mx-auto w-full max-w-5xl">
-      <Header name={portfolio.name} {sections} />
+      <Header name={portfolio.name} {sections} homepage />
       {
         sections.map((section) => (
           <Section section={section} socialItems={portfolio.socialLinks} posts={posts} />
         ))
       }
       <footer
-        class="mt-16 border-t border-[#363a4f] pt-6 text-center text-xs tracking-[0.01em] text-[#939ab7] sm:mt-20 sm:pt-7"
+        class="mt-20 border-t border-[#363a4f] pt-7 text-center text-xs tracking-[0.01em] text-[#939ab7] sm:mt-28 sm:pt-8"
       >
         <p class="m-0 inline-flex items-baseline gap-x-1.5">
           <span>Made with</span>
