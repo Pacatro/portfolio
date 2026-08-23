@@ -35,8 +35,8 @@ export const commands: readonly Command[] = [
   },
   { name: ":e", description: "Exit cmd", run: (_, { close }) => close() },
   {
-    name: ":r",
-    description: "Download resume",
+    name: ":cv",
+    description: "Download my cv",
     run: (_, { download }) =>
       download("/docs/resume_Paco.pdf", "resume_Paco.pdf"),
   },
