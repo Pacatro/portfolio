@@ -20,10 +20,10 @@ const errorCopy = {
 {
   errorKind && (
     <div class="flex items-center justify-center py-12">
-      <div class="max-w-md rounded-xl border border-[#494d64] bg-[#1e2030] p-6">
+      <div class="max-w-md rounded-xl border border-strong bg-panel p-6">
         <div class="flex items-start">
           <svg
-            class="mr-3 h-6 w-6 shrink-0 text-[#eed49f]"
+            class="mr-3 h-6 w-6 shrink-0 text-warning"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -37,10 +37,10 @@ const errorCopy = {
             />
           </svg>
           <div class="min-w-0">
-            <h3 class="mb-1 font-semibold text-[#cad3f5]">
+            <h3 class="mb-1 font-semibold text-primary">
               Projects are temporarily unavailable
             </h3>
-            <p class="text-sm leading-6 text-[#a5adcb]">
+            <p class="text-sm leading-6 text-secondary">
               {errorCopy[errorKind]} You can still browse every project directly
               on GitHub.
             </p>
@@ -49,13 +49,13 @@ const errorCopy = {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#8bd5ca] underline decoration-[#8bd5ca]/50 underline-offset-4 hover:decoration-[#8bd5ca]"
+                class="text-link underline decoration-link/50 underline-offset-4 hover:decoration-link"
               >
                 View projects on GitHub
               </a>
               <a
                 href="/#projects"
-                class="text-[#a5adcb] underline decoration-[#a5adcb]/40 underline-offset-4 hover:text-[#cad3f5]"
+                class="text-secondary underline decoration-secondary/40 underline-offset-4 hover:text-primary"
               >
                 Try again
               </a>
@@ -84,10 +84,10 @@ const errorCopy = {
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        <h3 class="mb-2 text-lg font-semibold text-[#cad3f5]">
+        <h3 class="mb-2 text-lg font-semibold text-primary">
           No public projects found
         </h3>
-        <p class="text-sm leading-6 text-[#a5adcb]">
+        <p class="text-sm leading-6 text-secondary">
           The repository list is empty right now. Check the GitHub profile for
           the latest work.
         </p>
@@ -95,7 +95,7 @@ const errorCopy = {
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-4 inline-block text-sm font-semibold text-[#8bd5ca] underline decoration-[#8bd5ca]/50 underline-offset-4 hover:decoration-[#8bd5ca]"
+          class="mt-4 inline-block text-sm font-semibold text-link underline decoration-link/50 underline-offset-4 hover:decoration-link"
         >
           Open GitHub profile
         </a>
@@ -108,24 +108,24 @@ const errorCopy = {
   !errorKind && projects.length > 0 && (
     <ul class="grid w-full gap-4 md:grid-cols-2">
       {projects.map((repo) => (
-        <li class="group relative flex min-w-0 overflow-hidden rounded-xl border border-[#363a4f] bg-[#1e2030]/90 shadow-[0_1px_0_rgb(255_255_255_/_0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a0f6]/50 hover:bg-[#24273a] hover:shadow-[0_16px_40px_rgb(0_0_0_/_0.2)]">
+        <li class="group relative flex min-w-0 overflow-hidden rounded-xl border border-line bg-panel/90 shadow-[0_1px_0_rgb(var(--color-highlight)_/_0.025)] transition-[background-color,border-color,box-shadow] duration-300 hover:border-accent/50 hover:bg-panel-hover hover:shadow-[0_16px_40px_rgb(var(--color-shadow)_/_0.2)]">
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex w-full min-w-0 flex-col p-5 no-underline active:bg-[#24273a] sm:p-6"
+            class="flex w-full min-w-0 flex-col p-5 no-underline active:bg-panel-hover sm:p-6"
           >
             <div class="flex items-start justify-between gap-4">
-              <p class="break-words text-lg font-bold leading-6 tracking-[-0.035em] text-[#c6a0f6] transition-colors group-hover:text-[#d8b9fa] sm:text-xl">
+              <p class="break-words text-lg font-bold leading-6 tracking-[-0.035em] text-accent transition-colors group-hover:text-accent-hover sm:text-xl">
                 {repo.name}
               </p>
             </div>
-            <p class="mt-3 flex-1 text-sm leading-6 text-[#a5adcb] sm:text-base sm:leading-7">
+            <p class="mt-3 flex-1 text-sm leading-6 text-secondary sm:text-base sm:leading-7">
               {repo.description || "No description provided."}
             </p>
-            <div class="mt-5 flex min-w-0 flex-wrap items-center gap-2 border-t border-[#363a4f] pt-4 text-xs text-[#939ab7] transition-colors group-hover:border-[#494d64]">
+            <div class="mt-5 flex min-w-0 flex-wrap items-center gap-2 border-t border-line pt-4 text-xs text-muted transition-colors group-hover:border-strong">
               {repo.language && (
-                <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
+                <span class="rounded bg-line px-2 py-1 text-tag">
                   {repo.language}
                 </span>
               )}
@@ -133,14 +133,14 @@ const errorCopy = {
                 <span class="break-all">#{topic}</span>
               ))}
               <span
-                class="ml-auto tabular-nums text-[#eed49f]"
+                class="ml-auto tabular-nums text-warning"
                 aria-label={`${repo.stargazers_count} stars`}
               >
                 ★ {repo.stargazers_count}
               </span>
             </div>
             <span
-              class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#c6a0f6] transition-transform duration-300 group-hover:scale-x-100"
+              class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100"
               aria-hidden="true"
             />
           </a>

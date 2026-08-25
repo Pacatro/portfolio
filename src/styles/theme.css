@@ -1,0 +1,30 @@
+:root {
+  /* Backgrounds and structural surfaces */
+  --color-canvas: 24 25 38;
+  --color-panel: 30 32 48;
+  --color-panel-hover: 36 39 58;
+  --color-line: 54 58 79;
+  --color-strong: 73 77 100;
+
+  /* Text hierarchy */
+  --color-text-faint: 110 115 141;
+  --color-text-quiet: 119 124 144;
+  --color-text-muted: 147 154 183;
+  --color-text-secondary: 165 173 203;
+  --color-text-tag: 184 192 224;
+  --color-text-primary: 202 211 245;
+
+  /* Interactive and semantic accents */
+  --color-accent: 198 160 246;
+  --color-accent-hover: 216 185 250;
+  --color-link: 139 213 202;
+  --color-link-hover: 183 234 223;
+  --color-warning: 238 212 159;
+  --color-danger: 237 135 150;
+  --color-code: 245 189 230;
+
+  /* Effects */
+  --color-scrim: 17 17 27;
+  --color-shadow: 0 0 0;
+  --color-highlight: 255 255 255;
+}

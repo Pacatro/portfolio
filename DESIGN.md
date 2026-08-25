@@ -15,21 +15,16 @@
 
 ## Colors
 
-### Primary
-- `#1e2030` — Dark base background (body, sections)
-- `#363a4f` — Card/panel border and accents
-- `#c6a0f6` — Primary accent (link text, project names)
-- `#494d64` — Hover state border/background
+The source of truth is `src/styles/theme.css`. Components use the corresponding
+semantic Tailwind names configured in `tailwind.config.mjs`, such as
+`bg-panel`, `border-line`, `text-secondary`, `text-accent`, and `text-link`.
+Opacity modifiers remain available (`bg-panel/90`, `border-accent/50`).
 
-### Secondary
-- `#24273a` — Hover background for project cards
-- `#a5adcb` — Secondary text/navigation inactive state
-- `#cad3f5` — Secondary text/navigation hover state
-- `#8bd5ca` — GitHub link accent
-- `#eed49f` — Star rating accent
-
-### Neutral
-- `#939ab7` — Muted text, subtle dividers
+- Surfaces: `canvas`, `panel`, `panel-hover`
+- Structure: `line`, `strong`
+- Text: `primary`, `secondary`, `muted`, `quiet`, `faint`, `tag`
+- Accents: `accent`, `accent-hover`, `link`, `link-hover`
+- Status: `warning`, `danger`, `code`
 
 ## Typography
 
@@ -38,10 +33,10 @@
 - Body text inherits the base stack
 
 **Hierarchy:**
-- Project names: `text-lg font-bold leading-6 tracking-[-0.02em] text-[#c6a0f6] sm:text-xl`
-- Project descriptions: `text-sm leading-6 text-[#a5adcb] sm:text-base sm:leading-7`
-- Section navigation: `text-sm font-semibold capitalize text-[#a5adcb] no-underline`
-- Header name: `text-lg font-bold tracking-[-0.02em] text-[#c6a0f6] sm:text-xl`
+- Project names: `text-lg font-bold leading-6 tracking-[-0.02em] text-accent sm:text-xl`
+- Project descriptions: `text-sm leading-6 text-secondary sm:text-base sm:leading-7`
+- Section navigation: `text-sm font-semibold capitalize text-secondary no-underline`
+- Header name: `text-lg font-bold tracking-[-0.02em] text-accent sm:text-xl`
 
 ## Layout
 
@@ -53,19 +48,19 @@
 
 ## Elevation
 
-**Card/Panel:** `border border-[#363a4f] bg-[#1e2030]` with `rounded-xl`
-**Hover States:** `transition-colors hover:border-[#494d64] hover:bg-[#24273a]`
-**Active States:** `active:border-[#8aadf4] active:text-[#cad3f5]`
+**Card/Panel:** `border border-line bg-panel` with `rounded-xl`
+**Hover States:** `transition-colors hover:border-strong hover:bg-panel-hover`
+**Active States:** `active:border-strong active:text-primary`
 **Atmosphere:** Fixed, low-contrast radial color fields over a four-rem baseline grid
 
 ## Components
 
 **Header Button:** Grid layout `grid h-11 w-11 shrink-0 place-items-center sm:h-10 sm:w-10`, SVG terminal icon, opacity transition on hover
 **Navigation Links:** `flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 py-2`, text color transitions on hover/active
-**Project List Item:** Rounded border `rounded-xl`, background `bg-[#1e2030]`, border `border border-[#363a4f]`, transition `transition-colors`
-**Language Tag:** Rounded background `rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]`
+**Project List Item:** Rounded border `rounded-xl`, background `bg-panel`, border `border border-line`, transition `transition-colors`
+**Language Tag:** Rounded background `rounded bg-line px-2 py-1 text-tag`
 **Topic Tags:** `break-all #{topic}`
-**Star Rating:** `tabular-nums text-[#eed49f]` with aria-label of star count
+**Star Rating:** `tabular-nums text-warning` with aria-label of star count
 **Project Index:** Two-digit repository order as a quiet scanning aid; it communicates listing position, not rank
 
 ## Do's and Don'ts

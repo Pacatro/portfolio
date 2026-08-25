@@ -20,7 +20,7 @@ const { links } = Astro.props;
           href={getSocialHref(link)}
           target={isEmail ? undefined : "_blank"}
           rel={isEmail ? undefined : "noopener noreferrer"}
-          class="group flex min-h-11 items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[#a5adcb] no-underline transition-all first:pl-0 hover:-translate-y-0.5 hover:text-[#cad3f5] active:translate-y-0 active:border-[#494d64] sm:px-3.5 sm:first:pl-0"
+          class="group flex min-h-11 items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-secondary no-underline transition-colors first:pl-0 hover:text-primary sm:px-3.5 sm:first:pl-0"
         >
           <span
             class="grid h-6 w-6 place-items-center rounded transition-colors"
@@ -34,7 +34,7 @@ const { links } = Astro.props;
           </span>
           <span>{name}</span>
           <svg
-            class="h-3 w-3 text-[#6e738d] transition-colors group-hover:text-[#8bd5ca]"
+            class="h-3 w-3 text-faint transition-colors group-hover:text-link"
             viewBox="0 0 12 12"
             fill="none"
             aria-hidden="true"

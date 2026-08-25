@@ -1,4 +1,5 @@
 ---
+import "../styles/theme.css";
 import Analytics from "@vercel/analytics/astro";
 import { portfolio } from "../lib/portfolio";
 
@@ -99,14 +100,14 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
     padding: 0;
     width: 100%;
     min-height: 100%;
-    background: #181926;
-    color: #cad3f5;
+    background: rgb(var(--color-canvas));
+    color: rgb(var(--color-text-primary));
     scroll-behavior: smooth;
   }
 
   html {
     color-scheme: dark;
-    scrollbar-color: #494d64 #181926;
+    scrollbar-color: rgb(var(--color-strong)) rgb(var(--color-canvas));
     scrollbar-width: thin;
   }
 
@@ -124,7 +125,7 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
     inset: 0;
     z-index: -1;
     background-image: linear-gradient(
-      rgb(202 211 245 / 2.5%) 1px,
+      rgb(var(--color-text-primary) / 2.5%) 1px,
       transparent 1px
     );
     background-size: 100% 4rem;
@@ -149,17 +150,17 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
   }
 
   ::selection {
-    background: #8bd5ca;
-    color: #181926;
+    background: rgb(var(--color-link));
+    color: rgb(var(--color-canvas));
   }
 
   :focus-visible {
-    outline: 2px solid #8bd5ca;
+    outline: 2px solid rgb(var(--color-link));
     outline-offset: 4px;
   }
 
   dialog::backdrop {
-    background: rgb(17 17 27 / 76%);
+    background: rgb(var(--color-scrim) / 76%);
     backdrop-filter: blur(3px);
   }
 

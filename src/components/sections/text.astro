@@ -12,12 +12,12 @@ const content = typeof section.content === "string" ? section.content : "";
 <SectionFrame id={section.id}>
   <div class="max-w-4xl">
     <p
-      class="text-lg sm:text-xl font-bold leading-[1.35] tracking-[-0.045em] text-[#cad3f5]"
+      class="text-lg sm:text-xl font-bold leading-[1.35] tracking-[-0.045em] text-primary"
     >
-      Hi, I'm <span class="text-[#c6a0f6]">{portfolio.shortName}</span>!
+      Hi, I'm <span class="text-accent">{portfolio.shortName}</span>!
     </p>
     <p
-      class="mt-6 max-w-3xl text-base leading-7 text-[#a5adcb] sm:text-lg sm:leading-8"
+      class="mt-6 max-w-3xl text-base leading-7 text-secondary sm:text-lg sm:leading-8"
     >
       {content}
     </p>

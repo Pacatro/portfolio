@@ -56,15 +56,15 @@ const structuredData = {
       <article class="mt-16 sm:mt-24">
         <header class="mb-10 pb-3 sm:mb-12">
           <h1
-            class="max-w-4xl text-2xl font-bold leading-tight tracking-[-0.045em] text-[#cad3f5] sm:text-4xl"
+            class="max-w-4xl text-2xl font-bold leading-tight tracking-[-0.045em] text-primary sm:text-4xl"
           >
-            <span class="mr-1 text-[#8bd5ca]" aria-hidden="true">~/</span>
+            <span class="mr-1 text-link" aria-hidden="true">~/</span>
             {post.data.title}
           </h1>
           <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3 text-xs">
             <time
               datetime={post.data.publishedAt.toISOString()}
-              class="tabular-nums text-[#939ab7]"
+              class="tabular-nums text-muted"
             >
               {publishedAt}
             </time>
@@ -73,7 +73,7 @@ const structuredData = {
               post.data.tags.length > 0 && (
                 <div class="flex flex-wrap gap-2">
                   {post.data.tags.map((tag) => (
-                    <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
+                    <span class="rounded bg-line px-2 py-1 text-tag">
                       #{tag}
                     </span>
                   ))}
@@ -85,10 +85,10 @@ const structuredData = {
         <div class="prose w-full">
           <Content />
         </div>
-        <footer class="mt-12 w-full border-t border-[#363a4f] pt-6 sm:mt-16">
+        <footer class="mt-12 w-full border-t border-line pt-6 sm:mt-16">
           <a
             href="/#blog"
-            class="inline-flex min-h-11 items-center text-sm font-semibold text-[#8bd5ca] no-underline transition-colors hover:text-[#cad3f5]"
+            class="inline-flex min-h-11 items-center text-sm font-semibold text-link no-underline transition-colors hover:text-primary"
           >
             ← Back to all posts
           </a>
@@ -102,7 +102,7 @@ const structuredData = {
 <style>
   .prose :global(h2) {
     margin: 3rem 0 1rem;
-    color: #c6a0f6;
+    color: rgb(var(--color-accent));
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.35;
@@ -110,14 +110,14 @@ const structuredData = {
   }
   .prose :global(h3) {
     margin: 2.25rem 0 0.75rem;
-    color: #c6a0f6;
+    color: rgb(var(--color-accent));
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.45;
   }
   .prose :global(p),
   .prose :global(li) {
-    color: #a5adcb;
+    color: rgb(var(--color-text-secondary));
     line-height: 1.75;
   }
   .prose :global(p),
@@ -131,21 +131,21 @@ const structuredData = {
     list-style: square;
   }
   .prose :global(strong) {
-    color: #cad3f5;
+    color: rgb(var(--color-text-primary));
   }
   .prose :global(a) {
-    color: #8bd5ca;
+    color: rgb(var(--color-link));
     text-decoration: underline;
-    text-decoration-color: rgb(139 213 202 / 50%);
+    text-decoration-color: rgb(var(--color-link) / 50%);
     text-underline-offset: 0.25rem;
   }
   .prose :global(a:hover) {
-    text-decoration-color: #8bd5ca;
+    text-decoration-color: rgb(var(--color-link));
   }
   .prose :global(blockquote) {
     padding: 0.25rem 0 0.25rem 1rem;
-    border-left: 1px solid #8bd5ca;
-    color: #a5adcb;
+    border-left: 1px solid rgb(var(--color-link));
+    color: rgb(var(--color-text-secondary));
   }
   .prose :global(blockquote p) {
     color: inherit;
@@ -153,22 +153,22 @@ const structuredData = {
   }
   .prose :global(pre) {
     overflow-x: auto;
-    border: 1px solid #363a4f;
+    border: 1px solid rgb(var(--color-line));
     border-radius: 0.75rem;
-    background: #1e2030;
+    background: rgb(var(--color-panel));
     padding: 1rem;
     font-size: 0.875rem;
     line-height: 1.7;
   }
   .prose :global(:not(pre) > code) {
     border-radius: 0.25rem;
-    background: #363a4f;
+    background: rgb(var(--color-line));
     padding: 0.15rem 0.35rem;
-    color: #f5bde6;
+    color: rgb(var(--color-code));
     font-size: 0.9em;
   }
   .prose :global(pre:focus-visible) {
-    outline: 2px solid #8bd5ca;
+    outline: 2px solid rgb(var(--color-link));
     outline-offset: 4px;
   }
 

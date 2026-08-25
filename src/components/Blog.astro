@@ -17,40 +17,40 @@ const PAGE_SIZE = 5;
         <li
           data-post
           hidden={index >= PAGE_SIZE}
-          class="group relative min-w-0 overflow-hidden rounded-xl border border-[#363a4f] bg-[#1e2030]/90 shadow-[0_1px_0_rgb(255_255_255_/_0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c6a0f6]/50 hover:bg-[#24273a] hover:shadow-[0_16px_40px_rgb(0_0_0_/_0.2)]"
+          class="group relative min-w-0 overflow-hidden rounded-xl border border-line bg-panel/90 shadow-[0_1px_0_rgb(var(--color-highlight)_/_0.025)] transition-[background-color,border-color,box-shadow] duration-300 hover:border-accent/50 hover:bg-panel-hover hover:shadow-[0_16px_40px_rgb(var(--color-shadow)_/_0.2)]"
         >
           <a
             href={`/blog/${post.id}/`}
-            class="grid gap-2 p-4 no-underline active:bg-[#24273a] sm:grid-cols-[8.5rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-5 sm:p-5"
+            class="grid gap-2 p-4 no-underline active:bg-panel-hover sm:grid-cols-[8.5rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-5 sm:p-5"
           >
             <time
               datetime={post.data.publishedAt.toISOString()}
-              class="text-xs tabular-nums text-[#939ab7]"
+              class="text-xs tabular-nums text-muted"
             >
               {formatDate(post.data.publishedAt)}
             </time>
             <span class="min-w-0">
-              <span class="block text-base font-bold tracking-[-0.02em] text-[#c6a0f6] transition-colors group-hover:text-[#d8b9fa] sm:text-lg">
+              <span class="block text-base font-bold tracking-[-0.02em] text-accent transition-colors group-hover:text-accent-hover sm:text-lg">
                 {post.data.title}
               </span>
-              <span class="mt-1 block text-sm leading-6 text-[#a5adcb]">
+              <span class="mt-1 block text-sm leading-6 text-secondary">
                 {post.data.description}
               </span>
               {post.data.tags.length > 0 && (
-                <span class="mt-3 flex flex-wrap gap-2 text-xs text-[#939ab7]">
+                <span class="mt-3 flex flex-wrap gap-2 text-xs text-muted">
                   {post.data.tags.map((tag) => (
-                    <span class="rounded bg-[#363a4f] px-2 py-1 text-[#b8c0e0]">
+                    <span class="rounded bg-line px-2 py-1 text-tag">
                       #{tag}
                     </span>
                   ))}
                 </span>
               )}
             </span>
-            <span class="hidden text-[#6e738d] transition-colors group-hover:text-[#c6a0f6] sm:block" aria-hidden="true">
+            <span class="hidden text-faint transition-colors group-hover:text-accent sm:block" aria-hidden="true">
               →
             </span>
             <span
-              class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#c6a0f6] transition-transform duration-300 group-hover:scale-x-100"
+              class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100"
               aria-hidden="true"
             />
           </a>
@@ -68,15 +68,15 @@ const PAGE_SIZE = 5;
         <button
           type="button"
           data-previous
-          class="min-h-11 px-1 text-sm font-semibold text-[#a5adcb] transition-colors hover:text-[#cad3f5] disabled:cursor-not-allowed disabled:text-[#494d64]"
+          class="min-h-11 px-1 text-sm font-semibold text-secondary transition-colors hover:text-primary disabled:cursor-not-allowed disabled:text-strong"
         >
           ← Newer
         </button>
-        <p class="text-xs tabular-nums text-[#939ab7]" data-page-status />
+        <p class="text-xs tabular-nums text-muted" data-page-status />
         <button
           type="button"
           data-next
-          class="min-h-11 px-1 text-sm font-semibold text-[#8bd5ca] transition-colors hover:text-[#cad3f5] disabled:cursor-not-allowed disabled:text-[#494d64]"
+          class="min-h-11 px-1 text-sm font-semibold text-link transition-colors hover:text-primary disabled:cursor-not-allowed disabled:text-strong"
         >
           Older →
         </button>
