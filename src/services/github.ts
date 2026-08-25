@@ -2,6 +2,7 @@ const GITHUB_API_VERSION = "2022-11-28";
 const REQUEST_TIMEOUT_MS = 8_000;
 const MAX_PROJECTS = 8;
 const MIN_STARS = 0;
+const EXCLUDED_REPOSITORIES = new Set(["portfolio"]);
 
 interface GitHubRepo {
   name: string;
@@ -23,7 +24,12 @@ interface ProjectsResult {
 
 function selectProjects(repos: GitHubRepo[]): GitHubRepo[] {
   return repos
-    .filter((repo) => !repo.fork && repo.stargazers_count > MIN_STARS)
+    .filter(
+      (repo) =>
+        !repo.fork &&
+        !EXCLUDED_REPOSITORIES.has(repo.name.toLowerCase()) &&
+        repo.stargazers_count > MIN_STARS,
+    )
     .sort(
       (a, b) =>
         new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
