@@ -74,7 +74,7 @@ export const commands: readonly Command[] = [
           const { url, icon } = link;
           const isEmail = isEmailLink(link);
           const href = getSocialHref(link);
-          return `<a href="${href}" target="${isEmail ? "" : "_blank"}" rel="${isEmail ? "" : "noopener noreferrer"}" class="flex items-center gap-2 font-semibold text-[#8bd5ca] transition-colors hover:text-[#cad3f5]">${icon ? `<img src="${icon}" alt="" class="h-4 w-4 opacity-70" />` : ""}${url}</a>`;
+          return `<a href="${href}" target="${isEmail ? "" : "_blank"}" rel="${isEmail ? "" : "noopener noreferrer"}" class="flex items-center gap-2 font-semibold text-link transition-colors hover:text-primary">${icon ? `<img src="${icon}" alt="" class="h-4 w-4 opacity-70" />` : ""}${url}</a>`;
         })
         .join("");
       return {
