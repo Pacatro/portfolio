@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { formatDate } from "../lib/dates";
 
 interface Props {
   posts: CollectionEntry<"blog">[];
@@ -8,6 +7,11 @@ interface Props {
 
 const { posts } = Astro.props;
 const PAGE_SIZE = 5;
+const dateFormatter = new Intl.DateTimeFormat("en", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
 ---
 
 <div class="blog-list" data-blog-list data-page-size={PAGE_SIZE}>
@@ -27,7 +31,7 @@ const PAGE_SIZE = 5;
               datetime={post.data.publishedAt.toISOString()}
               class="text-xs tabular-nums text-muted"
             >
-              {formatDate(post.data.publishedAt)}
+              {dateFormatter.format(post.data.publishedAt)}
             </time>
             <span class="min-w-0">
               <span class="block text-base font-bold tracking-[-0.02em] text-accent transition-colors group-hover:text-accent-hover sm:text-lg">
@@ -46,7 +50,10 @@ const PAGE_SIZE = 5;
                 </span>
               )}
             </span>
-            <span class="hidden text-faint transition-colors group-hover:text-accent sm:block" aria-hidden="true">
+            <span
+              class="hidden text-faint transition-colors group-hover:text-accent sm:block"
+              aria-hidden="true"
+            >
               →
             </span>
             <span

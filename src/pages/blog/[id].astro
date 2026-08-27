@@ -3,7 +3,6 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import CommandDialog from "../../components/CommandDialog.astro";
-import { formatDate } from "../../lib/dates";
 import { portfolio, sections, sectionIds } from "../../lib/portfolio";
 import { features } from "../../lib/features";
 
@@ -22,7 +21,11 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const publishedAt = formatDate(post.data.publishedAt, "long");
+const publishedAt = new Intl.DateTimeFormat("en", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+}).format(post.data.publishedAt);
 const canonicalPath = `/blog/${post.id}/`;
 const structuredData = {
   "@context": "https://schema.org",
