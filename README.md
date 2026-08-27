@@ -101,8 +101,11 @@ as the anchor, navigation label, and terminal-styled section title.
 ### Add a new section type
 
 Section renderers are discovered automatically from `src/components/sections`.
-The filename must match the `type` in `content.json`; no central conditional or
-registry needs to be updated.
+`Section.astro` uses `import.meta.glob` on `src/components/sections/*.astro` and
+resolves the renderer by `type`. The filename must match the `type` in
+`content.json`; no central conditional or registry needs to be updated. If the
+matching file is missing, the build fails with a message pointing to the file
+to create.
 
 For example, add `{ "id": "Experience", "type": "experience" }` to the
 `sections` array, then create `src/components/sections/experience.astro`:
