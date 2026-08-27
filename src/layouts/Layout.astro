@@ -1,6 +1,7 @@
 ---
 import "../styles/theme.css";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { portfolio } from "../lib/portfolio";
 
 interface Props {
@@ -67,6 +68,7 @@ const canonicalUrl = Astro.site && new URL(canonicalPath, Astro.site);
     }
     <title>{title}</title>
     <Analytics />
+    <SpeedInsights />
   </head>
   <body>
     <slot />
